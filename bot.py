@@ -1,6 +1,9 @@
+# This example requires the 'members' privileged intents
+
 import discord
 from discord.ext import commands
 import random
+import time
 
 description = '''List of all the commands
 -----------------------------------------'''
@@ -8,25 +11,28 @@ description = '''List of all the commands
 intents = discord.Intents.default()
 intents.members = True
 
-bot = commands.Bot(command_prefix='@', description=description, intents=intents)
+bot = commands.Bot(command_prefix='nou!', description=description, intents=intents)
 
 @bot.event
 async def on_ready():
-    # The status of the bot, uncomment what you want.
-    # Playing
-    #await bot.change_presence(activity=discord.Game(name="a game"))
-    # Streaming
-    #await bot.change_presence(activity=discord.Streaming(name="My Stream", url=my_twitch_url))
-    # Listening
-    #await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="a song"))
-    # Watching
-    #await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="a movie"))
-    
     # What gets printed in the terminal when the bot is succesfully logged in
     print('Logged in as')
     print(bot.user.name)
     print(bot.user.id)
     print('------')
+
+@bot.command()
+async def setStatus(ctx, status):
+    """Owner only. Sets the status of the bot. Requires double quotes."""
+
+    userID = ctx.message.author.id
+    ownerID = 461545952046743563 #Set this to the status you want
+
+    if userID == ownerID:
+        await bot.change_presence(activity=discord.Game(name=status))
+        await ctx.send("Done! Successfully set the bot status.")
+    else:
+        await ctx.send("are you braindead? did you read what the help message said? 'Owner only.'") #change this if it seems a bit too mean, lmao
 
 @bot.command()
 async def add(ctx, left: int, right: int):
@@ -49,13 +55,14 @@ async def roll(ctx, dice: str):
 async def choose(ctx, *choices: str):
     """Chooses between multiple choices."""
     if "@everyone" or "@here" in choices:
-        await ctx.send('Hahaha, nice try')
+        await ctx.send('Haha, nice try idiot. Enjoy a kick from the mods sooner or later.')
     else:
         await ctx.send(random.choice(choices))
 
 @bot.command()
 async def avatar(ctx, *, user: discord.Member = None):
     """Get a link to somebody's avatar"""
+
     if user is None:
         user = ctx.author
     await ctx.send(user.avatar_url)
@@ -63,8 +70,14 @@ async def avatar(ctx, *, user: discord.Member = None):
 @bot.command()
 async def repeat(ctx, times: int, content='repeating...'):
     """Repeats a message multiple times."""
-    for i in range(times):
-        await ctx.send(content)
+    if content == "@everyone" or content == "@here":
+        ctx.send("Haha, nice try idiot. Enjoy a kick from the mods sooner or later.")
+    else:
+        if times > 10:
+            await ctx.send("trying to spam huh? not gonna work. max number of repeats is 10.")
+        else:
+            for i in range(times):
+                await ctx.send(content)
 
 @bot.command()
 async def joined(ctx, member: discord.Member):
@@ -74,7 +87,7 @@ async def joined(ctx, member: discord.Member):
 @bot.command()
 async def ping(ctx):
     '''
-    This text will be shown in the help command
+    Get the latency of the bot.
     '''
 
     # Get the latency of the bot
@@ -84,6 +97,8 @@ async def ping(ctx):
 
 @bot.command()
 async def userinfo(ctx, *, user: discord.Member = None):
+    """Gives information about a user."""
+
     if user is None:
         user = ctx.author      
     date_format = "%a, %d %b %Y %I:%M %p"
@@ -104,4 +119,4 @@ async def userinfo(ctx, *, user: discord.Member = None):
     if isinstance(ctx.channel, discord.DMChannel):
         return
 
-bot.run('your-token-here')
+bot.run('Insert Your Bot Token Here')
