@@ -4,3 +4,6 @@ FreeDiscord is a Discord bot made by the FreeTechnologies team ([SKBotNL](https:
 If you find an issue, or have a feature suggestion, please let us know by opening an issue [here](https://github.com/FreeTechnologies/FreeDiscord/issues). :)
 
 The Documentation is coming soon
+
+FreeTechnologies/FreeDiscord is licensed under the
+GNU General Public License v3.0
