@@ -71,7 +71,7 @@ async def avatar(ctx, *, user: discord.Member = None):
 async def repeat(ctx, times: int, content='repeating...'):
     """Repeats a message multiple times."""
     if content == "@everyone" or content == "@here":
-        ctx.send("Haha, nice try idiot. Enjoy a kick from the mods sooner or later.")
+        ctx.send("Haha, nice try idiot. Enjoy a kick from the mods sooner or later n00b.")
     else:
         if times > 10:
             await ctx.send("trying to spam huh? not gonna work. max number of repeats is 10.")
