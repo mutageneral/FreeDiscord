@@ -4,8 +4,7 @@ import discord
 from discord.ext import commands
 import random
 
-description = '''Help
-------'''
+description = '''List of all the commands'''
 
 intents = discord.Intents.default()
 intents.members = True
