@@ -4,9 +4,7 @@ import discord
 from discord.ext import commands
 import random
 
-description = '''An example bot to showcase the discord.ext.commands extension
-module.
-There are a number of utility commands being showcased here.'''
+description = '''The help menu for the'''
 
 intents = discord.Intents.default()
 intents.members = True
@@ -15,6 +13,17 @@ bot = commands.Bot(command_prefix='@', description=description, intents=intents)
 
 @bot.event
 async def on_ready():
+    # The status of the bot, uncomment what you want.
+    # Playing
+    #await bot.change_presence(activity=discord.Game(name="a game"))
+    # Streaming
+    #await bot.change_presence(activity=discord.Streaming(name="My Stream", url=my_twitch_url))
+    # Listening
+    #await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="a song"))
+    # Watching
+    #await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="a movie"))
+    
+    # What gets printed in the terminal when the bot is succesfully logged in
     print('Logged in as')
     print(bot.user.name)
     print(bot.user.id)
