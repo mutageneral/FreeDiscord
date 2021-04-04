@@ -4,7 +4,8 @@ import discord
 from discord.ext import commands
 import random
 
-description = '''The help menu for the'''
+description = '''Help
+------'''
 
 intents = discord.Intents.default()
 intents.members = True
