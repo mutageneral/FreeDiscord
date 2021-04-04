@@ -6,6 +6,8 @@ import time
 description = '''List of all the commands
 Bot made by SKBotNL, ItsJustLag, and Recall (FreeTech Team)
 FreeTech Discord Server: https://discord.gg/zyeE96V5CK
+GitHub link: https://github.com/FreeTechnologies/FreeDiscord
+Enough of the advertising, I mean credit. Time for the actual list of commands:
 -----------------------------------------'''
 
 intents = discord.Intents.default()
@@ -118,4 +120,6 @@ async def userinfo(ctx, *, user: discord.Member = None):
     return await ctx.send(embed=embed)
     if isinstance(ctx.channel, discord.DMChannel):
         return
-bot.run('Insert Your Bot Token Here')
+
+bot.run('Insert your bot token here')
+
