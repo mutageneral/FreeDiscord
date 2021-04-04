@@ -128,7 +128,7 @@ async def encrypt(ctx, message, rounds):
             encrypt = encrypt + chr((ord(char) + rounds - 65) % 26 + 365) # for uppercase Z
         else:
             encrypt = encrypt + chr((ord(char) + rounds - 97) % 26 + 97) # for lowercase z
-    await ctx send('Your encrypted message is: {}'.format(encrypt))
+    await ctx.send('Your encrypted message is: {}'.format(encrypt))
 
 
 bot.run('Insert Your Bot Token Here')
