@@ -96,4 +96,4 @@ async def userinfo(ctx, *, user: discord.Member = None):
     if isinstance(ctx.channel, discord.DMChannel):
         return
 
-bot.run('ODI4Mjg3NTMxMzI1NDU2Mzk0.YGnY4A.ppqNJ9hizvv1UrxrNZz-8Hj-voE')
+bot.run('your-token-here')
