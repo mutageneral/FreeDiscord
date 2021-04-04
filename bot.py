@@ -1,11 +1,11 @@
-# This example requires the 'members' privileged intents
-
 import discord
 from discord.ext import commands
 import random
 import time
 
 description = '''List of all the commands
+Bot made by SKBotNL, ItsJustLag, and Recall (FreeTech Team)
+FreeTech Discord Server: https://discord.gg/zyeE96V5CK
 -----------------------------------------'''
 
 intents = discord.Intents.default()
@@ -118,5 +118,4 @@ async def userinfo(ctx, *, user: discord.Member = None):
     return await ctx.send(embed=embed)
     if isinstance(ctx.channel, discord.DMChannel):
         return
-
 bot.run('Insert Your Bot Token Here')
