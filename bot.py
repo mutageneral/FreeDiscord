@@ -10,7 +10,7 @@ description = '''List of all the commands
 
 intents = discord.Intents.default()
 intents.members = True
-ownerID = "Put your ID here"
+ownerID = ""
 
 bot = commands.Bot(command_prefix='@',
                    description=description, intents=intents)
@@ -132,10 +132,10 @@ async def decrypt(ctx, rounds: int, *args: str):
 @bot.command()
 async def setStatus(ctx, statusMsg):
     """Sets the status of the bot. Requires double quotes."""
-    if ownerID == ctx.message.author.id:
-        await client.change_presence(activity=discord.Game(name=statusMsg))
+    if ownerID == str(ctx.message.author.id):
+        await bot.change_presence(activity=discord.Game(name=statusMsg))
         await ctx.send("Status successfully changed!")
     else:
         await ctx.send("'Owner Only.'")
 
-bot.run('Insert Your Bot Token Here')
+bot.run('Your bot token here')
