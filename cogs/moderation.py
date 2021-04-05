@@ -44,15 +44,14 @@ class Moderation(commands.Cog):
 
     @commands.command()  # Takes 1s 1m 1h 1d
     @commands.has_permissions(manage_messages=True)
-    # "userDespacito"? lmao i cant think of good names and ruyibwtueiytrbvuywietrvyouwetrouwy
-    async def mute(self, ctx, userDespacito: discord.Member, time):
+    async def mute(self, ctx, user: discord.Member, time):
         """Mute a member"""
-        role = discord.utils.get(userDespacito.guild.roles, name="muted")
+        role = discord.utils.get(user.guild.roles, name="muted")
         await userDespacito.add_roles(role)
 
         await ctx.send("User muted for " + str(time) + " seconds.")
         await asyncio.sleep(timeconvertion(int(time)))
-        await user.remove_roles(userDespacito, "muted")
+        await user.remove_roles(user, "muted")
 
 
 def setup(bot):
