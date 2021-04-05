@@ -6,6 +6,10 @@ import requests
 import json
 
 description = '''List of all the commands
+-----------------------------------------
+This bot is based off of/is the FreeDiscord bot.
+Project URL: https://github.com/FreeTechnologies/FreeDiscord/
+Support Server: https://discord.gg/VyNxSt55gj
 -----------------------------------------'''
 
 intents = discord.Intents.default()
