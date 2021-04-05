@@ -10,7 +10,7 @@ description = '''List of all the commands
 
 intents = discord.Intents.default()
 intents.members = True
-ownerID = ""
+ownerID = "Put Your ID Here"
 
 bot = commands.Bot(command_prefix='@',
                    description=description, intents=intents)
