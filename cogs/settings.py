@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands
-
-ownerID = "YOUR Discord userID here"
+from bot import ownerID
 
 
 class Settings(commands.Cog):
@@ -20,3 +19,4 @@ class Settings(commands.Cog):
 
 def setup(bot):
     bot.add_cog(Settings(bot))
+
