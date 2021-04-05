@@ -15,7 +15,6 @@ Support Server: https://discord.gg/VyNxSt55gj
 
 intents = discord.Intents.default()
 intents.members = True
-ownerID = 'Insert-YOUR-Discord-ID-here'
 
 bot = commands.Bot(command_prefix='@',
                    description=description, intents=intents)
@@ -43,17 +42,6 @@ async def on_command_error(ctx, error):
         await ctx.send("You dont have permission to do that")
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("Your command is missing an argument")
-
-# skbotnl i swear to god if you remove this one more time im going to-
-@bot.command()
-async def setStatus(ctx, status):
-    """Sets the status of the bot. Owner only."""
-    if str(ctx.message.author.id) == ownerID:
-        await bot.change_presence(activity=discord.Game(name=status))
-        await ctx.send("Bot status successfully changed to " + status + "!")
-    else:
-        await ctx.send("listen here bud the command says 'Owner Only' for a reason")
-
 
 @bot.command()
 async def add(ctx, left: int, right: int):
