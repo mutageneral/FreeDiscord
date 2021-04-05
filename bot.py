@@ -8,6 +8,7 @@ description = '''List of all the commands
 
 intents = discord.Intents.default()
 intents.members = True
+ownerID =  # put your ID Here
 
 bot = commands.Bot(command_prefix='@', description=description, intents=intents)
 
@@ -24,7 +25,6 @@ async def setStatus(ctx, status):
     """Owner only. Sets the status of the bot. Requires double quotes."""
 
     userID = ctx.message.author.id
-    ownerID = 461545952046743563 #Set this to the status you want
 
     if userID == ownerID:
         await bot.change_presence(activity=discord.Game(name=status))
