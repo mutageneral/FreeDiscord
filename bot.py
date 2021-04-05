@@ -129,10 +129,11 @@ async def decrypt(ctx, rounds: int, message: str):
 
 @bot.command()
 async def setStatus(ctx, statusMsg):
-    """Sets the status of the bot. Has to be in double quotes."""
+    """Sets the status of the bot. Requires double quotes."""
     if ownerID == ctx.message.author.id:
         await client.change_presence(activity=discord.Game(name=statusMsg))
+        await ctx.send("Status successfully changed!")
     else:
-        ctx.send("'Owner Only.'")
+        await ctx.send("'Owner Only.'")
 
-bot.run('Insert your bot token Here')
+bot.run('Insert Your Bot Token Here')
