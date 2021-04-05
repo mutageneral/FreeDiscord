@@ -58,10 +58,13 @@ async def roll(ctx, dice: str):
 @bot.command(description='For when you wanna settle the score some other way')
 async def choose(ctx, *choices: str):
     """Chooses between multiple choices."""
-    if "@everyone" or "@here" in choices:
-        await ctx.send("Haha, nice try. Isn't going to work")
+    if "@everyone" in choices:
+        await ctx.send("Hahaha nice try")
     else:
-        await ctx.send(random.choice(choices))
+        if "@here" in choices:
+            await ctx.send("Hahaha nice try")
+        else:
+            await ctx.send(random.choice(choices))
 
 @bot.command()
 async def avatar(ctx, *, user: discord.Member = None):
