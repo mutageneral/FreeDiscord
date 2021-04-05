@@ -40,6 +40,7 @@ class Moderation(commands.Cog):
     @commands.command()#Takes 1s 1m 1h 1d
     @commands.has_permissions(mute=True)
     async def mute(self, ctx, user: discord.Member = None, _time):
+        """Mute a member"""
         await user.add_roles(user, "mute")
         await ctx.send("User muted.")
         await asyncio.sleep(timeconvertion(_time))
