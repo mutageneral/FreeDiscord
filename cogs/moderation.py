@@ -18,6 +18,7 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, user: discord.Member, *reason):
+        """Kick a member."""
         if not reason:
             await user.kick()
             await ctx.send(f"**{user}** has been kicked, reason: **none**.")
@@ -25,13 +26,16 @@ class Moderation(commands.Cog):
             await user.kick()
             await ctx.send(f"**{user}** has been kicked, reason: **{reason}**.")
 
-    @commands.command()#Takes 1s 1m 1h 1d
-    @commands.has_permissions(mute=True)
-    async def mute(self, ctx, user: discord.Member = None, _time):
-        await user.add_roles(user, "mute")
-        await ctx.send("User muted.")
-        await asyncio.sleep(timeconvertion(_time))
-        await user.remove_roles(user, "mute")
+    @commands.command()
+    @commands.has_permissions(ban_members=True)
+    async def ban(self, ctx, user: discord.Member, *reason):
+        """Ban a member."""
+        if not reason:
+            await user.ban()
+            await ctx.send(f"**{user}** has been banned, reason: **none**.")
+        else:
+            await user.ban()
+            await ctx.send(f"**{user}** has been banned, reason: **{reason}**.")
 
 def setup(bot):
     bot.add_cog(Moderation(bot))
