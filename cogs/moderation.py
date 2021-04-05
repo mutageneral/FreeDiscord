@@ -6,9 +6,19 @@ class Moderation(commands.Cog):
         
     @commands.command()
     @commands.has_permissions(manage_messages=True)
-    async def purge(ctx, amount : int):
-        await ctx.channel.purge(limit=amount)
-        await ctx.send('Done!', delete_after=5.0)
+    async def purge(self, ctx, amount=10):
+        """Purge messages, default amount is 10."""
+        await ctx.channel.purge(limit=amount+1)
+
+    @commands.command()
+    @commands.has_permissions(kick_members=True)
+    async def kick(self, ctx, user: discord.Member, *reason):
+        if not reason:
+            await user.kick()
+            await ctx.send(f"**{user}** has been kicked, reason: **none**.")
+        else:
+            await user.kick()
+            await ctx.send(f"**{user}** has been kicked, reason: **{reason}**.")
 
 def setup(bot):
     bot.add_cog(Moderation(bot))

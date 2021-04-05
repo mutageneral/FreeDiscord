@@ -13,7 +13,7 @@ class Utils(commands.Cog):
 
     @commands.command()
     async def avatar(self, ctx, *, user: discord.Member = None):
-        """Get a link to somebody's avatar"""
+        """Get a link to somebody's avatar."""
         if user is None:
             user = ctx.author
         await ctx.send(user.avatar_url)
