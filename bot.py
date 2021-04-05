@@ -92,6 +92,7 @@ async def encrypt(ctx, rounds: int, message: str):
     except ValueError:
         await ctx.send('Not a valid number.')
 
+@bot.command(description="Decrypt with caesarcrypt. @bot rounds(numbers) message")
 async def decrypt(ctx, rounds: int, message: str):
     decrypt = ""
     try:
