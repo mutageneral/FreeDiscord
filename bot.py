@@ -57,7 +57,7 @@ async def choose(ctx, *choices: str):
 #Put a VirusTotal API key within the quote down below.
 apikey = ""
 @bot.command(description='Testing, "@bot hash"')
-async def vt_api(ctx, hash):
+async def vt_api(ctx, hash: str):
     url = "https://www.virustotal.com/api/v3/files/{}".format(hash)
     headers = {'x-apikey': '{}'.format(apikey)}
     response = requests.get(url, headers=headers).json()
