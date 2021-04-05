@@ -47,7 +47,7 @@ async def on_command_error(ctx, error):
 # skbotnl i swear to god if you remove this one more time im going to-
 @bot.command()
 async def setStatus(ctx, status):
-    if str(ctx.user.id) == ownerID:
+    if str(ctx.message.author.id) == ownerID:
         await bot.change_presence(activity=discord.Game(name=status))
         await ctx.send("Bot status successfully changed to " + status + "!")
     else:
