@@ -12,8 +12,7 @@ intents = discord.Intents.default()
 intents.members = True
 ownerID = ""
 
-bot = commands.Bot(command_prefix='@',
-                   description=description, intents=intents)
+bot = commands.Bot(command_prefix='@', description=description, intents=intents)
 # bot.remove_command('help')
 
 
@@ -28,6 +27,7 @@ async def on_ready():
 bot.load_extension("cogs.general")
 bot.load_extension("cogs.utils")
 bot.load_extension("cogs.moderation")
+bot.load_extension("cogs.settings")
 
 
 @bot.event
@@ -127,15 +127,5 @@ async def decrypt(ctx, rounds: int, *args: str):
         await ctx.send('Your decrypted message is: {}'.format(decrypt))
     except ValueError:
         await ctx.send('Not a valid number.')
-
-
-@bot.command()
-async def setStatus(ctx, statusMsg):
-    """Sets the status of the bot. Requires double quotes."""
-    if ownerID == str(ctx.message.author.id):
-        await bot.change_presence(activity=discord.Game(name=statusMsg))
-        await ctx.send("Status successfully changed!")
-    else:
-        await ctx.send("'Owner Only.'")
 
 bot.run('Your bot token here')
