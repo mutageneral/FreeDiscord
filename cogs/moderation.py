@@ -7,7 +7,8 @@ class Moderation(commands.Cog):
     def timeconvertion(period):#Time convertion
         to_convert = ''.join(filter(str.isdigit, period))
         convertion = {"s":1, "m":60, "h":3600,"d":86400}
-        timeconvert = int(to_convert) * convertion[period[-1]]
+        timeconverted = int(to_convert) * convertion[period[-1]]
+        return timeconverted
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
