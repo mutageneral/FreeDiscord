@@ -71,22 +71,6 @@ async def avatar(ctx, *, user: discord.Member = None):
     await ctx.send(user.avatar_url)
 
 @bot.command()
-async def repeat(ctx, times: int, content='repeating...'):
-    """Repeats a message multiple times."""
-    try:
-        if "@everyone" or "@here" in content:
-            ctx.send("Haha, nice try. Isn't going to work.")
-        else:
-            if times > 10:
-                await ctx.send("Please don't try to repeat too much.")
-            else:
-                for i in range(times):
-                    await ctx.send(content)
-        
-    except Exception:
-        await ctx.send("Please don't spam this command")
-
-@bot.command()
 async def joined(ctx, member: discord.Member):
     """Says when a member joined."""
     await ctx.send('{0.name} joined in {0.joined_at}'.format(member))
