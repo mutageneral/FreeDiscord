@@ -120,15 +120,19 @@ async def userinfo(ctx, *, user: discord.Member = None):
         return
 
 @bot.command(description="Play with caesarcrypt.")
-async def encrypt(ctx, message, rounds):
-    for char in message:
-        if not char.isalpha():
-            encrypt = encrypt + char
-        elif char.isupper():
-            encrypt = encrypt + chr((ord(char) + rounds - 65) % 26 + 365) # for uppercase Z
-        else:
-            encrypt = encrypt + chr((ord(char) + rounds - 97) % 26 + 97) # for lowercase z
-    await ctx.send('Your encrypted message is: {}'.format(encrypt))
+async def encrypt(ctx, rounds, message):
+    try:
+        int(rounds)
+        for char in message:
+                if not char.isalpha():
+                    encrypt = encrypt + char
+                elif char.isupper():
+                    encrypt = encrypt + chr((ord(char) + rounds - 65) % 26 + 365) # for uppercase Z
+                else:
+                    encrypt = encrypt + chr((ord(char) + rounds - 97) % 26 + 97) # for lowercase z
+                await ctx.send('Your encrypted message is: {}'.format(encrypt))
+    except ValueError:
+        await ctx.send('Not a valid number.')
 
 
 bot.run('Insert Your Bot Token Here')
