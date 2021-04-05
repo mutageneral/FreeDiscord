@@ -30,6 +30,7 @@ bot.load_extension("cogs.moderation")
 bot.load_extension("cogs.settings")
 
 
+# Comment this out when debugging
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):
