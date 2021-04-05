@@ -37,5 +37,13 @@ class Moderation(commands.Cog):
             await user.ban()
             await ctx.send(f"**{user}** has been banned, reason: **{reason}**.")
 
+    @commands.command()#Takes 1s 1m 1h 1d
+    @commands.has_permissions(mute=True)
+    async def mute(self, ctx, user: discord.Member = None, _time):
+        await user.add_roles(user, "mute")
+        await ctx.send("User muted.")
+        await asyncio.sleep(timeconvertion(_time))
+        await user.remove_roles(user, "mute")
+
 def setup(bot):
     bot.add_cog(Moderation(bot))
