@@ -119,8 +119,9 @@ async def userinfo(ctx, *, user: discord.Member = None):
     if isinstance(ctx.channel, discord.DMChannel):
         return
 
-@bot.command(description="Play with caesarcrypt.")
+@bot.command(description="Play with caesarcrypt. @bot rounds(numbers) message")
 async def encrypt(ctx, rounds: int, message: str):
+    encrypt = ""
     try:
         int(rounds)
         for char in message:
