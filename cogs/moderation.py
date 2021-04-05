@@ -1,12 +1,16 @@
-import discord, time
+import discord
+import time
 from discord.ext import commands
+from discord.utils import get
+
+
 class Moderation(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    def timeconvertion(period):#Time convertion
+    def timeconvertion(period):  # Time convertion
         to_convert = ''.join(filter(str.isdigit, period))
-        convertion = {"s":1, "m":60, "h":3600,"d":86400}
+        convertion = {"s": 1, "m": 60, "h": 3600, "d": 86400}
         timeconverted = int(to_convert) * convertion[period[-1]]
         return timeconverted
 
@@ -38,14 +42,19 @@ class Moderation(commands.Cog):
             await user.ban()
             await ctx.send(f"**{user}** has been banned, reason: **{reason}**.")
 
-    @commands.command()#Takes 1s 1m 1h 1d
-    @commands.has_permissions(mute=True)
-    async def mute(self, ctx, user: discord.Member = None, time):
+    @commands.command()  # Takes 1s 1m 1h 1d
+    @commands.has_permissions(manage_messages=True)
+    # "userDespacito"? lmao i cant think of good names and ruyibwtueiytrbvuywietrvyouwetrouwy
+    async def mute(self, ctx, userDespacito: discord.Member, time):
         """Mute a member"""
-        await user.add_roles(user, "mute")
-        await ctx.send("User muted.")
-        await asyncio.sleep(timeconvertion(time))
-        await user.remove_roles(user, "mute")
+        role = discord.utils.get(userDespacito.guild.roles, name="muted")
+        await userDespacito.add_roles(role)
+
+        await ctx.send("User muted for " + str(time) + " seconds.")
+        await asyncio.sleep(timeconvertion(int(time)))
+        await user.remove_roles(userDespacito, "muted")
+
 
 def setup(bot):
     bot.add_cog(Moderation(bot))
+
