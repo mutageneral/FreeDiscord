@@ -88,8 +88,9 @@ async def vt_api(ctx, hash: str):
 
 
 @bot.command(description="Play with caesarcrypt. @bot rounds(numbers) message")
-async def encrypt(ctx, rounds: int, message: str):
+async def encrypt(ctx, rounds: int, *args:str):
     """Encrypt a message."""
+    message = args.join(args)
     encrypt = ""
     try:
         int(rounds)
@@ -108,8 +109,9 @@ async def encrypt(ctx, rounds: int, message: str):
 
 
 @bot.command(description="Decrypt with caesarcrypt. @bot rounds(numbers) message")
-async def decrypt(ctx, rounds: int, message: str):
+async def decrypt(ctx, rounds: int, *args:str):
     """Decrypt a message."""
+    message = args.join(args)
     decrypt = ""
     try:
         int(rounds)
