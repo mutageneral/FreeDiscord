@@ -69,4 +69,20 @@ async def vt_api(ctx, hash):
             counts += 1
     await ctx.send("Detections: {}".format(counts))
 
+@bot.command(description="Play with caesarcrypt. @bot rounds(numbers) message")
+async def encrypt(ctx, rounds: int, message: str):
+    encrypt = ""
+    try:
+        int(rounds)
+        for char in message:
+                if not char.isalpha():
+                    encrypt = encrypt + char
+                elif char.isupper():
+                    encrypt = encrypt + chr((ord(char) + rounds - 65) % 26 + 365) # for uppercase Z
+                else:
+                    encrypt = encrypt + chr((ord(char) + rounds - 97) % 26 + 97) # for lowercase z
+                await ctx.send('Your encrypted message is: {}'.format(encrypt))
+    except ValueError:
+        await ctx.send('Not a valid number.')
+
 bot.run('Insert your bot token here')
