@@ -15,9 +15,10 @@ Support Server: https://discord.gg/VyNxSt55gj
 
 intents = discord.Intents.default()
 intents.members = True
-ownerID = 'OWNER_ID_HERE'
+ownerID = 'Insert-YOUR-Discord-ID-here'
 
-bot = commands.Bot(command_prefix='@', description=description, intents=intents)
+bot = commands.Bot(command_prefix='@',
+                   description=description, intents=intents)
 # bot.remove_command('help')
 
 
@@ -42,6 +43,15 @@ async def on_command_error(ctx, error):
         await ctx.send("You dont have permission to do that")
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("Your command is missing an argument")
+
+# skbotnl i swear to god if you remove this one more time im going to-
+@bot.command()
+async def setStatus(ctx, status):
+    if str(ctx.user.id) == ownerID:
+        await bot.change_presence(activity=discord.Game(name=status))
+        await ctx.send("Bot status successfully changed to " + status + "!")
+    else:
+        await ctx.send("listen here bud the command says 'Owner Only' for a reason")
 
 
 @bot.command()
@@ -74,9 +84,11 @@ async def choose(ctx, *choices: str):
         else:
             await ctx.send(random.choice(choices))
 
-#Require "import json" to run.
+# Require "import json" to run.
 # Put a VirusTotal API key within the quote down below.
 apikey = "VIRUSTOTAL_API_KEY_HERE"
+
+
 @bot.command(description='Testing, "@bot hash"')
 async def vt(ctx, hash: str):
     """VirusTotal Integration"""
@@ -92,6 +104,4 @@ async def vt(ctx, hash: str):
     await ctx.send("Detections: {}".format(counts))
 
 
-
-
-bot.run('BOT_TOKEN_HERE')
+bot.run('Insert-bot-token-here')
