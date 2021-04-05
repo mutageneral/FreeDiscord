@@ -10,7 +10,7 @@ description = '''List of all the commands
 
 intents = discord.Intents.default()
 intents.members = True
-ownerID = "819345641439625257"
+ownerID = 'OWNER_ID_HERE'
 
 bot = commands.Bot(command_prefix='@', description=description, intents=intents)
 # bot.remove_command('help')
