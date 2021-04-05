@@ -13,6 +13,7 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, user: discord.Member, *reason):
+        """Kick a member."""
         if not reason:
             await user.kick()
             await ctx.send(f"**{user}** has been kicked, reason: **none**.")
@@ -23,6 +24,7 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx, user: discord.Member, *reason):
+        """Ban a member."""
         if not reason:
             await user.ban()
             await ctx.send(f"**{user}** has been banned, reason: **none**.")
