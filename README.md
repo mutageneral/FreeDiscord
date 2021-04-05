@@ -17,7 +17,7 @@ If you find an issue, or have a feature suggestion, please let us know by openin
 There are many features of the bot. These features include:
 
 - VirusTotal file scanning (see below)
-- Music playing
+- Message encryption
 - Moderation
 - Lots more
 - More being added regularly :)
