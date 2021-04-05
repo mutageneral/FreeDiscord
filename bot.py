@@ -10,7 +10,7 @@ description = '''List of all the commands
 
 intents = discord.Intents.default()
 intents.members = True
-ownerID = ""
+ownerID = "Put Your ID Here"
 
 bot = commands.Bot(command_prefix='@', description=description, intents=intents)
 # bot.remove_command('help')
@@ -68,12 +68,11 @@ async def choose(ctx, *choices: str):
         else:
             await ctx.send(random.choice(choices))
 
+#Require "import json" to run.
 # Put a VirusTotal API key within the quote down below.
 apikey = ""
-
-
 @bot.command(description='Testing, "@bot hash"')
-async def vt_api(ctx, hash: str):
+async def vt(ctx, hash: str):
     """VirusTotal Integration"""
     url = "https://www.virustotal.com/api/v3/files/{}".format(hash)
     headers = {'x-apikey': '{}'.format(apikey)}
@@ -88,9 +87,8 @@ async def vt_api(ctx, hash: str):
 
 
 @bot.command(description="Play with caesarcrypt. @bot rounds(numbers) message")
-async def encrypt(ctx, rounds: int, *args: str):
+async def encrypt(ctx, rounds: int, * , message):
     """Encrypt a message."""
-    message = args.join(args)
     encrypt = ""
     try:
         int(rounds)
@@ -109,9 +107,8 @@ async def encrypt(ctx, rounds: int, *args: str):
 
 
 @bot.command(description="Decrypt with caesarcrypt. @bot rounds(numbers) message")
-async def decrypt(ctx, rounds: int, *args: str):
+async def decrypt(ctx, rounds: int, * , message):
     """Decrypt a message."""
-    message = args.join(args)
     decrypt = ""
     try:
         int(rounds)
