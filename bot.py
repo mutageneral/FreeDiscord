@@ -10,7 +10,7 @@ description = '''List of all the commands
 
 intents = discord.Intents.default()
 intents.members = True
-ownerID = "Put Your ID Here"
+ownerID = "819345641439625257"
 
 bot = commands.Bot(command_prefix='@', description=description, intents=intents)
 # bot.remove_command('help')
@@ -28,9 +28,9 @@ bot.load_extension("cogs.general")
 bot.load_extension("cogs.utils")
 bot.load_extension("cogs.moderation")
 bot.load_extension("cogs.settings")
+bot.load_extension("cogs.caesarcrypt")
 
 
-# Comment this out when debugging
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):
@@ -71,7 +71,7 @@ async def choose(ctx, *choices: str):
 
 #Require "import json" to run.
 # Put a VirusTotal API key within the quote down below.
-apikey = ""
+apikey = "VIRUSTOTAL_API_KEY_HERE"
 @bot.command(description='Testing, "@bot hash"')
 async def vt(ctx, hash: str):
     """VirusTotal Integration"""
@@ -87,43 +87,6 @@ async def vt(ctx, hash: str):
     await ctx.send("Detections: {}".format(counts))
 
 
-@bot.command(description="Play with caesarcrypt. @bot rounds(numbers) message")
-async def encrypt(ctx, rounds: int, * , message):
-    """Encrypt a message."""
-    encrypt = ""
-    try:
-        int(rounds)
-        for char in message:
-            if not char.isalpha():
-                encrypt = encrypt + char
-            elif char.isupper():
-                # for uppercase Z
-                encrypt = encrypt + chr((ord(char) + rounds - 65) % 26 + 365)
-            else:
-                # for lowercase z
-                encrypt = encrypt + chr((ord(char) + rounds - 97) % 26 + 97)
-        await ctx.send('Your encrypted message is: {}'.format(encrypt))
-    except ValueError:
-        await ctx.send('Not a valid number.')
 
 
-@bot.command(description="Decrypt with caesarcrypt. @bot rounds(numbers) message")
-async def decrypt(ctx, rounds: int, * , message):
-    """Decrypt a message."""
-    decrypt = ""
-    try:
-        int(rounds)
-        for char in message:
-            if not char.isalpha():
-                decrypt = decrypt + char
-            elif char.isupper():
-                # for uppercase Z
-                decrypt = decrypt + chr((ord(char) - rounds - 65) % 26 + 65)
-            else:
-                # for lowercase z
-                decrypt = decrypt + chr((ord(char) - rounds - 97) % 26 + 97)
-        await ctx.send('Your decrypted message is: {}'.format(decrypt))
-    except ValueError:
-        await ctx.send('Not a valid number.')
-
-bot.run('Your bot token here')
+bot.run('BOT_TOKEN_HERE')
