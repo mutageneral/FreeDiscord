@@ -85,4 +85,19 @@ async def encrypt(ctx, rounds: int, message: str):
     except ValueError:
         await ctx.send('Not a valid number.')
 
+async def decrypt(ctx, rounds: int, message: str):
+    decrypt = ""
+    try:
+        int(rounds)
+        for char in message:
+            if not char.isalpha():
+                decrypt = decrypt + char
+            elif char.isupper():
+                decrypt = decrypt + chr((ord(char) - rounds - 65) % 26 + 65) # for uppercase Z
+            else:
+                decrypt = decrypt + chr((ord(char) - rounds - 97) % 26 + 97) # for lowercase z
+        await ctx.send('Your decrypted message is: {}'.format(decrypt))
+    except ValueError:
+        await ctx.send('Not a valid number.')
+
 bot.run('Insert your bot token here')
