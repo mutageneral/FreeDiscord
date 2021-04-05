@@ -7,7 +7,8 @@ class Moderation(commands.Cog):
     def timeconvertion(period):#Time convertion
         to_convert = ''.join(filter(str.isdigit, period))
         convertion = {"s":1, "m":60, "h":3600,"d":86400}
-        timeconvert = int(to_convert) * convertion[period[-1]]
+        timeconverted = int(to_convert) * convertion[period[-1]]
+        return timeconverted
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
@@ -39,11 +40,11 @@ class Moderation(commands.Cog):
 
     @commands.command()#Takes 1s 1m 1h 1d
     @commands.has_permissions(mute=True)
-    async def mute(self, ctx, user: discord.Member = None, _time):
+    async def mute(self, ctx, user: discord.Member = None, time):
         """Mute a member"""
         await user.add_roles(user, "mute")
         await ctx.send("User muted.")
-        await asyncio.sleep(timeconvertion(_time))
+        await asyncio.sleep(timeconvertion(time))
         await user.remove_roles(user, "mute")
 
 def setup(bot):
