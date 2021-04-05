@@ -20,5 +20,15 @@ class Moderation(commands.Cog):
             await user.kick()
             await ctx.send(f"**{user}** has been kicked, reason: **{reason}**.")
 
+    @commands.command()
+    @commands.has_permissions(ban_members=True)
+    async def ban(self, ctx, user: discord.Member, *reason):
+        if not reason:
+            await user.ban()
+            await ctx.send(f"**{user}** has been banned, reason: **none**.")
+        else:
+            await user.ban()
+            await ctx.send(f"**{user}** has been banned, reason: **{reason}**.")
+
 def setup(bot):
     bot.add_cog(Moderation(bot))
