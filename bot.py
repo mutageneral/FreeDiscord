@@ -38,6 +38,12 @@ async def add(ctx, left: int, right: int):
     await ctx.send(left + right)
 
 @bot.command()
+@commands.has_permissions(manage_messages=True)
+async def purge(ctx, amount : int):
+    await ctx.channel.purge(limit=amount)
+    await ctx.send('Done!', delete_after=5.0)
+   
+@bot.command()
 async def roll(ctx, dice: str):
     """Rolls a dice in N-N format."""
     try:
