@@ -10,7 +10,7 @@ description = '''List of all the commands
 
 intents = discord.Intents.default()
 intents.members = True
-ownerID = "owner ID here"
+ownerID = "Owner ID here"
 
 bot = commands.Bot(command_prefix='@',
                    description=description, intents=intents)
@@ -128,11 +128,11 @@ async def decrypt(ctx, rounds: int, message: str):
 
 
 @bot.command()
-async def setStatus(ctx, statusMsg):
+async def setStatus(ctx, aRandomWordBcYes):
     """Sets the status of the bot. Requires double quotes."""
 
     if ownerID == str(ctx.message.author.id):
-        await client.change_presence(activity=discord.Game(name=statusMsg))
+        await client.change_presence(activity=discord.Game(name=aRandomWordBcYes))
         await ctx.send("Status successfully changed!")
     else:
         await ctx.send("'Owner Only.'")
