@@ -4,10 +4,6 @@ import random
 import time
 
 description = '''List of all the commands
-Bot made by SKBotNL, ItsJustLag, and Recall (FreeTech Team)
-FreeTech Discord Server: https://discord.gg/zyeE96V5CK
-GitHub link: https://github.com/FreeTechnologies/FreeDiscord
-Enough of the advertising, I mean credit. Time for the actual list of commands:
 -----------------------------------------'''
 
 intents = discord.Intents.default()
@@ -34,7 +30,7 @@ async def setStatus(ctx, status):
         await bot.change_presence(activity=discord.Game(name=status))
         await ctx.send("Done! Successfully set the bot status.")
     else:
-        await ctx.send("are you braindead? did you read what the help message said? 'Owner only.'") #change this if it seems a bit too mean, lmao
+        await ctx.send("You don't have permission to change this")
 
 @bot.command()
 async def add(ctx, left: int, right: int):
@@ -43,11 +39,11 @@ async def add(ctx, left: int, right: int):
 
 @bot.command()
 async def roll(ctx, dice: str):
-    """Rolls a dice in NdN format."""
+    """Rolls a dice in N-N format."""
     try:
-        rolls, limit = map(int, dice.split('d'))
+        rolls, limit = map(int, dice.split('-'))
     except Exception:
-        await ctx.send('Format has to be in NdN!')
+        await ctx.send('Format has to be in N-N!')
         return
 
     result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
@@ -57,14 +53,13 @@ async def roll(ctx, dice: str):
 async def choose(ctx, *choices: str):
     """Chooses between multiple choices."""
     if "@everyone" or "@here" in choices:
-        await ctx.send('Haha, nice try idiot. Enjoy a kick from the mods sooner or later.')
+        await ctx.send("Haha, nice try. Isn't going to work")
     else:
         await ctx.send(random.choice(choices))
 
 @bot.command()
 async def avatar(ctx, *, user: discord.Member = None):
     """Get a link to somebody's avatar"""
-
     if user is None:
         user = ctx.author
     await ctx.send(user.avatar_url)
@@ -72,14 +67,18 @@ async def avatar(ctx, *, user: discord.Member = None):
 @bot.command()
 async def repeat(ctx, times: int, content='repeating...'):
     """Repeats a message multiple times."""
-    if "@everyone" or "@here" in content:
-        ctx.send("Haha, nice try idiot. Enjoy a kick from the mods sooner or later n00b.")
-    else:
-        if times > 10:
-            await ctx.send("trying to spam huh? not gonna work. max number of repeats is 10.")
+    try:
+        if "@everyone" or "@here" in content:
+            ctx.send("Haha, nice try. Isn't going to work.")
         else:
-            for i in range(times):
-                await ctx.send(content)
+            if times > 10:
+                await ctx.send("Please don't try to repeat too much.")
+            else:
+                for i in range(times):
+                    await ctx.send(content)
+        
+    except Exception:
+        await ctx.send("Please don't spam this command")
 
 @bot.command()
 async def joined(ctx, member: discord.Member):
