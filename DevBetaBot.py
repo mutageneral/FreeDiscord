@@ -120,7 +120,8 @@ async def userinfo(ctx, *, user: discord.Member = None):
         return
 
 @bot.command(description="Play with caesarcrypt.")
-async def encrypt(ctx, rounds: int, message: str):
+async def encrypt(ctx, rounds: int, message: st):
+    encrypt = ""
     try:
         int(rounds)
         for char in message:
