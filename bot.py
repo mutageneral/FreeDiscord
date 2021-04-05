@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import random
 import time
+import requests, json
 
 description = '''List of all the commands
 -----------------------------------------'''
@@ -29,7 +30,7 @@ bot.load_extension("cogs.moderation")
 async def add(ctx, left: int, right: int):
     """Adds two numbers together."""
     await ctx.send(left + right)
-   
+
 @bot.command()
 async def roll(ctx, dice: str):
     """Rolls a dice in N-N format."""
@@ -53,5 +54,18 @@ async def choose(ctx, *choices: str):
         else:
             await ctx.send(random.choice(choices))
 
-bot.run('Insert your bot token here')
+apikey = ""
+@bot.command(description='Testing, put your own api key here.')
+async def vt_api(ctx, hash):
+    url = "https://www.virustotal.com/api/v3/files/{}".format(hash)
+    headers = {'x-apikey': '{}'.format(apikey)}
+    response = requests.get(url, headers=headers).json()
+    detections = str(response).split("'")
+    #Count the detecionts
+    counts = 0
+    for m in detections:
+        if m == "malicious":
+            counts += 1
+    await ctx.send("Detections: {}".format(counts))
 
+bot.run('Insert your bot token here')
