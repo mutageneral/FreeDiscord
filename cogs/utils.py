@@ -46,6 +46,7 @@ class Utils(commands.Cog):
 
     @commands.command()
     async def serverinfo(self, ctx):
+        """Gives some information about the server."""
         name = str(ctx.guild.name)
         description = str(ctx.guild.description)
 
