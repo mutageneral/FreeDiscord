@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
-from bot import ownerID
-
+# from bot import ownerID 
+ownerID = "Insert-YOUR-Discord-ID-Here"
 
 class Settings(commands.Cog):
     def __init__(self, bot):
