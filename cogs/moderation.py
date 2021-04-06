@@ -9,7 +9,7 @@ class Moderation(commands.Cog):
         self.bot = bot
 
     def timeconvertion(period):  # Time convertion
-        if period[-1].isalpha()
+        if period[-1].isalpha():
             to_convert = ''.join(filter(str.isdigit, period))
             convertion = {"s": 1, "m": 60, "h": 3600, "d": 86400}
             timeconverted = int(to_convert) * convertion[period[-1]]
