@@ -7,10 +7,10 @@ If you find an issue, or have a feature suggestion, please let us know by openin
 
 ### Starting the bot
 
-1. Clone the repository: `git clone https://github.com/FreeTechnologies/FreeDiscord.git`.
+1. Clone the repository: `git clone https://github.com/FreeTechnologies/FreeDiscord.git`. Or download the zip, upzip it, and go to step 3.
 2. `cd` to the repository folder: `cd FreeDiscord`.
-3. Copy "config-example.py" and rename it to "config.py".
-4. Fill in "config.py".
+3. Copy `config-example.py` and rename it to `config.py`.
+4. Fill in `config.py`.
 5. Run the bot main file: `python3 bot.py`.
 
 ### Features
