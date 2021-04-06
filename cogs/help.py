@@ -55,38 +55,60 @@ class Help(commands.Cog):
     # General commands
     @help.command(name="add")
     async def _add(self, ctx):
-        em = discord.Embed(title = "General: add", description = prefix + "add <number1> <number2> \n\n Adds two numbers together.")
+        em = discord.Embed(title = "General: Add", description = prefix + "add <number1> <number2> \n\n Adds two numbers together.")
         await ctx.send(embed = em)
 
     @help.command(name="choose")
     async def _choose(self, ctx):
-        em = discord.Embed(title = "General: choose", description = prefix + "choose <choice1> <choice2> \n\n Chooses between multiple choices.")
+        em = discord.Embed(title = "General: Choose", description = prefix + "choose <choice1> <choice2> \n\n Chooses between multiple choices.")
         await ctx.send(embed = em)
 
     @help.command(name="roll")
     async def _roll(self, ctx):
-        em = discord.Embed(title = "General: roll", description = prefix + "roll <number1>-<number2> \n\n Rolls a dice in N-N format.")
+        em = discord.Embed(title = "General: Roll", description = prefix + "roll <number1>-<number2> \n\n Rolls a dice in N-N format.")
         await ctx.send(embed = em)
 
     @help.command(name="vt")
     async def _vt(self, ctx):
-        em = discord.Embed(title = "General: vt", description = prefix + "vt <hash> \n\n VirusTotal Integration")
+        em = discord.Embed(title = "General: VT", description = prefix + "vt <hash> \n\n VirusTotal Integration")
         await ctx.send(embed = em)
 
     # Settings commands
     @help.command(name="botstatus")
     async def _botstatus(self, ctx):
-        em = discord.Embed(title = "Settings: botstatus", description = prefix + "botstatus <status> \n\n Sets the status of the bot. Owner only. '" + prefix + "botstatus' to reset")
+        em = discord.Embed(title = "Settings: BotStatus", description = prefix + "botstatus <status> \n\n Sets the status of the bot. Owner only. '" + prefix + "botstatus' to reset")
         await ctx.send(embed = em)
 
     # Utils commands
     @help.command(name="avatar")
     async def _avatar(self, ctx):
-        em = discord.Embed(title = "Utils: avatar", description = prefix + "avatar <user> \n\n Get a link to somebody's avatar.")
+        em = discord.Embed(title = "Utils: Avatar", description = prefix + "avatar <user> \n\n Get a link to somebody's avatar.")
+        await ctx.send(embed = em)
+    
+    @help.command(name="encrypt")
+    async def _encrypt(self, ctx):
+        em = discord.Embed(title = "Caesarcrypt: Encrypt", description = prefix + "encrypt <rounds> <message> \n\n Encrypt a message. The '<message>' has to be in double quotes for it to work.")
         await ctx.send(embed = em)
 
-    # WIP
+    @help.command(name="decrypt")
+    async def _decrypt(self, ctx):
+        em = discord.Embed(title = "Caesarcrypt: Decrypt", description = prefix + "decrypt <rounds> <message> \n\n Decrypt a message. The '<message>' has to be in double quotes for it to work.")
+        await ctx.send(embed = em)
 
+    @help.command(name="joined")
+    async def _joined(self, ctx):
+        em = discord.Embed(title = "Utils: Joined", description = prefix + "joined <user> \n\n Tells you when a user joined the server.")
+        await ctx.send(embed = em)
 
+    @help.command(name="ping")
+    async def _ping(self, ctx):
+        em = discord.Embed(title = "Utils: Ping", description = prefix + "ping \n\n Tells you the latency between the bot and the server.")
+        await ctx.send(embed = em)
+
+    @help.command(name="userinfo")
+    async def _userinfo(self, ctx):
+        em = discord.Embed(title = "Utils: UserInfo", description = prefix + "userinfo <user> \n\n Gives you information about a user.")
+        await ctx.send(embed = em)
+    
 def setup(bot):
     bot.add_cog(Help(bot))
