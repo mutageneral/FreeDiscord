@@ -8,7 +8,7 @@ class Settings(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def setStatus(self, ctx, status):
+    async def botstatus(self, ctx, status):
         """Sets the status of the bot. Owner only."""
         if str(ctx.message.author.id) == ownerID:
             await self.bot.change_presence(activity=discord.Game(name=status))
