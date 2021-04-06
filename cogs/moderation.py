@@ -55,7 +55,7 @@ class Moderation(commands.Cog):
         role = discord.utils.get(user.guild.roles, name="muted")
         await user.add_roles(role)
         await ctx.send("User muted for " + "``{}``".format(str(mutetime)) + " seconds.")
-        await asyncio.sleep(int(mutetime))
+        await asyncio.sleep(int(timeconvertion(period)))
         await user.remove_roles(role)
 
 
