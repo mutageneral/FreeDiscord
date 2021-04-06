@@ -57,7 +57,7 @@ class Moderation(commands.Cog):
             await ctx.send("User muted for " + "`{}`".format(str(mutetime)) + ".")
             await asyncio.sleep(timeconvertion(mutetime))
             await user.remove_roles(role)
-        elif timeconvertion(time) == 0:
+        elif timeconvertion(mutetime) == 0:
             await ctx.send("Time format is not right.")
         else:
             print("Something went wrong")
