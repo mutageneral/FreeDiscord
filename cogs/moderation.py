@@ -12,7 +12,7 @@ class Moderation(commands.Cog):
         to_convert = ''.join(filter(str.isdigit, period))
         convertion = {"s": 1, "m": 60, "h": 3600, "d": 86400}
         timeconverted = int(to_convert) * convertion[period[-1]]
-        return timeconverted
+        return int(timeconverted)
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
@@ -50,10 +50,9 @@ class Moderation(commands.Cog):
         await userDespacito.add_roles(role)
 
         await ctx.send("User muted for " + str(time) + " seconds.")
-        await asyncio.sleep(timeconvertion(int(time)))
+        await asyncio.sleep(timeconvertion(time))
         await user.remove_roles(user, "muted")
 
 
 def setup(bot):
     bot.add_cog(Moderation(bot))
-
