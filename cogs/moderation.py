@@ -54,7 +54,7 @@ class Moderation(commands.Cog):
         if timeconvertion(time) is not 0:
             role = discord.utils.get(user.guild.roles, name="muted")
             await user.add_roles(role)
-            await ctx.send("User muted for " + "```{}```.".format(str(time)))
+            await ctx.send("User muted for " + "``{}``.".format(str(time)))
             await asyncio.sleep(timeconvertion(time))
             await user.remove_roles(role)
         elif timeconvertion(time) is 0:
