@@ -51,6 +51,7 @@ class Moderation(commands.Cog):
     @commands.command()  # Takes 1s 1m 1h 1d
     @commands.has_permissions(manage_messages=True)
     async def mute(self, ctx, user: discord.Member, mutetime):
+        """Mute a member."""
         if timeconvertion(mutetime) != 0:
             role = discord.utils.get(user.guild.roles, name="muted")
             await user.add_roles(role)
@@ -62,6 +63,21 @@ class Moderation(commands.Cog):
         else:
             print("Something went wrong")
 
+    @commands.command()
+    @commands.has_permissions(ban_members=True)
+    async def unban(self, ctx, id: int):
+        """Unban a member."""
+        userToUnban = await self.bot.fetch_user(id)
+        await ctx.guild.unban(userToUnban)
+        await ctx.send("Successfully unbanned `" + userToUnban.name + "`")
+
+    @commands.command()  # Takes 1s 1m 1h 1d
+    @commands.has_permissions(manage_messages=True)
+    async def unmute(self, ctx, user: discord.Member):
+        """Unmute a member."""
+        role = discord.utils.get(user.guild.roles, name="muted")
+        await user.remove_roles(role)
+        await ctx.send("Successfully unmuted `" + user.name + "`")
 
 def setup(bot):
     bot.add_cog(Moderation(bot))
