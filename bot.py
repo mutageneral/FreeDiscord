@@ -18,7 +18,7 @@ intents = discord.Intents.default()
 intents.members = True
 
 bot = commands.Bot(command_prefix=prefix, description=description, intents=intents)
-# bot.remove_command('help')
+bot.remove_command('help')
 
 
 @bot.event
@@ -34,6 +34,7 @@ bot.load_extension("cogs.utils")
 bot.load_extension("cogs.moderation")
 bot.load_extension("cogs.settings")
 bot.load_extension("cogs.caesarcrypt")
+bot.load_extension("cogs.help")
 
 
 @bot.event
