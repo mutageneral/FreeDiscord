@@ -72,11 +72,8 @@ async def choose(ctx, *choices: str):
             await ctx.send("Hahaha nice try")
         else:
             await ctx.send(random.choice(choices))
-
-# Require "import json" to run.
-# Put a VirusTotal API key within the quote down below.
-apikey = "VIRUSTOTAL_API_KEY_HERE"
-
+            
+apikey = virustotal_api
 
 @bot.command(description='Testing, "@bot hash"')
 async def vt(ctx, hash: str):
