@@ -12,7 +12,8 @@ If you find an issue, or have a feature suggestion, please let us know by openin
 3. Make sure all the dependencies are installed, Windows: `python -m pip install discord.py requests` Linux: `pip3 install discord.py requests`.
 4. Copy `config-example.py` and rename it to `config.py`.
 5. Fill in `config.py`.
-6. Run the bot main file: `python3 bot.py`.
+6. Before starting, make sure Server Members Intent is enabled in your bot settings.
+7. Run the bot main file: `python3 bot.py`.
 
 ### Features
 
