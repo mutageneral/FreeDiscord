@@ -9,10 +9,13 @@ class Moderation(commands.Cog):
         self.bot = bot
 
     def timeconvertion(period):  # Time convertion
-        to_convert = ''.join(filter(str.isdigit, period))
-        convertion = {"s": 1, "m": 60, "h": 3600, "d": 86400}
-        timeconverted = int(to_convert) * convertion[period[-1]]
-        return int(timeconverted)
+        if period[-1].isalpha()
+            to_convert = ''.join(filter(str.isdigit, period))
+            convertion = {"s": 1, "m": 60, "h": 3600, "d": 86400}
+            timeconverted = int(to_convert) * convertion[period[-1]]
+            return int(timeconverted)
+        else:
+            return 0
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
@@ -48,11 +51,16 @@ class Moderation(commands.Cog):
     @commands.has_permissions(manage_messages=True)
     async def mute(self, ctx, user: discord.Member, time):
         """Mute a member"""
-        role = discord.utils.get(user.guild.roles, name="muted")
-        await user.add_roles(role)
-        await ctx.send("User muted for " + "```{}```.".format(str(time)))
-        await asyncio.sleep(timeconvertion(time))
-        await user.remove_roles(role)
+        if timeconvertion(time) is not 0:
+            role = discord.utils.get(user.guild.roles, name="muted")
+            await user.add_roles(role)
+            await ctx.send("User muted for " + "```{}```.".format(str(time)))
+            await asyncio.sleep(timeconvertion(time))
+            await user.remove_roles(role)
+        elif timeconvertion(time) is 0:
+            await ctx.send("Time format is not right.")
+        else:
+            print("Something went wrong")
 
 
 def setup(bot):
