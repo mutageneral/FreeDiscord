@@ -19,11 +19,12 @@ class Settings(commands.Cog):
                 await ctx.send("Bot status successfully reset the status!")
             else:
                 await self.bot.change_presence(activity=discord.Game(name=args))
-                await ctx.send("Bot status successfully changed to **" + status + "**!")
+                await ctx.send("Bot status successfully changed to " + args + "!")
         else:
-            await ctx.send("This command is Bot Owner only")
+            await ctx.send("This command is for the bot Owner only")
 
 
 def setup(bot):
     bot.add_cog(Settings(bot))
+
 
