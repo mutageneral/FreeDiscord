@@ -1,6 +1,6 @@
 import discord, time
 from discord.ext import commands
-class caesarcrypt(commands.Cog):
+class Caesarcrypt(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -44,4 +44,4 @@ class caesarcrypt(commands.Cog):
             await ctx.send('Not a valid number.')
 
 def setup(bot):
-    bot.add_cog(caesarcrypt(bot))
+    bot.add_cog(Caesarcrypt(bot))
