@@ -10,13 +10,18 @@ class Settings(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def botstatus(self, ctx, status):
-        """Sets the status of the bot. Owner only."""
+    async def botstatus(self, ctx, *args):
+        """Sets the status of the bot. Owner only. 'botstatus' to reset"""
+        args = " ".join(args[:])
         if str(ctx.message.author.id) == ownerID:
-            await self.bot.change_presence(activity=discord.Game(name=status))
-            await ctx.send("Bot status successfully changed to " + status + "!")
+            if args == '':
+                await self.bot.change_presence(activity=discord.Game(name=''))
+                await ctx.send("Bot status successfully reset the status!")
+            else:
+                await self.bot.change_presence(activity=discord.Game(name=args))
+                await ctx.send("Bot status successfully changed to **" + status + "**!")
         else:
-            await ctx.send("listen here bud the command says 'Owner Only' for a reason")
+            await ctx.send("This command is Bot Owner only")
 
 
 def setup(bot):
