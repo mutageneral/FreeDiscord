@@ -1,7 +1,9 @@
 import discord
 from discord.ext import commands
-# from bot import ownerID 
-ownerID = "Insert-YOUR-Discord-ID-Here"
+import os
+import sys
+sys.path.append(os.path.realpath('.'))
+from config import *
 
 class Settings(commands.Cog):
     def __init__(self, bot):
