@@ -17,7 +17,7 @@ Support Server: https://discord.gg/VyNxSt55gj
 intents = discord.Intents.default()
 intents.members = True
 
-bot = commands.Bot(command_prefix='@', description=description, intents=intents)
+bot = commands.Bot(command_prefix=prefix, description=description, intents=intents)
 # bot.remove_command('help')
 
 

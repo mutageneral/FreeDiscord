@@ -7,7 +7,7 @@ If you find an issue, or have a feature suggestion, please let us know by openin
 
 ### Starting the bot
 
-1. Clone the repository: `git clone https://github.com/FreeTechnologies/FreeDiscord.git`. Or download the zip, upzip it, and go to step 3.
+1. Clone the repository: `git clone https://github.com/FreeTechnologies/FreeDiscord.git`. Or download the zip, upzip it, go into the folder, and go to step 3.
 2. `cd` to the repository folder: `cd FreeDiscord`.
 3. Make sure all the dependencies are installed, Windows: `python -m pip install discord.py requests` Linux: `pip3 install discord.py requests`.
 4. Copy `config-example.py` and rename it to `config.py`.
