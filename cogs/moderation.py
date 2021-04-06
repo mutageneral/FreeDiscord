@@ -1,8 +1,8 @@
 import discord
 import time
-import asyncio
 from discord.ext import commands
 from discord.utils import get
+import asyncio
 
 
 class Moderation(commands.Cog):
@@ -50,18 +50,13 @@ class Moderation(commands.Cog):
 
     @commands.command()  # Takes 1s 1m 1h 1d
     @commands.has_permissions(manage_messages=True)
-    async def mute(self, ctx, user: discord.Member, time):
+    async def mute(self, ctx, user: discord.Member, mutetime):
         """Mute a member"""
-        if timeconvertion(time) is not 0:
-            role = discord.utils.get(user.guild.roles, name="muted")
-            await user.add_roles(role)
-            await ctx.send("User muted for " + "``{}``.".format(str(time)))
-            await asyncio.sleep(timeconvertion(time))
-            await user.remove_roles(role)
-        elif timeconvertion(time) is 0:
-            await ctx.send("Time format is not right.")
-        else:
-            print("Something went wrong")
+        role = discord.utils.get(user.guild.roles, name="muted")
+        await user.add_roles(role)
+        await ctx.send("User muted for " + "``{}``".format(str(mutetime)) + " seconds.")
+        await asyncio.sleep(int(mutetime))
+        await user.remove_roles(role)
 
 
 def setup(bot):
