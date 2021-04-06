@@ -13,7 +13,8 @@ If you find an issue, or have a feature suggestion, please let us know by openin
 4. Copy `config-example.py` and rename it to `config.py`.
 5. Fill in `config.py`.
 6. Before starting, make sure Server Members Intent is enabled in your bot settings.
-7. Run the bot main file: `python3 bot.py`.
+7. To make sure the `mute` and `unmute` command works, please make a role called `muted` in your server.
+8. Run the bot main file: `python3 bot.py`.
 
 ### Features
 
