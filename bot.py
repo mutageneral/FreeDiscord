@@ -4,6 +4,7 @@ import random
 import time
 import requests
 import json
+from config import *
 
 description = '''List of all the commands
 -----------------------------------------
@@ -92,4 +93,4 @@ async def vt(ctx, hash: str):
     await ctx.send("Detections: {}".format(counts))
 
 
-bot.run('Insert-bot-token-here')
+bot.run(bot_token)
