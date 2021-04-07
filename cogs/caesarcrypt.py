@@ -19,9 +19,11 @@ class Caesarcrypt(commands.Cog):
                 else:
                     # for lowercase z
                     encrypt = encrypt + chr((ord(char) + rounds - 97) % 26 + 97)
-            await ctx.send('Your encrypted message is: {}'.format(encrypt))
+            em = discord.Embed(title = 'Your encrypted message is: {}'.format(encrypt))
+            await ctx.send(embed = em)
         except ValueError:
-            await ctx.send('Not a valid number.')
+            em = discord.Embed(title = "Not a valid number.")
+            await ctx.send(embed = em)
 
 
     @commands.command(description="Decrypt with caesarcrypt. @bot rounds(numbers) message")
@@ -39,9 +41,12 @@ class Caesarcrypt(commands.Cog):
                 else:
                     # for lowercase z
                     decrypt = decrypt + chr((ord(char) - rounds - 97) % 26 + 97)
-            await ctx.send('Your decrypted message is: {}'.format(decrypt))
+
+            em = discord.Embed(title = 'Your decrypted message is: {}'.format(decrypt))
+            await ctx.send(embed = em)
         except ValueError:
-            await ctx.send('Not a valid number.')
+            em = discord.Embed(title = "Not a valid number.")
+            await ctx.send(embed = em)
 
 def setup(bot):
     bot.add_cog(Caesarcrypt(bot))
