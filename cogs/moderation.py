@@ -1,5 +1,6 @@
 import discord
 import time
+import os
 from discord.ext import commands
 from discord.utils import get
 import asyncio
@@ -88,6 +89,62 @@ class Moderation(commands.Cog):
         await user.remove_roles(role)
         em = discord.Embed(title = "Successfully unmuted `" + user.name + "`")
         await ctx.send(embed = em)
+
+    @commands.command()
+    @commands.has_permissions(manage_messages=True)
+    async def warn(self, ctx, user : discord.Member, reason):
+        if not os.path.exists('warns'):
+            os.makedirs('warns')
+        try:
+            if os.stat("warns/" + str(user.id) + "_" + str(ctx.message.guild.id) + ".py").st_size > 0:    
+                await ctx.send("Successfully warned that member")
+                writeReasonTemplate = str(reason)
+                warns = open("warns/" + str(user.id) + "_" + str(ctx.message.guild.id) + ".py", 'a')
+                warns.write("\n")
+                warns.write(writeReasonTemplate)
+                warns.close()
+        except:
+            await ctx.send("Successfully warned that member")
+            writeReasonTemplate = str(reason)
+            warns = open("warns/" + str(user.id) + "_" + str(ctx.message.guild.id) + ".py", 'a')
+            warns.write(writeReasonTemplate)
+            warns.close()
+
+    @commands.command()
+    @commands.has_permissions(manage_messages=True)
+    async def warns(self, ctx, user : discord.Member):
+        if not os.path.exists('warns'):
+            os.makedirs('warns')
+        try:
+            with open("warns/" + str(user.id) + "_" + str(ctx.message.guild.id) + ".py") as f:
+                lines = f.readlines()
+                lines_clean = " ".join(lines[:])
+                if not lines_clean:
+                    em = discord.Embed(title = "Warns for " + str(user), description = "This user has no warnings")
+                else:
+                    em = discord.Embed(title = "Warns for " + str(user), description = lines_clean)
+                await ctx.send(embed = em)
+        except:
+            em = discord.Embed(title = "Warns for " + str(user), description = "This user has no warnings")
+            await ctx.send(embed = em)
+
+    @commands.command()
+    @commands.has_permissions(manage_messages=True)
+    async def delwarn(self, ctx, user : discord.Member, reason):
+        if not os.path.exists('warns'):
+            os.makedirs('warns')
+        fn = "warns/" + str(user.id) + "_" + str(ctx.message.guild.id) + ".py"
+        f = open(fn)
+        output = []
+        word=reason
+        for line in f:
+            if not line.startswith(word):
+                output.append(line)
+        f.close()
+        f = open(fn, 'w')
+        f.writelines(output)
+        f.close()
+        await ctx.send("Successfully removed that warning")
 
 def setup(bot):
     bot.add_cog(Moderation(bot))
