@@ -64,6 +64,7 @@ class Settings(commands.Cog):
                 await self.bot.change_presence(activity=discord.Game("creeper? aw man"))
                 await asyncio.sleep(5)
                 await self.bot.change_presence(activity=discord.Game("FreeDiscord is the best open source discord bot"))
+                await asyncio.sleep(5)
 
 def setup(bot):
     bot.add_cog(Settings(bot))
