@@ -47,9 +47,9 @@ async def on_command_error(ctx, error):
         em = discord.Embed(title = "Your command is missing an argument.")
         await ctx.send(embed = em)
     elif isinstance(error):
-        print("FreeDiscord has encountered an error.")
-        print("The error details are below:")
-        print(error)
+        await ctx.send("FreeDiscord has encountered an error.")
+        await ctx.send("The error details are below:")
+        await ctx.send(error)
 
 @bot.command()
 async def add(ctx, left: int, right: int):
