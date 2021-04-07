@@ -87,9 +87,9 @@ apikey = virustotal_api
 @bot.command(description='Testing, "@bot hash"')
 async def vt_hash(ctx, hash: str):
     """VirusTotal Integration"""
-    headers = {'x-apikey': '{}'.format(apikey)}
+    header = {'x-apikey': '{}'.format(apikey)}
     vturl = "https://www.virustotal.com/api/v3/files/{}".format(hash)
-    response = requests.get(vturl, headers=headers).json()
+    response = requests.get(vturl, headers=header).json()
     detections = str(response).split("'")
     # Count the detecionts
     counts = 0
@@ -103,7 +103,7 @@ async def vt_hash(ctx, hash: str):
 @bot.command(description='Testing, "@bot hash"')
 async def scan_url(ctx, url: str):
     #Need to import base64 module to work
-    headers = {'x-apikey': '{}'.format(apikey)}
+    header = {'x-apikey': '{}'.format(apikey)}
     encode = base64.b64encode(url.encode("utf-8"))
     url_in_base64 = str(encode, "utf-8").replace("=", "")
     vturl = "https://www.virustotal.com/api/v3/urls/{}".format(url_in_base64)
