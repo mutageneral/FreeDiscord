@@ -9,7 +9,7 @@ class Utils(commands.Cog):
         '''
         Get the latency of the bot.
         '''
-        em = discord.Embed(title = "Pong! `"f"{self.bot.latency} ms`.")
+        em = discord.Embed(title = "Pong! `"f"{self.bot.latency*1000} ms`.")
         await ctx.send(embed = em)
 
     @commands.command()
