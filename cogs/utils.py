@@ -71,5 +71,13 @@ class Utils(commands.Cog):
 
         await ctx.send(embed=embed)
 
+    @commands.command()
+    async def quickpoll(self, ctx, *poll):
+        args = " ".join(poll[:])
+        em = discord.Embed(title = f'{args}')
+        msg = await ctx.send(embed = em)
+        await msg.add_reaction('👍')
+        await msg.add_reaction('👎')
+
 def setup(bot):
     bot.add_cog(Utils(bot))
