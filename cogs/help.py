@@ -65,7 +65,7 @@ class Help(commands.Cog):
 
     @help.command(name="warns")
     async def _warns(self, ctx):
-        em = discord.Embed(title = "Moderation: Warns", description = prefix + "warns <user> \n\See the warnings for a member.")
+        em = discord.Embed(title = "Moderation: Warns", description = prefix + "warns <user> \n\nSee the warnings for a member.")
         await ctx.send(embed = em)
 
     # General commands
