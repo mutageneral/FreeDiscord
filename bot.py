@@ -65,7 +65,8 @@ async def roll(ctx, dice: str):
         return
 
     result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
-    await ctx.send(result)
+    em = discord.Embed(title = result)
+    await ctx.send(embed = em)
 
 
 @bot.command(description='For when you wanna settle the score some other way')
