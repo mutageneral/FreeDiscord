@@ -55,9 +55,9 @@ class Moderation(commands.Cog):
             em = discord.Embed(title = f"**{user}** has been banned, reason: **{reason}**.")
             await ctx.send(embed = em)
 
-    @commands.command()  # Takes 1s 1m 1h 1d
+    @commands.command() # Takes 1s 1m 1h 1d
     @commands.has_permissions(manage_messages=True)
-    async def mute(self, ctx, user: discord.Member, mutetime):
+    async def mute(self, ctx, user: discord.Member, mutetime): #BTW need to import time module to work.
         """Mute a member."""
         if timeconvertion(mutetime) != 0:
             role = discord.utils.get(user.guild.roles, name="muted")
@@ -98,7 +98,7 @@ class Moderation(commands.Cog):
         if not os.path.exists('warns'):
             os.makedirs('warns')
         try:
-            if os.stat("warns/" + str(user.id) + "_" + str(ctx.message.guild.id) + ".py").st_size > 0:    
+            if os.stat("warns/" + str(user.id) + "_" + str(ctx.message.guild.id) + ".py").st_size > 0:
                 await ctx.send("Successfully warned that member")
                 writeReasonTemplate = str(reason)
                 warns = open("warns/" + str(user.id) + "_" + str(ctx.message.guild.id) + ".py", 'a')
