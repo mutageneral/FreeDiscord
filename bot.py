@@ -97,7 +97,7 @@ async def vt_hash(ctx, hash: str):
     for m in detections:
         if m == "malicious":
             counts += 1
-    counts = counts -2
+    counts = counts - 2
     em = discord.Embed(title = "Detections: {}".format(counts))
     await ctx.send(embed = em)
 
@@ -114,7 +114,9 @@ async def scan_url(ctx, url: str):
     for m in detections:
         if m == "malicious":
             counts += 1
-    counts = counts - 2
+    counts = counts - 5
+    if counts < 0:
+        counts = 0
     em = discord.Embed(title = "Detections: {}".format(counts))
     await ctx.send(embed = em)
 
