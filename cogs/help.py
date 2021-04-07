@@ -3,7 +3,7 @@ from discord.ext import commands
 import os
 import sys
 sys.path.append(os.path.realpath('.'))
-from config import *
+from config import * #
 class Help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -14,11 +14,10 @@ class Help(commands.Cog):
             em = discord.Embed(title = "Help", description = "Use " + prefix + "help <command> for extended information on a command.")
             em.add_field(name = "General", value = "add, choose, roll, vt")
             em.add_field(name = "Moderation", value = "ban, delwarn, kick, mute, purge, unban, unmute, warn, warns")
-            em.add_field(name = "Settings", value = "botstatus")
+            em.add_field(name = "Settings", value = "botstatus, botstatusrepeat")
             em.add_field(name = "Utils", value = "avatar, joined, ping, userinfo")
             em.add_field(name = "Caesarcrypt", value = "decrypt, encrypt")
             em.add_field(name = "Help", value = "help - Shows this message")
-            em.add_field(name = "botstatuschange", value = "botstatusrepeat")
 
             await ctx.send(embed = em)
 

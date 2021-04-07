@@ -43,8 +43,11 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):
         em = discord.Embed(title = "You do not have permission to do that.")
         await ctx.send(embed = em)
-    if isinstance(error, commands.MissingRequiredArgument):
+    elif isinstance(error, commands.MissingRequiredArgument):
         em = discord.Embed(title = "Your command is missing an argument.")
+        await ctx.send(embed = em)
+    else:
+        em = discord.Embed(title = "An internal error occurred.")
         await ctx.send(embed = em)
 
 @bot.command()
