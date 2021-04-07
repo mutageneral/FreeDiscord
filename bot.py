@@ -35,7 +35,6 @@ bot.load_extension("cogs.moderation")
 bot.load_extension("cogs.settings")
 bot.load_extension("cogs.caesarcrypt")
 bot.load_extension("cogs.help")
-bot.load_extension("cogs.botstatuschange")
 
 
 @bot.event
