@@ -19,11 +19,14 @@ If you find an issue, or have a feature suggestion, please let us know by openin
 
 There are many features of the bot. These features include:
 
-- VirusTotal file scanning (see below)
+- VirusTotal file scanning
 - Message encryption
 - Moderation
+- Fun commands
+- Utility commands
+- Custom playing status that you can customize per instance
 - Lots more
-- More being added regularly :)
+- More being added regularly!
 
 Like earlier said, if you have any feature requests or issues with the bot, open an issue [here](https://github.com/FreeTechnologies/FreeDiscord/issues)!
 Enjoy the bot! We hope you have as much fun with it as we had programming it! :)
