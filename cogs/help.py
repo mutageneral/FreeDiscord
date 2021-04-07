@@ -86,7 +86,12 @@ class Help(commands.Cog):
 
     @help.command(name="vt")
     async def _vt(self, ctx):
-        em = discord.Embed(title = "General: VT", description = prefix + "vt <hash> \n\nVirusTotal Integration")
+        em = discord.Embed(title = "General: VT", description = prefix + "vt <hash> \n\nScan a hash with VirusTotal")
+        await ctx.send(embed = em)
+
+    @help.command(name="scan_url")
+    async def _vt(self, ctx):
+        em = discord.Embed(title = "General: VT", description = prefix + "scan_url <url> \n\nScan a url with VirusTotal. **Make sure to do `https://<website>` and not `<website>`**")
         await ctx.send(embed = em)
 
     # Settings commands
