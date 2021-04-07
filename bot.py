@@ -46,6 +46,9 @@ async def on_command_error(ctx, error):
     elif isinstance(error, commands.MissingRequiredArgument):
         em = discord.Embed(title = "Your command is missing an argument.")
         await ctx.send(embed = em)
+    elif isinstance(error, commands.CommandNotFound):
+        em = discord.Embed(title = "Command not found")
+        await ctx.send(embed = em)
     else:
         em = discord.Embed(title = "An internal error occurred.")
         await ctx.send(embed = em)
