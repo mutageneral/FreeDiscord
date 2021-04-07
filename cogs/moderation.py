@@ -57,7 +57,8 @@ class Moderation(commands.Cog):
 
     @commands.command() # Takes 1s 1m 1h 1d
     @commands.has_permissions(manage_messages=True)
-    async def mute(self, ctx, user: discord.Member, mutetime): #BTW need to import time module to work.
+    async def mute(self, ctx, user: discord.Member, mutetime):
+        #BTW need to import time&asyncio module to work.
         """Mute a member."""
         if timeconvertion(mutetime) != 0:
             role = discord.utils.get(user.guild.roles, name="muted")
