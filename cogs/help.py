@@ -3,7 +3,7 @@ from discord.ext import commands
 import os
 import sys
 sys.path.append(os.path.realpath('.'))
-from config import *
+from config import * #
 class Help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
