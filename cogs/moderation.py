@@ -31,10 +31,12 @@ class Moderation(commands.Cog):
         args = " ".join(reason[:])
         if not reason:
             await user.kick()
-            await ctx.send(f"**{user}** has been kicked, reason: **none**.")
+            em = discord.Embed(title = f"**{user}** has been kicked, reason: **none**.")
+            await ctx.send(embed = em)
         else:
             await user.kick()
-            await ctx.send(f"**{user}** has been kicked, reason: **{reason}**.")
+            em = discord.Embed(title = f"**{user}** has been kicked, reason: **{reason}**.")
+            await ctx.send(embed = em)
 
     @commands.command()
     @commands.has_permissions(ban_members=True)
@@ -43,10 +45,12 @@ class Moderation(commands.Cog):
         args = " ".join(reason[:])
         if not reason:
             await user.ban()
-            await ctx.send(f"**{user}** has been banned, reason: **none**.")
+            em = discord.Embed(title = f"**{user}** has been banned, reason: **none**.")
+            await ctx.send(embed = em)
         else:
             await user.ban()
-            await ctx.send(f"**{user}** has been banned, reason: **{reason}**.")
+            em = discord.Embed(title = f"**{user}** has been banned, reason: **{reason}**.")
+            await ctx.send(embed = em)
 
     @commands.command()  # Takes 1s 1m 1h 1d
     @commands.has_permissions(manage_messages=True)
@@ -55,13 +59,17 @@ class Moderation(commands.Cog):
         if timeconvertion(mutetime) != 0:
             role = discord.utils.get(user.guild.roles, name="muted")
             await user.add_roles(role)
-            await ctx.send("User muted for " + "`{}`".format(str(mutetime)) + ".")
+
+            em = discord.Embed(title = "User has been muted for " + "`{}`".format(str(mutetime)) + ".")
+            await ctx.send(embed = em)
+
             await asyncio.sleep(timeconvertion(mutetime))
             await user.remove_roles(role)
         elif timeconvertion(mutetime) == 0:
-            await ctx.send("Time format is not right.")
+            em = discord.Embed(title = "The time format doesn't seem right.")
+            await ctx.send(embed = em)
         else:
-            print("Something went wrong")
+            print("Something went wrong | Mute command, moderation.py, line 57.")
 
     @commands.command()
     @commands.has_permissions(ban_members=True)
@@ -69,7 +77,8 @@ class Moderation(commands.Cog):
         """Unban a member."""
         userToUnban = await self.bot.fetch_user(id)
         await ctx.guild.unban(userToUnban)
-        await ctx.send("Successfully unbanned `" + userToUnban.name + "`")
+        em = discord.Embed(title = "Successfully unbanned `" + userToUnban.name + "`")
+        await ctx.send(embed = em)
 
     @commands.command()  # Takes 1s 1m 1h 1d
     @commands.has_permissions(manage_messages=True)
@@ -77,7 +86,8 @@ class Moderation(commands.Cog):
         """Unmute a member."""
         role = discord.utils.get(user.guild.roles, name="muted")
         await user.remove_roles(role)
-        await ctx.send("Successfully unmuted `" + user.name + "`")
+        em = discord.Embed(title = "Successfully unmuted `" + user.name + "`")
+        await ctx.send(embed = em)
 
 def setup(bot):
     bot.add_cog(Moderation(bot))
