@@ -5,6 +5,7 @@ import time
 import requests
 import json
 from config import *
+import base64
 
 description = '''List of all the commands
 -----------------------------------------
