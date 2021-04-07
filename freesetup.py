@@ -69,6 +69,13 @@ def vtapiWrite() :
         print("Please rerun the file and input your VirusTotal API key.")
         exit()
     elif verificationFour == "s":
+        print("Writing...")
+        config = open('config.py', 'a')
+        writePrefixTemplate = "virustotal_api = '' "
+        config.write(writePrefixTemplate)
+        config.close()
+        print("Written!")
+        print()
         print("You have chosen not to input a VirusTotal API key. You may add one by editing the config.py file later.")
     elif verificationFour != "n" or "y" or "s":
         print("Invalid response, please rerun the script.")
