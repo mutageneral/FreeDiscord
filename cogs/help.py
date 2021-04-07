@@ -11,9 +11,9 @@ class Help(commands.Cog):
     @commands.group(invoke_without_command=True)
     async def help(self, ctx):
         if ctx.invoked_subcommand is None:
-            em = discord.Embed(title = "Help", description = "Use [prefix]help <command> for extended information on a command.")
+            em = discord.Embed(title = "Help", description = "Use " + prefix + "help <command> for extended information on a command.")
             em.add_field(name = "General", value = "add, choose, roll, vt")
-            em.add_field(name = "Moderation", value = "ban, kick, mute, purge, unban, unmute")
+            em.add_field(name = "Moderation", value = "ban, delwarn, kick, mute, purge, unban, unmute, warn, warns")
             em.add_field(name = "Settings", value = "botstatus")
             em.add_field(name = "Utils", value = "avatar, joined, ping, userinfo")
             em.add_field(name = "Caesarcrypt", value = "decrypt, encrypt")
@@ -26,6 +26,11 @@ class Help(commands.Cog):
     @help.command(name="ban")
     async def _ban(self, ctx):
         em = discord.Embed(title = "Moderation: Ban", description = prefix + "ban <user> optional:<reason> \n\nBan a member.")
+        await ctx.send(embed = em)
+
+    @help.command(name="delwarn")
+    async def _delwarn(self, ctx):
+        em = discord.Embed(title = "Moderation: Delwarn", description = prefix + "delwarn <user> <reason of warn you want to delete> \n\nDelete a warning.")
         await ctx.send(embed = em)
     
     @help.command(name="kick")
@@ -51,6 +56,16 @@ class Help(commands.Cog):
     @help.command(name="unmute")
     async def _unmute(self, ctx):
         em = discord.Embed(title = "Moderation: Unmute", description = prefix + "unmute <user> \n\nUnmute a member.")
+        await ctx.send(embed = em)
+
+    @help.command(name="warn")
+    async def _warn(self, ctx):
+        em = discord.Embed(title = "Moderation: Warn", description = prefix + "warn <user> <reason> \n\nWarn a member.")
+        await ctx.send(embed = em)
+
+    @help.command(name="warns")
+    async def _warns(self, ctx):
+        em = discord.Embed(title = "Moderation: Warns", description = prefix + "warns <user> \n\See the warnings for a member.")
         await ctx.send(embed = em)
 
     # General commands
@@ -79,21 +94,16 @@ class Help(commands.Cog):
     async def _botstatus(self, ctx):
         em = discord.Embed(title = "Settings: BotStatus", description = prefix + "botstatus <status> \n\nSets the status of the bot. Owner only. '" + prefix + "botstatus' to reset")
         await ctx.send(embed = em)
+    
+    @help.command(name="botstatusrepeat")
+    async def _botstatusrepeat(self, ctx):
+        em = discord.Embed(title = "Settings: BotStatusRepeat", description = prefix + "botstatusrepeat \n\nRepeatedly sets the status of the bot. Owner only.")
+        await ctx.send(embed = em) 
 
     # Utils commands
     @help.command(name="avatar")
     async def _avatar(self, ctx):
         em = discord.Embed(title = "Utils: Avatar", description = prefix + "avatar <user> \n\nGet a link to somebody's avatar.")
-        await ctx.send(embed = em)
-    
-    @help.command(name="encrypt")
-    async def _encrypt(self, ctx):
-        em = discord.Embed(title = "Caesarcrypt: Encrypt", description = prefix + "encrypt <rounds> <message> \n\nEncrypt a message. The '<message>' has to be in double quotes for it to work.")
-        await ctx.send(embed = em)
-
-    @help.command(name="decrypt")
-    async def _decrypt(self, ctx):
-        em = discord.Embed(title = "Caesarcrypt: Decrypt", description = prefix + "decrypt <rounds> <message> \n\nDecrypt a message. The '<message>' has to be in double quotes for it to work.")
         await ctx.send(embed = em)
 
     @help.command(name="joined")
@@ -110,12 +120,17 @@ class Help(commands.Cog):
     async def _userinfo(self, ctx):
         em = discord.Embed(title = "Utils: UserInfo", description = prefix + "userinfo <user> \n\nGives you information about a user.")
         await ctx.send(embed = em)
+    
+    # Caesar commands
+    @help.command(name="encrypt")
+    async def _encrypt(self, ctx):
+        em = discord.Embed(title = "Caesarcrypt: Encrypt", description = prefix + "encrypt <rounds> <message> \n\nEncrypt a message. The '<message>' has to be in double quotes for it to work.")
+        await ctx.send(embed = em)
 
-    # botstatuschange
-    @help.command(name="botstatusrepeat")
-    async def _botstatusrepeat(self, ctx):
-        em = discord.Embed(title = "Settings: BotStatusRepeat", description = prefix + "botstatusrepeat \n\nRepeatedly sets the status of the bot. Owner only.")
-        await ctx.send(embed = em)    
+    @help.command(name="decrypt")
+    async def _decrypt(self, ctx):
+        em = discord.Embed(title = "Caesarcrypt: Decrypt", description = prefix + "decrypt <rounds> <message> \n\nDecrypt a message. The '<message>' has to be in double quotes for it to work.")
+        await ctx.send(embed = em)
     
 def setup(bot):
     bot.add_cog(Help(bot))
