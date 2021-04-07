@@ -15,7 +15,7 @@ class Help(commands.Cog):
             em.add_field(name = "General", value = "add, choose, roll, vt")
             em.add_field(name = "Moderation", value = "ban, delwarn, kick, mute, purge, unban, unmute, warn, warns")
             em.add_field(name = "Settings", value = "botstatus, botstatusrepeat")
-            em.add_field(name = "Utils", value = "avatar, joined, ping, userinfo")
+            em.add_field(name = "Utils", value = "avatar, joined, ping, quickpoll, userinfo")
             em.add_field(name = "Caesarcrypt", value = "decrypt, encrypt")
             em.add_field(name = "Help", value = "help - Shows this message")
 
@@ -118,6 +118,11 @@ class Help(commands.Cog):
     @help.command(name="ping")
     async def _ping(self, ctx):
         em = discord.Embed(title = "Utils: Ping", description = prefix + "ping \n\nTells you the latency between the bot and the server.")
+        await ctx.send(embed = em)
+
+    @help.command(name="quickpoll")
+    async def _quickpoll(self, ctx):
+        em = discord.Embed(title = "Utils: Quickpoll", description = prefix + "quickpoll <poll> \n\nMake a poll with yes/no reactions.")
         await ctx.send(embed = em)
 
     @help.command(name="userinfo")
