@@ -109,6 +109,7 @@ async def scan_url(ctx, url: str):
     url_in_base64 = str(encode, "utf-8").replace("=", "")
     vturl = "https://www.virustotal.com/api/v3/urls/{}".format(url_in_base64)
     response = requests.get(vturl, headers = header).json()
+    detections = str(response).split("'")
     counts = 0
     for m in detections:
         if m == "malicious":
