@@ -9,13 +9,15 @@ class Utils(commands.Cog):
         '''
         Get the latency of the bot.
         '''
-        await ctx.send(f"{self.bot.latency}")
+        em = discord.Embed(title = "Pong! `"f"{self.bot.latency} ms`.")
+        await ctx.send(embed = em)
 
     @commands.command()
     async def avatar(self, ctx, *, user: discord.Member = None):
         """Get a link to somebody's avatar."""
         if user is None:
             user = ctx.author
+
         await ctx.send(user.avatar_url)
 
     @commands.command()
@@ -41,7 +43,8 @@ class Utils(commands.Cog):
     @commands.command()
     async def joined(self, ctx, member: discord.Member):
         """Says when a member joined."""
-        await ctx.send('{0.name} joined in {0.joined_at}'.format(member))
+        em = discord.Embed(title = '{0.name} joined in {0.joined_at}'.format(member))
+        await ctx.send(embed = em)
 
 
     @commands.command()
