@@ -9,7 +9,7 @@ import base64
 
 description = '''List of all the commands
 -----------------------------------------
-This bot is based off/is the FreeDiscord bot made by SKbotNL, ItsJustLag,
+This bot is based off of/is the FreeDiscord bot made by SKbotNL, ItsJustLag,
 Recall/Recallwhoiam, Quirinus, and antistalker.
 Project URL: https://github.com/FreeTechnologies/FreeDiscord/
 Support Server: https://discord.gg/VyNxSt55gj
@@ -25,7 +25,7 @@ bot.remove_command('help')
 @bot.event
 async def on_ready():
     # What gets printed in the terminal when the bot is succesfully logged in
-    print('Successfully logged in as')
+    print('Logged in as')
     print(bot.user.name)
     print(bot.user.id)
     print('------')
@@ -46,10 +46,6 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
         em = discord.Embed(title = "Your command is missing an argument.")
         await ctx.send(embed = em)
-    elif isinstance(error):
-        await ctx.send("FreeDiscord has encountered an error.")
-        await ctx.send("The error details are below:")
-        await ctx.send(error)
 
 @bot.command()
 async def add(ctx, left: int, right: int):
@@ -106,6 +102,7 @@ async def vt_hash(ctx, hash: str):
 
 @bot.command(description='Testing, "@bot hash"')
 async def scan_url(ctx, url: str):
+    #Need to import base64 module to work
     headers = {'x-apikey': '{}'.format(apikey)}
     encode = base64.b64encode(url.encode("utf-8"))
     url_in_base64 = str(encode, "utf-8").replace("=", "")
