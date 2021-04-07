@@ -7,10 +7,10 @@ If you find an issue, or have a feature suggestion, please let us know by openin
 
 ### Starting the bot
 
-1. Clone the repository: `git clone https://github.com/FreeTechnologies/FreeDiscord.git`. Or download the zip, upzip it, go into the folder, and go to step 3.
+1. Clone the repository: `git clone https://github.com/FreeTechnologies/FreeDiscord.git`. Or download the zip, unzip it, `cd` into the folder, and continue with step 3.
 2. `cd` to the repository folder: `cd FreeDiscord`.
 3. Make sure all the dependencies are installed, Windows: `python -m pip install discord.py requests asyncio` Linux: `pip3 install discord.py requests asyncio`.
-4. Run `python3 freesetup.py` for an interative configuration creator.
+4. Run `python3 freesetup.py` for an interative configuration creator. (If you don't want to use the script, just rename `config-example.py` to `config.py` and fill that out)
 5. Before starting, make sure Server Members Intent is enabled in your bot settings.
 6. To make sure the `mute` and `unmute` command works, please make a role called `muted` in your server.
 7. Run the bot main file: `python3 bot.py`.
