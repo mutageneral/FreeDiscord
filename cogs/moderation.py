@@ -6,11 +6,13 @@ from discord.utils import get
 import asyncio
 
 
-def timeconvertion(period):  # Time convertion
-    if period[-1].isalpha():
-        to_convert = ''.join(filter(str.isdigit, period))
-        convertion = {"s": 1, "m": 60, "h": 3600, "d": 86400}
-        timeconverted = int(to_convert) * convertion[period[-1]]
+def timeconvertion(time):# Time convertion
+    convertion = {"s": 1, "m": 60, "h": 3600, "d": 86400}
+    letters_inside = ''.join(filter(str.isalpha, time))
+    lettercount = len(letters_inside)
+    to_convert = ''.join(filter(str.isdigit, time))
+    if time[-1].isalpha() is True and time[0].isdigit() and lettercount == 1 and letters_inside in convertion and time.isalnum() == True:
+        timeconverted = int(to_convert) * convertion[time[-1]]
         return int(timeconverted)
     else:
         return 0
