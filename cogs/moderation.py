@@ -105,6 +105,13 @@ class Moderation(commands.Cog):
                 warns.write("\n")
                 warns.write(writeReasonTemplate)
                 warns.close()
+
+            elif os.stat("warns/" + str(user.id) + "_" + str(ctx.message.guild.id) + ".py").st_size == 0:
+                await ctx.send("Successfully warned that member")
+                writeReasonTemplate = str(reason)
+                warns = open("warns/" + str(user.id) + "_" + str(ctx.message.guild.id) + ".py", 'a')
+                warns.write(writeReasonTemplate)
+                warns.close()
         except:
             await ctx.send("Successfully warned that member")
             writeReasonTemplate = str(reason)
