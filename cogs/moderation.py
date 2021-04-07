@@ -38,7 +38,7 @@ class Moderation(commands.Cog):
             await ctx.send(embed = em)
         else:
             await user.kick()
-            em = discord.Embed(title = f"**{user}** has been kicked, reason: **{reason}**.")
+            em = discord.Embed(title = f"**{user}** has been kicked, reason: **{args}**.")
             await ctx.send(embed = em)
 
     @commands.command()
@@ -52,7 +52,7 @@ class Moderation(commands.Cog):
             await ctx.send(embed = em)
         else:
             await user.ban()
-            em = discord.Embed(title = f"**{user}** has been banned, reason: **{reason}**.")
+            em = discord.Embed(title = f"**{user}** has been banned, reason: **{args}**.")
             await ctx.send(embed = em)
 
     @commands.command() # Takes 1s 1m 1h 1d
