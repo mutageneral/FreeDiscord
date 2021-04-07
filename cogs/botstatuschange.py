@@ -15,10 +15,11 @@ class Settings(commands.Cog):
     @commands.command()
     async def botstatusrepeat(self, ctx):
         if str(ctx.message.author.id) == ownerID:
-            await ctx.send("Status loop initiated.")
+            
+            em = discord.Embed(title = "Status loop initiated.")
+            await ctx.send(embed = em)
 
             while True:
-                # you may change these
                 await self.bot.change_presence(activity=discord.Game("Activate Windows"))
                 await asyncio.sleep(5)
                 await self.bot.change_presence(activity=discord.Game("Fixing Bugs"))
@@ -64,9 +65,9 @@ class Settings(commands.Cog):
                 await self.bot.change_presence(activity=discord.Game("creeper? aw man"))
                 await asyncio.sleep(5)
                 await self.bot.change_presence(activity=discord.Game("FreeDiscord is the best open source discord bot"))
-                await asyncio.sleep(5)
+        else:
+            em = discord.Embed(title = "This command is for the bot owner only.")
+            await ctx.send(embed = em)           
 
 def setup(bot):
     bot.add_cog(Settings(bot))
-
-
