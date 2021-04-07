@@ -18,6 +18,7 @@ class Help(commands.Cog):
             em.add_field(name = "Utils", value = "avatar, joined, ping, userinfo")
             em.add_field(name = "Caesarcrypt", value = "decrypt, encrypt")
             em.add_field(name = "Help", value = "help - Shows this message")
+            em.add_field(name = "botstatuschange", value = "botstatusrepeat")
 
             await ctx.send(embed = em)
 
@@ -109,6 +110,12 @@ class Help(commands.Cog):
     async def _userinfo(self, ctx):
         em = discord.Embed(title = "Utils: UserInfo", description = prefix + "userinfo <user> \n\n Gives you information about a user.")
         await ctx.send(embed = em)
+
+    # botstatuschange
+    @help.command(name="botstatusrepeat")
+    async def _botstatusrepeat(self, ctx):
+        em = discord.Embed(title = "Settings: BotStatusRepeat", description = prefix + "botstatusrepeat \n\n Repeatedly sets the status of the bot. Owner only.")
+        await ctx.send(embed = em)    
     
 def setup(bot):
     bot.add_cog(Help(bot))
