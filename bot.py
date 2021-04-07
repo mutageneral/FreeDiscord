@@ -41,14 +41,17 @@ bot.load_extension("cogs.botstatuschange")
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):
-        await ctx.send("You dont have permission to do that")
+        em = discord.Embed(title = "You do not have permission to do that.")
+        await ctx.send(embed = em)
     if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send("Your command is missing an argument")
+        em = discord.Embed(title = "Your command is missing an argument.")
+        await ctx.send(embed = em)
 
 @bot.command()
 async def add(ctx, left: int, right: int):
     """Adds two numbers together."""
-    await ctx.send(left + right)
+    em = discord.Embed(title = left + right)
+    await ctx.send(embed = em)
 
 
 @bot.command()
@@ -57,7 +60,8 @@ async def roll(ctx, dice: str):
     try:
         rolls, limit = map(int, dice.split('-'))
     except Exception:
-        await ctx.send('Format has to be in N-N!')
+        em = discord.Embed(title = "Format has to be in `Number-Number`")
+        await ctx.send(embed = em)
         return
 
     result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
@@ -68,12 +72,15 @@ async def roll(ctx, dice: str):
 async def choose(ctx, *choices: str):
     """Chooses between multiple choices."""
     if "@everyone" in choices:
-        await ctx.send("Hahaha nice try")
+        em = discord.Embed(title = "Nice try, sadly that won't work here.")
+        await ctx.send(embed = em)
     else:
         if "@here" in choices:
-            await ctx.send("Hahaha nice try")
+            em = discord.Embed(title = "Nice try, sadly that won't work here.")
+            await ctx.send(embed = em)
         else:
-            await ctx.send(random.choice(choices))
+            em = discord.Embed(title = random.choice(choices))
+            await ctx.send(embed = em)
             
 apikey = virustotal_api
 
@@ -89,7 +96,8 @@ async def vt(ctx, hash: str):
     for m in detections:
         if m == "malicious":
             counts += 1
-    await ctx.send("Detections: {}".format(counts))
+    em = discord.Embed(title = "Detections: {}".format(counts))
+    await ctx.send(embed = em)
 
 
 bot.run(bot_token)
