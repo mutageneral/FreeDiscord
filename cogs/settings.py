@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import os
 import sys
+import asyncio
 sys.path.append(os.path.realpath('.'))
 from config import *
 
@@ -57,5 +58,3 @@ class Settings(commands.Cog):
 
 def setup(bot):
     bot.add_cog(Settings(bot))
-
-
