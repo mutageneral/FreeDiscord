@@ -25,9 +25,5 @@ There are many features of the bot. These features include:
 - Lots more
 - More being added regularly :)
 
-For the VirusTotal file scanning to work, you need to get a VirusTotal V3 API key.(Only hash working right now.)
-To get this, sign in to VirusTotal and get the API key, then put it where it says:
-`Your VirusTotal API Key Here` in the config file.
-
 Like earlier said, if you have any feature requests or issues with the bot, open an issue [here](https://github.com/FreeTechnologies/FreeDiscord/issues)!
 Enjoy the bot! We hope you have as much fun with it as we had programming it! :)
