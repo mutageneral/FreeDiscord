@@ -16,12 +16,17 @@ class Settings(commands.Cog):
         if str(ctx.message.author.id) == ownerID:
             if args == '':
                 await self.bot.change_presence(activity=discord.Game(name=''))
-                await ctx.send("Bot status successfully reset the status!")
+
+                em = discord.Embed(title = "Bot status successfully reset!")
+                await ctx.send(embed = em)
             else:
                 await self.bot.change_presence(activity=discord.Game(name=args))
-                await ctx.send("Bot status successfully changed to " + args + "!")
+
+                em = discord.Embed(title = "Bot status successfully changed to `" + args + "`!")
+                await ctx.send(embed = em)
         else:
-            await ctx.send("This command is for the bot Owner only")
+            em = discord.Embed(title = "This command is for the bot owner only.")
+            await ctx.send(embed = em)
 
 
 def setup(bot):
