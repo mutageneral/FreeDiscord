@@ -18,6 +18,7 @@ class Settings(commands.Cog):
             await ctx.send("Status loop initiated.")
 
             while True:
+                # you may change these
                 await self.bot.change_presence(activity=discord.Game("Activate Windows"))
                 await asyncio.sleep(5)
                 await self.bot.change_presence(activity=discord.Game("Fixing Bugs"))
