@@ -5,10 +5,11 @@ import time
 import requests
 import json
 from config import *
+import base64
 
 description = '''List of all the commands
 -----------------------------------------
-This bot is based off of/is the FreeDiscord bot made by SKbotNL, ItsJustLag, 
+This bot is based off of/is the FreeDiscord bot made by SKbotNL, ItsJustLag,
 Recall/Recallwhoiam, Quirinus, and antistalker.
 Project URL: https://github.com/FreeTechnologies/FreeDiscord/
 Support Server: https://discord.gg/VyNxSt55gj
@@ -81,23 +82,39 @@ async def choose(ctx, *choices: str):
         else:
             em = discord.Embed(title = random.choice(choices))
             await ctx.send(embed = em)
-            
+
 apikey = virustotal_api
 
 @bot.command(description='Testing, "@bot hash"')
-async def vt(ctx, hash: str):
+async def vt_hash(ctx, hash: str):
     """VirusTotal Integration"""
-    url = "https://www.virustotal.com/api/v3/files/{}".format(hash)
     headers = {'x-apikey': '{}'.format(apikey)}
-    response = requests.get(url, headers=headers).json()
+    vturl = "https://www.virustotal.com/api/v3/files/{}".format(hash)
+    response = requests.get(vturl, headers=headers).json()
     detections = str(response).split("'")
     # Count the detecionts
     counts = 0
     for m in detections:
         if m == "malicious":
             counts += 1
+    counts = counts -2
     em = discord.Embed(title = "Detections: {}".format(counts))
     await ctx.send(embed = em)
 
+@bot.command(description='Testing, "@bot hash"')
+async def scan_url(ctx, url: str):
+    #Need to import base64 module to work
+    headers = {'x-apikey': '{}'.format(apikey)}
+    encode = base64.b64encode(url.encode("utf-8"))
+    url_in_base64 = str(encode, "utf-8").replace("=", "")
+    vturl = "https://www.virustotal.com/api/v3/urls/{}".format(url_in_base64)
+    response = requests.get(vturl, headers = header).json()
+    counts = 0
+    for m in detections:
+        if m == "malicious":
+            counts += 1
+    counts = counts - 2
+    em = discord.Embed(title = "Detections: {}".format(counts))
+    await ctx.send(embed = em)
 
 bot.run(bot_token)
