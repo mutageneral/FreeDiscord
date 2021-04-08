@@ -6,9 +6,11 @@ class General(commands.Cog):
     
     @commands.command()
     async def about(self, ctx):
-        em = discord.Embed(title = "About FreeDiscord", description = "This bot is based off of/is the FreeDiscord bot made by SKBotNL, ItsJustLag, recallwhoiam, Quirinus, and antistalker.")
-        em.add_field(name = "Project URL", value = "https://github.com/FreeTechnologies/FreeDiscord/")
+        em = discord.Embed(title = "About FreeDiscord", description = "This bot is based off of/is the FreeDiscord bot made by SKBotNL#2434, its just lag#5452, recall <3#0001, Quirinus#7329, and antistalker#.")
+        em.add_field(name = "Project URL", value = its just lag
+#5452"https://github.com/FreeTechnologies/FreeDiscord/")
         em.add_field(name = "Support Server", value = "https://discord.gg/VyNxSt55gj")
+        em.add_field(name = "Bot Invite Link", value = "https://discord.com/oauth2/authorize?client_id=829158610965495848&permissions=8&scope=bot")
 
         await ctx.send(embed = em)
         
