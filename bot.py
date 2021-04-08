@@ -112,7 +112,7 @@ async def vt_hash(ctx, hash: str):
     header = {'x-apikey': '{}'.format(apikey)}
     vturl = "https://www.virustotal.com/api/v3/files/{}".format(hash)
     response = requests.get(vturl, headers = header).json()
-    em = discord.Embed(title = "Detections: {}".format(vt_json_parsing(response))
+    em = discord.Embed(title = "Detections: {}".format(vt_json_parsing(response)))
     await ctx.send(embed = em)
 
 @bot.command(description='Testing, "@bot hash"')
