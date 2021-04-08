@@ -93,10 +93,9 @@ async def choose(ctx, *choices: str):
 apikey = virustotal_api
 
 def vt_json_parsing(detections):
-    detections = requests.get(vturl, headers = header).json()
-    detections = json.dumps(response)
-    detections = json.dumps(json.loads(response), indent=2)
-    detections = str(response).split("last_analysis_stats")
+    detections = json.dumps(detections)
+    detections = json.dumps(json.loads(detections), indent=2)
+    detections = str(detections).split("last_analysis_stats")
     detections = detections[1]
     detections = detections.split("        ")
     for m in detections:
