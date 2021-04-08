@@ -17,7 +17,7 @@ class Update(commands.Cog):
     async def updatebot(self, ctx):
         """Attempts to update the bot directly from the GitHub repository."""
         if str(ctx.message.author.id) == ownerID:
-            username = os.getlogin()
+            # username = os.getlogin()
             os.mkdir('/tmp/freeupdate')
             HTTPS_REMOTE_URL = github_login_url
             DEST_NAME = '/tmp/freeupdate'
@@ -25,7 +25,7 @@ class Update(commands.Cog):
             dir_path = os.getcwd()
             shutil.rmtree(dir_path + "/cogs/")
             shutil.rmtree(dir_path + "/.github/")
-            path = '/home/' + username
+            path = dir_path
             src = '/tmp/freeupdate/cogs'
             dest = dir_path + "/cogs"
             destination = shutil.copytree(src, dest)
