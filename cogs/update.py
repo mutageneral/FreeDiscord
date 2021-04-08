@@ -24,7 +24,6 @@ class Update(commands.Cog):
             cloned_repo = Repo.clone_from(HTTPS_REMOTE_URL, DEST_NAME)
             dir_path = os.getcwd()
             shutil.rmtree(dir_path + "/cogs/")
-            shutil.rmtree(dir_path + "/.github/")
             path = dir_path
             src = '/tmp/freeupdate/cogs'
             dest = dir_path + "/cogs"
