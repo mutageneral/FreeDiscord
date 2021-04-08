@@ -18,7 +18,7 @@ class Help(commands.Cog):
             em.add_field(name = "Utils", value = "avatar, joined, ping, quickpoll, userinfo")
             em.add_field(name = "Caesarcrypt", value = "decrypt, encrypt")
             em.add_field(name = "Help", value = "help - Shows this message")
-            em.add_field(name = "Update", value = "updatebot - Updates the bot (WILL REPLACE ALL COG AND BOT FILES!!!)")
+            em.add_field(name = "Update", value = "updatebot - Updates the bot (destructive, do " + prefix + "help before running so you know what this command does)")
 
             await ctx.send(embed = em)
 
