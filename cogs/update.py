@@ -37,6 +37,8 @@ class Update(commands.Cog):
             
             await ctx.send(embed = em)
             
+            await ctx.bot.logout()
+            
         else:
             em = discord.Embed(title = "This command is for the bot owner only.")
             await ctx.send(embed = em)
