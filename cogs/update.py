@@ -30,7 +30,13 @@ class Update(commands.Cog):
             copyfile('/tmp/freeupdate/bot.py', dir_path + '/bot.py')
             copyfile('/tmp/freeupdate/freesetup.py', dir_path + '/freesetup.py')
             copyfile('/tmp/freeupdate/README.md', dir_path + '/README.md')
-            print("Done!")
+            shutil.rmtree('/tmp/freeupdate')
+            print("Done! Restart the bot to apply the changes!")
+            em = discord.Embed(title = "Updated!", description = "FreeDiscord updated! No error reported. Check your console to confirm this.")
+            em.add_field(name = "Note", value = "The bot will now shut down. Restart it to apply the changes.")
+            
+            await ctx.send(embed = em)
+            
         else:
             em = discord.Embed(title = "This command is for the bot owner only.")
             await ctx.send(embed = em)
