@@ -6,7 +6,7 @@ class General(commands.Cog):
     
     @commands.command()
     async def about(self, ctx):
-        em = discord.Embed(title = "About FreeDiscord", description = "This bot is based off of/is the FreeDiscord bot made by SKbotNL, ItsJustLag, recallwhoiam, Quirinus, and antistalker.")
+        em = discord.Embed(title = "About FreeDiscord", description = "This bot is based off of/is the FreeDiscord bot made by SKBotNL, ItsJustLag, recallwhoiam, Quirinus, and antistalker.")
         em.add_field(name = "Project URL", value = "https://github.com/FreeTechnologies/FreeDiscord/")
         em.add_field(name = "Support Server", value = "https://discord.gg/VyNxSt55gj")
 
