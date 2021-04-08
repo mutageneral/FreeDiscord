@@ -92,15 +92,10 @@ async def choose(ctx, *choices: str):
 
 apikey = virustotal_api
 
-@bot.command(description='Testing, "@bot hash"')
-async def vt_hash(ctx, hash: str):
-    """VirusTotal Integration"""
-    header = {'x-apikey': '{}'.format(apikey)}
-    vturl = "https://www.virustotal.com/api/v3/files/{}".format(hash)
-    response = requests.get(vturl, headers = header).json()
-    response = json.dumps(response)
-    response = json.dumps(json.loads(response), indent=2)
-    detections = str(response).split("'")
+def vt_json_parsing(detections):
+    detections = requests.get(vturl, headers = header).json()
+    detections = json.dumps(response)
+    detections = json.dumps(json.loads(response), indent=2)
     detections = str(response).split("last_analysis_stats")
     detections = detections[1]
     detections = detections.split("        ")
@@ -109,7 +104,15 @@ async def vt_hash(ctx, hash: str):
             detections = m
             break
     detections = "".join(filter(str.isdigit, m))
-    em = discord.Embed(title = "Detections: {}".format(counts))
+    return str(detections)
+
+@bot.command(description='Testing, "@bot hash"')
+async def vt_hash(ctx, hash: str):
+    """VirusTotal Integration"""
+    header = {'x-apikey': '{}'.format(apikey)}
+    vturl = "https://www.virustotal.com/api/v3/files/{}".format(hash)
+    response = requests.get(vturl, headers = header).json()
+    em = discord.Embed(title = "Detections: {}".format(vt_json_parsing(response))
     await ctx.send(embed = em)
 
 @bot.command(description='Testing, "@bot hash"')
@@ -120,17 +123,7 @@ async def scan_url(ctx, url: str):
     url_in_base64 = str(encode, "utf-8").replace("=", "")
     vturl = "https://www.virustotal.com/api/v3/urls/{}".format(url_in_base64)
     response = requests.get(vturl, headers = header).json()
-    response = json.dumps(response)
-    response = json.dumps(json.loads(response), indent=2)
-    detections = str(response).split("last_analysis_stats")
-    detections = detections[1]
-    detections = detections.split("        ")
-    for m in detections:
-        if 'malicious' in str(m) and any(d.isdigit() for d in m):
-            detections = m
-            break
-    detections = "".join(filter(str.isdigit, m))
-    em = discord.Embed(title = "Detections: {}".format(detections))
+    em = discord.Embed(title = "Detections: {}".format(vt_json_parsing(response))
     await ctx.send(embed = em)
 
 bot.run(bot_token)
