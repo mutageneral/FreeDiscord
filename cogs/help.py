@@ -90,7 +90,7 @@ class Help(commands.Cog):
 
     @help.command(name="vt")
     async def _vt(self, ctx):
-        em = discord.Embed(title = "General: VT", description = prefix + "vt <hash> \n\nScan a hash with VirusTotal")
+        em = discord.Embed(title = "General: VT", description = prefix + "vt <hash> \n\nScan a hash with VirusTotal, only takes SHA-256, SHA-1 or MD5")
         await ctx.send(embed = em)
 
     @help.command(name="scan_url")
