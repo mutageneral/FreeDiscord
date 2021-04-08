@@ -17,13 +17,14 @@ class Update(commands.Cog):
     async def updatebot(self, ctx):
         """Attempts to update the bot directly from the GitHub repository."""
         if str(ctx.message.author.id) == ownerID:
+            username = os.getlogin()
             os.mkdir('/tmp/freeupdate')
             HTTPS_REMOTE_URL = github_login_url
             DEST_NAME = '/tmp/freeupdate'
             cloned_repo = Repo.clone_from(HTTPS_REMOTE_URL, DEST_NAME)
             dir_path = os.getcwd()
             shutil.rmtree(dir_path + "/cogs/")
-            path = '/home/recallwhoiam'
+            path = '/home/' + username
             src = '/tmp/freeupdate/cogs'
             dest = dir_path + "/cogs"
             destination = shutil.copytree(src, dest)
