@@ -17,6 +17,7 @@ class Help(commands.Cog):
             em.add_field(name = "Settings", value = "botstatus, botstatusrepeat")
             em.add_field(name = "Utils", value = "avatar, joined, ping, quickpoll, userinfo")
             em.add_field(name = "Caesarcrypt", value = "decrypt, encrypt")
+            em.add_field(name = "VirusTotal", value = "scan_url, vt_hash")
             em.add_field(name = "Bot", value = "updatebot - Updates the bot (destructive, do " + prefix + "help before running so you know what this command does), help - Shows this message")
 
             await ctx.send(embed = em)
@@ -88,16 +89,6 @@ class Help(commands.Cog):
         em = discord.Embed(title = "General: Roll", description = prefix + "roll <number1>-<number2> \n\nRolls a dice in N-N format.")
         await ctx.send(embed = em)
 
-    @help.command(name="vt")
-    async def _vt(self, ctx):
-        em = discord.Embed(title = "General: VT", description = prefix + "vt <hash> \n\nScan a hash with VirusTotal, only takes SHA-256, SHA-1 or MD5")
-        await ctx.send(embed = em)
-
-    @help.command(name="scan_url")
-    async def _vt(self, ctx):
-        em = discord.Embed(title = "General: VT", description = prefix + "scan_url <url> \n\nScan a url with VirusTotal. **Make sure to do `https://<website>` and not `<website>`**")
-        await ctx.send(embed = em)
-
     # Settings commands
     @help.command(name="botstatus")
     async def _botstatus(self, ctx):
@@ -151,6 +142,17 @@ class Help(commands.Cog):
     async def _updatebot(self, ctx):
         em = discord.Embed(title = "Update: UpdateBot", description = prefix + "updatebot \n\nUpdates the bot, replacing all of the bot files, except for the warns folder and the config.py file, with the newest files directly from the GitHub repository. Owner only.")
         await ctx.send(embed = em)
+
+    # VirusTotal commands'
+    @help.command(name="scan_url")
+    async def _scan_url(self, ctx):
+        em = discord.Embed(title = "VirusTotal: Scan_URL", description = prefix + "scan_url <link> \n\nScans a URL link using a VirusTotal API key.")
+        await ctx.send(embed = em)  
+
+    @help.command(name="vt_hash")
+    async def _vt_hash(self, ctx):
+        em = discord.Embed(title = "VirusTotal: VT_Hash", description = prefix + "vt_hash <file hash> \n\nScans a file hash using a VirusTotal API key.")
+        await ctx.send(embed = em)   
 
 def setup(bot):
     bot.add_cog(Help(bot))
