@@ -123,7 +123,7 @@ async def scan_url(ctx, url: str):
     url_in_base64 = str(encode, "utf-8").replace("=", "")
     vturl = "https://www.virustotal.com/api/v3/urls/{}".format(url_in_base64)
     response = requests.get(vturl, headers = header).json()
-    em = discord.Embed(title = "Detections: {}".format(vt_json_parsing(response))
+    em = discord.Embed(title = "Detections: {}".format(vt_json_parsing(response)))
     await ctx.send(embed = em)
 
 bot.run(bot_token)
