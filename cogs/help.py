@@ -146,12 +146,12 @@ class Help(commands.Cog):
     # VirusTotal commands'
     @help.command(name="scan_url")
     async def _scan_url(self, ctx):
-        em = discord.Embed(title = "VirusTotal: Scan_URL", description = prefix + "scan_url <link> \n\nScans a URL link using a VirusTotal API key.")
+        em = discord.Embed(title = "VirusTotal: Scan_URL", description = prefix + "scan_url <link> with https or http at the begining \n\nScans a URL link using a VirusTotal API key.")
         await ctx.send(embed = em)  
 
     @help.command(name="vt_hash")
     async def _vt_hash(self, ctx):
-        em = discord.Embed(title = "VirusTotal: VT_Hash", description = prefix + "vt_hash <file hash> \n\nScans a file hash using a VirusTotal API key.")
+        em = discord.Embed(title = "VirusTotal: VT_Hash", description = prefix + "vt_hash <file hash> SHA-256 SHA-1 or MD5 \n\nScans a file hash using a VirusTotal API key.")
         await ctx.send(embed = em)   
 
 def setup(bot):
