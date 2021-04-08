@@ -40,9 +40,9 @@ class Update(commands.Cog):
 
             await ctx.bot.close()
 
-            else:
-                em = discord.Embed(title = "This command is for the bot owner only.")
-                await ctx.send(embed = em)
+        else:
+            em = discord.Embed(title = "This command is for the bot owner only.")
+            await ctx.send(embed = em)
                 
 def setup(bot):
     bot.add_cog(Update(bot))
