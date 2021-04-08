@@ -54,7 +54,7 @@ def ownerIDWrite() :
         exit()
 
 def githubLoginWrite() :
-    print("Since FreeDiscord is still a private repository, please enter your GitHub login in this format: 'https://username:auth_key_if_2fa@github.com/FreeTechnologies/FreeDiscord'\n If you don't know how to get this, search up 'clone github repository with auth key'.")
+    print("Since FreeDiscord is still a private repository, please enter your GitHub login in this format: 'https://username:auth_key_if_2fa@github.com/FreeTechnologies/FreeDiscord'\n If you don't know how to get this, search up 'clone github repository with auth key'.\n")
     githubLoginInput = input("Enter your GitHub login credentials: ")
     verificationFive = input("Is this correct? (y/n): '" + githubLoginInput + "'")
     if verificationFive == "y":
