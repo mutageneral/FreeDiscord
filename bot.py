@@ -97,14 +97,18 @@ async def vt_hash(ctx, hash: str):
     """VirusTotal Integration"""
     header = {'x-apikey': '{}'.format(apikey)}
     vturl = "https://www.virustotal.com/api/v3/files/{}".format(hash)
-    response = requests.get(vturl, headers=header).json()
+    response = requests.get(vturl, headers = header).json()
+    response = json.dumps(response)
+    response = json.dumps(json.loads(response), indent=2)
     detections = str(response).split("'")
-    # Count the detecionts
-    counts = 0
+    detections = str(response).split("last_analysis_stats")
+    detections = detections[1]
+    detections = detections.split("        ")
     for m in detections:
-        if m == "malicious":
-            counts += 1
-    counts = counts - 2
+        if 'malicious' in str(m) and any(d.isdigit() for d in m):
+            detections = m
+            break
+    detections = "".join(filter(str.isdigit, m))
     em = discord.Embed(title = "Detections: {}".format(counts))
     await ctx.send(embed = em)
 
@@ -118,7 +122,9 @@ async def scan_url(ctx, url: str):
     response = requests.get(vturl, headers = header).json()
     response = json.dumps(response)
     response = json.dumps(json.loads(response), indent=2)
-    detections = response.split("        ")
+    detections = str(response).split("last_analysis_stats")
+    detections = detections[1]
+    detections = detections.split("        ")
     for m in detections:
         if 'malicious' in str(m) and any(d.isdigit() for d in m):
             detections = m
