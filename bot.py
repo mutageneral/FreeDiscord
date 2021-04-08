@@ -116,15 +116,15 @@ async def scan_url(ctx, url: str):
     url_in_base64 = str(encode, "utf-8").replace("=", "")
     vturl = "https://www.virustotal.com/api/v3/urls/{}".format(url_in_base64)
     response = requests.get(vturl, headers = header).json()
-    detections = str(response).split("'")
-    counts = 0
+    response = json.dumps(response)
+    response = json.dumps(json.loads(response), indent=2)
+    detections = response.split("        ")
     for m in detections:
-        if m == "malicious":
-            counts += 1
-    counts = counts - 5
-    if counts < 0:
-        counts = 0
-    em = discord.Embed(title = "Detections: {}".format(counts))
+        if 'malicious' in str(m) and any(d.isdigit() for d in m):
+            detections = m
+            break
+    detections = "".join(filter(str.isdigit, m))
+    em = discord.Embed(title = "Detections: {}".format(detections))
     await ctx.send(embed = em)
 
 bot.run(bot_token)
