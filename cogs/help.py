@@ -12,12 +12,13 @@ class Help(commands.Cog):
     async def help(self, ctx):
         if ctx.invoked_subcommand is None:
             em = discord.Embed(title = "Help", description = "Use " + prefix + "help <command> for extended information on a command.")
-            em.add_field(name = "General", value = "add, choose, roll, vt")
+            em.add_field(name = "General", value = "about, add, choose, roll, vt")
             em.add_field(name = "Moderation", value = "ban, delwarn, kick, mute, purge, unban, unmute, warn, warns")
             em.add_field(name = "Settings", value = "botstatus, botstatusrepeat")
             em.add_field(name = "Utils", value = "avatar, joined, ping, quickpoll, userinfo")
             em.add_field(name = "Caesarcrypt", value = "decrypt, encrypt")
             em.add_field(name = "Help", value = "help - Shows this message")
+            em.add_field(name = "Update", value = "updatebot - Updates the bot (WILL REPLACE ALL COG AND BOT FILES!!!)")
 
             await ctx.send(embed = em)
 
@@ -31,7 +32,7 @@ class Help(commands.Cog):
     async def _delwarn(self, ctx):
         em = discord.Embed(title = "Moderation: Delwarn", description = prefix + "delwarn <user> <reason of warn you want to delete> \n\nDelete a warning.")
         await ctx.send(embed = em)
-    
+
     @help.command(name="kick")
     async def _kick(self, ctx):
         em = discord.Embed(title = "Moderation: Kick", description = prefix + "kick <user> optional:<reason> \n\nKick a member.")
@@ -46,12 +47,12 @@ class Help(commands.Cog):
     async def _purge(self, ctx):
         em = discord.Embed(title = "Moderation: Purge", description = prefix + "purge <number of messages to purge> \n\nPurge messages, default amount is 10.")
         await ctx.send(embed = em)
-    
+
     @help.command(name="unban")
     async def _unban(self, ctx):
         em = discord.Embed(title = "Moderation: Unban", description = prefix + "unban <userid> \n\nUnban a member.")
         await ctx.send(embed = em)
-    
+
     @help.command(name="unmute")
     async def _unmute(self, ctx):
         em = discord.Embed(title = "Moderation: Unmute", description = prefix + "unmute <user> \n\nUnmute a member.")
@@ -68,6 +69,11 @@ class Help(commands.Cog):
         await ctx.send(embed = em)
 
     # General commands
+    @help.command(name="about")
+    async def _about(self, ctx):
+        em = discord.Embed(title = "About", description = prefix + "about \n\nShows information about this bot instance.")
+        await ctx.send(embed = em)
+
     @help.command(name="add")
     async def _add(self, ctx):
         em = discord.Embed(title = "General: Add", description = prefix + "add <number1> <number2> \n\nAdds two numbers together.")
@@ -98,11 +104,11 @@ class Help(commands.Cog):
     async def _botstatus(self, ctx):
         em = discord.Embed(title = "Settings: BotStatus", description = prefix + "botstatus <status> \n\nSets the status of the bot. Owner only. '" + prefix + "botstatus' to reset")
         await ctx.send(embed = em)
-    
+
     @help.command(name="botstatusrepeat")
     async def _botstatusrepeat(self, ctx):
         em = discord.Embed(title = "Settings: BotStatusRepeat", description = prefix + "botstatusrepeat \n\nRepeatedly sets the status of the bot. Owner only.")
-        await ctx.send(embed = em) 
+        await ctx.send(embed = em)
 
     # Utils commands
     @help.command(name="avatar")
@@ -129,7 +135,7 @@ class Help(commands.Cog):
     async def _userinfo(self, ctx):
         em = discord.Embed(title = "Utils: UserInfo", description = prefix + "userinfo <user> \n\nGives you information about a user.")
         await ctx.send(embed = em)
-    
+
     # Caesar commands
     @help.command(name="encrypt")
     async def _encrypt(self, ctx):
@@ -140,6 +146,12 @@ class Help(commands.Cog):
     async def _decrypt(self, ctx):
         em = discord.Embed(title = "Caesarcrypt: Decrypt", description = prefix + "decrypt <rounds> <message> \n\nDecrypt a message. The '<message>' has to be in double quotes for it to work.")
         await ctx.send(embed = em)
-    
+
+    # Update command
+    @help.command(name="updatebot")
+    async def _updatebot(self, ctx):
+        em = discord.Embed(title = "Update: UpdateBot", description = prefix + "updatebot \n\nUpdates the bot, replacing all of the bot files, except for the warns folder and the config.py file, with the newest files directly from the GitHub repository. Owner only.")
+        await ctx.send(embed = em)
+
 def setup(bot):
     bot.add_cog(Help(bot))
