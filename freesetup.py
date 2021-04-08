@@ -53,6 +53,25 @@ def ownerIDWrite() :
         print("Invalid response, please rerun the script.")
         exit()
 
+def githubLoginWrite() :
+    print("Since FreeDiscord is still a private repository, please enter your GitHub login in this format: 'https://username:password_or_auth_key_if_2fa@github.com/FreeTechnologies/FreeDiscord'\n")
+    githubLoginInput = input("Enter your GitHub login credentials: ")
+    verificationFive = input("Is this correct? (y/n): '" + githubLoginInput + "'")
+    if verificationFive == "y":
+        print("Writing...")
+        config = open('config.py', 'a')
+        writePrefixTemplate = "github_login_url = '" + githubLoginInput + "'\n"
+        config.write(writePrefixTemplate)
+        config.close()
+        print("Written!")
+        print()
+    elif verificationFive == "n":
+        print("Please rerun the file and input your GitHub login credentials.")
+        exit()
+    elif verificationFive != "n" or "y":
+        print("Invalid response, please rerun the script.")
+        exit()
+
 def vtapiWrite() :
     print("If you don't have a VirusTotal API key, or don't want this feature, just hit enter on this prompt and type 's' when it asks if what you inputted is correct.\n")
     vtapiToken = input("Enter your VirusTotal API key: ")
@@ -95,6 +114,7 @@ if os.path.exists("config.py"):
         print("Invalid response, please rerun the script.")
         exit()
 
+githubLoginWrite()
 tokenWrite()
 prefixWrite()
 ownerIDWrite()
