@@ -7,13 +7,13 @@ import json
 from config import *
 import base64
 
-description = '''List of all the commands
------------------------------------------
-This bot is based off of/is the FreeDiscord bot made by SKbotNL, ItsJustLag,
-Recall/Recallwhoiam, Quirinus, and antistalker.
-Project URL: https://github.com/FreeTechnologies/FreeDiscord/
-Support Server: https://discord.gg/VyNxSt55gj
------------------------------------------'''
+#description = '''List of all the commands
+#-----------------------------------------
+#This bot is based off of/is the FreeDiscord bot made by SKbotNL, ItsJustLag,
+#Recall/Recallwhoiam, Quirinus, and antistalker.
+#Project URL: https://github.com/FreeTechnologies/FreeDiscord/
+#Support Server: https://discord.gg/VyNxSt55gj
+#-----------------------------------------'''
 
 intents = discord.Intents.default()
 intents.members = True
@@ -36,6 +36,7 @@ bot.load_extension("cogs.moderation")
 bot.load_extension("cogs.settings")
 bot.load_extension("cogs.caesarcrypt")
 bot.load_extension("cogs.help")
+bot.load_extension("cogs.update")
 
 
 @bot.event
