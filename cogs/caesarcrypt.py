@@ -5,7 +5,7 @@ class Caesarcrypt(commands.Cog):
         self.bot = bot
 
     @commands.command(description="Play with caesarcrypt. @bot rounds(numbers) message")
-    async def encrypt(self, ctx, rounds: int, *message: str):
+    async def encrypt(self, ctx, rounds: int, *, message: str):
         """Encrypt a message."""
         encrypt = ""
         message = str(message)
@@ -23,7 +23,7 @@ class Caesarcrypt(commands.Cog):
 
 
     @commands.command(description="Decrypt with caesarcrypt. @bot rounds(numbers) message")
-    async def decrypt(self, ctx, rounds: int, *message: str):
+    async def decrypt(self, ctx, rounds: int, *, message: str):
         """Decrypt a message."""
         decrypt = ""
         message = str(message)
