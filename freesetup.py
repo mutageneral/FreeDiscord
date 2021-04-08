@@ -100,6 +100,34 @@ def vtapiWrite() :
         print("Invalid response, please rerun the script.")
         exit()
 
+    def badwordWrite() :
+    print("Please put in bad words that you want to be filtered by the bot.\n If you don't want this feature just hit enter on this prompt and type 's' when it asks if what you inputted is correct.\n The format is "["badword1", "badword2", "badword3"]"")
+    badwords = input("Enter your VirusTotal API key: ")
+    verificationFour = input("Is this correct? (y/n/s): '" + badwords + "'")
+    if verificationFour == "y":
+        print("Writing...")
+        config = open('config.py', 'a')
+        writePrefixTemplate = "bad_words = '" + badwords + "'\n"
+        config.write(writePrefixTemplate)
+        config.close()
+        print("Written!")
+        print()
+    elif verificationFour == "n":
+        print("Writing...")
+        config = open('config.py', 'a')
+        writePrefixTemplate = "bad_words = '' "
+        config.write(writePrefixTemplate)
+        config.close()
+        print("Written!")
+        print()
+        print("Please rerun the file and input the bad words you want to be filtered.")
+        exit()
+    elif verificationFour == "s":
+        print("You have chosen not to input bad words. You may add them by editing the config.py file later.")
+    elif verificationFour != "n" or "y" or "s":
+        print("Invalid response, please rerun the script.")
+        exit()
+
 if os.path.exists("config.py"):
     prompt = input("Existing config.py found. Should I delete it? (y/n)")
     if prompt == "y":
@@ -123,3 +151,6 @@ print("Your config file should be written now!")
 print("To start your bot, run python3 bot.py")
 print("Have a nice day! :)")
 exit()
+
+
+["badword", "badtest"]
