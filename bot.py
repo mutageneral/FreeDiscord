@@ -115,7 +115,7 @@ async def choose(ctx, *choices: str):
         em = discord.Embed(title = "This bot is locked down", description = "<@!" + config.ownerID + "> has locked down this bot globally.")
         await ctx.send(embed = em)
 
-apikey = config.virustotal_api
+"""apikey = config.virustotal_api
 
 def vt_json_parsing(detections):
     detections = json.dumps(detections)
@@ -132,7 +132,7 @@ def vt_json_parsing(detections):
 
 @bot.command(description='Testing, "@bot hash"')
 async def vt_hash(ctx, hash: str):
-    """VirusTotal Integration"""
+    #VirusTotal Integration
     if config.bot_lockdown_status == 'no_lockdown':
         header = {'x-apikey': '{}'.format(apikey)}
         vturl = "https://www.virustotal.com/api/v3/files/{}".format(hash)
@@ -156,6 +156,6 @@ async def scan_url(ctx, url: str):
         await ctx.send(embed = em)
     elif config.bot_lockdown_status == "lockdown_activated":
         em = discord.Embed(title = "This bot is locked down", description = "<@!" + config.ownerID + "> has locked down this bot globally.")
-        await ctx.send(embed = em)
+        await ctx.send(embed = em)"""
 
 bot.run(config.bot_token)
