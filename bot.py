@@ -1,11 +1,11 @@
 import discord
 from discord.ext import commands
 import random
-import requests
+#import requests
 import time
-import json
+#import json
 import config
-import base64
+#import base64
 import psutil
 
 description = '''List of all the commands
@@ -43,10 +43,10 @@ bot.load_extension("cogs.vt_scan")
 
 @bot.event 
 async def on_message(msg):
-    for word in bad_words:
+    for word in config.bad_words:
         if word in msg.content.lower():
             await msg.delete()
-            await msg.channel.send("123")
+            await msg.channel.send("Please don't use that word", delete_after=5.0)
         else:
             await bot.process_commands(msg)
             
