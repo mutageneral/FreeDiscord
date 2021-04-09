@@ -1,11 +1,11 @@
 import discord
 from discord.ext import commands
 import random
-import requests
+#import requests
 import time
-import json
+#import json
 import config
-import base64
+#import base64
 import psutil
 
 description = '''List of all the commands
