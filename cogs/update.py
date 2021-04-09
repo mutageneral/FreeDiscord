@@ -36,7 +36,7 @@ class Update(commands.Cog):
             shutil.rmtree('/tmp/freeupdate')
             print("Done! Restart the bot to apply the changes!")
             em = discord.Embed(title = "Updated!", description = "FreeDiscord updated! No error reported. Check your console to confirm this.")
-            em.add_field(name = "Note", value = "The bot will now restart.")
+            em.add_field(name = "Note", value = "The bot will now shut down. Restart it to apply the changes.")
 
             await ctx.send(embed = em)
 
