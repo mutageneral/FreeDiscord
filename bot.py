@@ -26,13 +26,10 @@ bot.remove_command('help')
 @bot.event
 async def on_ready():
     # What gets printed in the terminal when the bot is succesfully logged in
-    servers = list(bot.guilds)
-    serverNumber = len(servers)
     print('Logged in as')
     print(bot.user.name)
     print(bot.user.id)
     print('------')
-    print(serverNumber)
 
 bot.load_extension("cogs.general")
 bot.load_extension("cogs.utils")
@@ -43,20 +40,20 @@ bot.load_extension("cogs.help")
 bot.load_extension("cogs.update")
 bot.load_extension("cogs.admin")
 
-#@bot.event
-#async def on_command_error(ctx, error):
-#    if isinstance(error, commands.MissingPermissions):
-#        em = discord.Embed(title = "You do not have permission to do that.")
-#        await ctx.send(embed = em)
-#    elif isinstance(error, commands.MissingRequiredArgument):
-#        em = discord.Embed(title = "Your command is missing an argument.")
-#        await ctx.send(embed = em)
-#    elif isinstance(error, commands.CommandNotFound):
-#        em = discord.Embed(title = "Command not found")
-#        await ctx.send(embed = em)
-#    else:
-#        em = discord.Embed(title = "An internal error occurred.", description = "Here are the details of the error: " + str(error))
-#        await ctx.send(embed = em)
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.MissingPermissions):
+        em = discord.Embed(title = "You do not have permission to do that.")
+        await ctx.send(embed = em)
+    elif isinstance(error, commands.MissingRequiredArgument):
+        em = discord.Embed(title = "Your command is missing an argument.")
+        await ctx.send(embed = em)
+    elif isinstance(error, commands.CommandNotFound):
+        em = discord.Embed(title = "Command not found")
+        await ctx.send(embed = em)
+    else:
+        em = discord.Embed(title = "An internal error occurred.", description = "Here are the details of the error: " + str(error))
+        await ctx.send(embed = em)
 
 @bot.command(description='Shows information about bot instance.')
 async def about(ctx):
