@@ -38,16 +38,16 @@ bot.load_extension("cogs.caesarcrypt")
 bot.load_extension("cogs.help")
 bot.load_extension("cogs.update")
 
-@bot.event
+@bot.event 
 async def on_message(msg):
-    if bad_words == '':
-        return
-    else:    
-        for word in bad_words:
-            if word in msg.content:
-                await msg.delete()
-
-        await bot.process_commands(msg)
+    for word in bad_words:
+        if word in msg.content.lower():
+            await msg.delete()
+            await msg.channel.send("123")
+        else:
+            await bot.process_commands(msg)
+            
+    await bot.process_commands(msg)
 
 @bot.event
 async def on_command_error(ctx, error):
