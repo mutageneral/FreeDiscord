@@ -5,7 +5,7 @@ import json, base64, requests
 
 apikey = config.virustotal_api
 
-def vt_json_parsing(self, detections):
+def vt_json_parsing(detections):
     detections = json.dumps(detections)
     detections = json.dumps(json.loads(detections), indent=2)
     detections = str(detections).split("last_analysis_stats")
