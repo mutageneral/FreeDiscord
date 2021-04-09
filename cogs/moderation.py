@@ -83,7 +83,7 @@ class Moderation(commands.Cog):
         if config.bot_lockdown_status == 'no_lockdown':
             if timeconvertion(mutetime) != 0:
                 #role = discord.utils.get(user.guild.roles, name = [r for r in immune_roles])
-                if check_immune(discord.utils.get(user.roles)) == False:
+                if check_immune(user.roles) == False:
                     role = discord.utils.get(user.guild.roles, name="muted")
                     await user.add_roles(role)
                     em = discord.Embed(title = "User has been muted for " + "`{}`".format(str(mutetime)) + ".")
