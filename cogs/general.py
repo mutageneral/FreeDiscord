@@ -3,6 +3,7 @@ from discord.ext import commands
 import psutil
 import config
 import bot
+
 class General(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
