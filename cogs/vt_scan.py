@@ -49,3 +49,6 @@ class vt_scan(commands.Cog):
         elif config.bot_lockdown_status == "lockdown_activated":
             em = discord.Embed(title = "This bot is locked down", description = "<@!" + config.ownerID + "> has locked down this bot globally.")
             await ctx.send(embed = em)
+
+def setup(bot):
+    bot.add_cog(vt_scan(bot))
