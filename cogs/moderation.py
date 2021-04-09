@@ -90,7 +90,7 @@ class Moderation(commands.Cog):
                     await asyncio.sleep(timeconvertion(mutetime))
                     await user.remove_roles(role)
                 else:
-                    em = discord.Embed(title = "User is immune to that command")
+                    em = discord.Embed(title = "User is immune to that command.")
                     await ctx.send(embed = em)
             elif timeconvertion(mutetime) == 0:
                 em = discord.Embed(title = "The time format doesn't seem right.")
