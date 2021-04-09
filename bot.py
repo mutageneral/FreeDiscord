@@ -46,7 +46,7 @@ async def on_message(msg):
     for word in bad_words:
         if word in msg.content.lower():
             await msg.delete()
-            await msg.channel.send("123")
+            await msg.channel.send("Please don't use that word")
         else:
             await bot.process_commands(msg)
             
