@@ -100,14 +100,15 @@ def vtapiWrite() :
         print("Invalid response, please rerun the script.")
         exit()
 
-    def badwordWrite() :
-    print("Please put in bad words that you want to be filtered by the bot.\n If you don't want this feature just hit enter on this prompt and type 's' when it asks if what you inputted is correct.\n The format is "["badword1", "badword2", "badword3"]"")
-    badwords = input("Enter your VirusTotal API key: ")
+def badwordWrite() :
+    print("Please put in bad words that you want to be filtered by the bot.\n If you don't want this feature just hit enter on this prompt and type 's' when it asks if what you inputted is correct.\n The format is ")
+    print('["badword1", "badword2", "badword3"]')
+    badwords = input("Enter the bad words (make sure to use the format): ")
     verificationFour = input("Is this correct? (y/n/s): '" + badwords + "'")
     if verificationFour == "y":
         print("Writing...")
         config = open('config.py', 'a')
-        writePrefixTemplate = "bad_words = '" + badwords + "'\n"
+        writePrefixTemplate = "bad_words = ' + badwords + '\n"
         config.write(writePrefixTemplate)
         config.close()
         print("Written!")
@@ -115,7 +116,7 @@ def vtapiWrite() :
     elif verificationFour == "n":
         print("Writing...")
         config = open('config.py', 'a')
-        writePrefixTemplate = "bad_words = '' "
+        writePrefixTemplate = "bad_words = [] "
         config.write(writePrefixTemplate)
         config.close()
         print("Written!")
