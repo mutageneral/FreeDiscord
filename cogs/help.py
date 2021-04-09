@@ -3,7 +3,7 @@ from discord.ext import commands
 import os
 import sys
 sys.path.append(os.path.realpath('.'))
-from config import * #
+import config
 class Help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -11,148 +11,168 @@ class Help(commands.Cog):
     @commands.group(invoke_without_command=True)
     async def help(self, ctx):
         if ctx.invoked_subcommand is None:
-            em = discord.Embed(title = "Help", description = "Use " + prefix + "help <command> for extended information on a command.")
-            em.add_field(name = "General", value = "about, add, choose, roll, vt")
-            em.add_field(name = "Moderation", value = "ban, delwarn, kick, mute, purge, unban, unmute, warn, warns")
-            em.add_field(name = "Settings", value = "botstatus, botstatusrepeat")
-            em.add_field(name = "Utils", value = "avatar, joined, ping, quickpoll, userinfo")
-            em.add_field(name = "Caesarcrypt", value = "decrypt, encrypt")
-            em.add_field(name = "VirusTotal", value = "scan_url, vt_hash")
-            em.add_field(name = "Bot", value = "updatebot - Updates the bot (destructive, do " + prefix + "help before running so you know what this command does), help - Shows this message")
+            if config.bot_lockdown_status == 'lockdown_activated':
+                em = discord.Embed(title = "Help", description = "Note: global bot lockdown is enabled, so most commands are disabled. Use " + config.prefix + "help <command> for extended information on a command.")
+                em.add_field(name = "General", value = "GLOBAL BOT LOCKDOWN ENABLED, only the `about` command works.")
+                em.add_field(name = "Moderation", value = "GLOBAL BOT LOCKDOWN ENABLED")
+                em.add_field(name = "Settings", value = "GLOBAL BOT LOCKDOWN ENABLED")
+                em.add_field(name = "Utils", value = "GLOBAL BOT LOCKDOWN ENABLED")
+                em.add_field(name = "Caesarcrypt", value = "GLOBAL BOT LOCKDOWN ENABLED")
+                em.add_field(name = "VirusTotal", value = "GLOBAL BOT LOCKDOWN ENABLED")
+                em.add_field(name = "Update", value = "updatebot - Updates the bot (destructive, do " + config.prefix + "help before running so you know what this command does)")
+                em.add_field(name = "Admin", value = "lockdownbot")
+                em.add_field(name = "Help", value = "help - Shows this message")
+            elif config.bot_lockdown_status == 'no_lockdown':
+                em = discord.Embed(title = "Help", description = "Use " + config.prefix + "help <command> for extended information on a command.")
+                em.add_field(name = "General", value = "about, add, choose, roll")
+                em.add_field(name = "Moderation", value = "ban, delwarn, kick, mute, purge, unban, unmute, warn, warns")
+                em.add_field(name = "Settings", value = "botstatus, botstatusrepeat")
+                em.add_field(name = "Utils", value = "avatar, joined, ping, quickpoll, userinfo")
+                em.add_field(name = "Caesarcrypt", value = "decrypt, encrypt")
+                em.add_field(name = "VirusTotal", value = "scan_url, vt_hash")
+                em.add_field(name = "Update", value = "updatebot - Updates the bot (destructive, do " + config.prefix + "help before running so you know what this command does)")
+                em.add_field(name = "Admin", value = "lockdownbot")
+                em.add_field(name = "Help", value = "help - Shows this message")
 
             await ctx.send(embed = em)
 
     # Moderation commands
     @help.command(name="ban")
     async def _ban(self, ctx):
-        em = discord.Embed(title = "Moderation: Ban", description = prefix + "ban <user> optional:<reason> \n\nBan a member.")
+        em = discord.Embed(title = "Moderation: Ban", description = config.prefix + "ban <user> optional:<reason> \n\nBan a member.")
         await ctx.send(embed = em)
 
     @help.command(name="delwarn")
     async def _delwarn(self, ctx):
-        em = discord.Embed(title = "Moderation: Delwarn", description = prefix + "delwarn <user> <reason of warn you want to delete> \n\nDelete a warning.")
+        em = discord.Embed(title = "Moderation: Delwarn", description = config.prefix + "delwarn <user> <reason of warn you want to delete> \n\nDelete a warning.")
         await ctx.send(embed = em)
 
     @help.command(name="kick")
     async def _kick(self, ctx):
-        em = discord.Embed(title = "Moderation: Kick", description = prefix + "kick <user> optional:<reason> \n\nKick a member.")
+        em = discord.Embed(title = "Moderation: Kick", description = config.prefix + "kick <user> optional:<reason> \n\nKick a member.")
         await ctx.send(embed = em)
 
     @help.command(name="mute")
     async def _mute(self, ctx):
-        em = discord.Embed(title = "Moderation: Mute", description = prefix + "mtue <user> <mutetime> \n\nMute a member.")
+        em = discord.Embed(title = "Moderation: Mute", description = config.prefix + "mtue <user> <mutetime> \n\nMute a member.")
         await ctx.send(embed = em)
 
     @help.command(name="purge")
     async def _purge(self, ctx):
-        em = discord.Embed(title = "Moderation: Purge", description = prefix + "purge <number of messages to purge> \n\nPurge messages, default amount is 10.")
+        em = discord.Embed(title = "Moderation: Purge", description = config.prefix + "purge <number of messages to purge> \n\nPurge messages, default amount is 10.")
         await ctx.send(embed = em)
 
     @help.command(name="unban")
     async def _unban(self, ctx):
-        em = discord.Embed(title = "Moderation: Unban", description = prefix + "unban <userid> \n\nUnban a member.")
+        em = discord.Embed(title = "Moderation: Unban", description = config.prefix + "unban <userid> \n\nUnban a member.")
         await ctx.send(embed = em)
 
     @help.command(name="unmute")
     async def _unmute(self, ctx):
-        em = discord.Embed(title = "Moderation: Unmute", description = prefix + "unmute <user> \n\nUnmute a member.")
+        em = discord.Embed(title = "Moderation: Unmute", description = config.prefix + "unmute <user> \n\nUnmute a member.")
         await ctx.send(embed = em)
 
     @help.command(name="warn")
     async def _warn(self, ctx):
-        em = discord.Embed(title = "Moderation: Warn", description = prefix + "warn <user> <reason> \n\nWarn a member.")
+        em = discord.Embed(title = "Moderation: Warn", description = config.prefix + "warn <user> <reason> \n\nWarn a member.")
         await ctx.send(embed = em)
 
     @help.command(name="warns")
     async def _warns(self, ctx):
-        em = discord.Embed(title = "Moderation: Warns", description = prefix + "warns <user> \n\nSee the warnings for a member.")
+        em = discord.Embed(title = "Moderation: Warns", description = config.prefix + "warns <user> \n\nSee the warnings for a member.")
         await ctx.send(embed = em)
 
     # General commands
     @help.command(name="about")
     async def _about(self, ctx):
-        em = discord.Embed(title = "About", description = prefix + "about \n\nShows information about this bot instance.")
+        em = discord.Embed(title = "General: About", description = config.prefix + "about \n\nShows information about this bot instance.")
         await ctx.send(embed = em)
 
     @help.command(name="add")
     async def _add(self, ctx):
-        em = discord.Embed(title = "General: Add", description = prefix + "add <number1> <number2> \n\nAdds two numbers together.")
+        em = discord.Embed(title = "General: Add", description = config.prefix + "add <number1> <number2> \n\nAdds two numbers together.")
         await ctx.send(embed = em)
 
     @help.command(name="choose")
     async def _choose(self, ctx):
-        em = discord.Embed(title = "General: Choose", description = prefix + "choose <choice1> <choice2> \n\nChooses between multiple choices.")
+        em = discord.Embed(title = "General: Choose", description = config.prefix + "choose <choice1> <choice2> \n\nChooses between multiple choices.")
         await ctx.send(embed = em)
 
     @help.command(name="roll")
     async def _roll(self, ctx):
-        em = discord.Embed(title = "General: Roll", description = prefix + "roll <number1>-<number2> \n\nRolls a dice in N-N format.")
+        em = discord.Embed(title = "General: Roll", description = config.prefix + "roll <number1>-<number2> \n\nRolls a dice in N-N format.")
         await ctx.send(embed = em)
 
     # Settings commands
     @help.command(name="botstatus")
     async def _botstatus(self, ctx):
-        em = discord.Embed(title = "Settings: BotStatus", description = prefix + "botstatus <status> \n\nSets the status of the bot. Owner only. '" + prefix + "botstatus' to reset")
+        em = discord.Embed(title = "Settings: BotStatus", description = config.prefix + "botstatus <status> \n\nSets the status of the bot. Owner only. '" + config.prefix + "botstatus' to reset")
         await ctx.send(embed = em)
 
     @help.command(name="botstatusrepeat")
     async def _botstatusrepeat(self, ctx):
-        em = discord.Embed(title = "Settings: BotStatusRepeat", description = prefix + "botstatusrepeat \n\nRepeatedly sets the status of the bot. Owner only.")
+        em = discord.Embed(title = "Settings: BotStatusRepeat", description = config.prefix + "botstatusrepeat \n\nRepeatedly sets the status of the bot. Owner only.")
         await ctx.send(embed = em)
 
     # Utils commands
     @help.command(name="avatar")
     async def _avatar(self, ctx):
-        em = discord.Embed(title = "Utils: Avatar", description = prefix + "avatar <user> \n\nGet a link to somebody's avatar.")
+        em = discord.Embed(title = "Utils: Avatar", description = config.prefix + "avatar <user> \n\nGet a link to somebody's avatar.")
         await ctx.send(embed = em)
 
     @help.command(name="joined")
     async def _joined(self, ctx):
-        em = discord.Embed(title = "Utils: Joined", description = prefix + "joined <user> \n\nTells you when a user joined the server.")
+        em = discord.Embed(title = "Utils: Joined", description = config.prefix + "joined <user> \n\nTells you when a user joined the server.")
         await ctx.send(embed = em)
 
     @help.command(name="ping")
     async def _ping(self, ctx):
-        em = discord.Embed(title = "Utils: Ping", description = prefix + "ping \n\nTells you the latency between the bot and the server.")
+        em = discord.Embed(title = "Utils: Ping", description = config.prefix + "ping \n\nTells you the latency between the bot and the server.")
         await ctx.send(embed = em)
 
     @help.command(name="quickpoll")
     async def _quickpoll(self, ctx):
-        em = discord.Embed(title = "Utils: Quickpoll", description = prefix + "quickpoll <poll> \n\nMake a poll with yes/no reactions.")
+        em = discord.Embed(title = "Utils: Quickpoll", description = config.prefix + "quickpoll <poll> \n\nMake a poll with yes/no reactions.")
         await ctx.send(embed = em)
 
     @help.command(name="userinfo")
     async def _userinfo(self, ctx):
-        em = discord.Embed(title = "Utils: UserInfo", description = prefix + "userinfo <user> \n\nGives you information about a user.")
+        em = discord.Embed(title = "Utils: UserInfo", description = config.prefix + "userinfo <user> \n\nGives you information about a user.")
         await ctx.send(embed = em)
 
     # Caesar commands
     @help.command(name="encrypt")
     async def _encrypt(self, ctx):
-        em = discord.Embed(title = "Caesarcrypt: Encrypt", description = prefix + "encrypt <rounds> <message> \n\nEncrypt a message. The '<message>' has to be in double quotes for it to work.")
+        em = discord.Embed(title = "Caesarcrypt: Encrypt", description = config.prefix + "encrypt <rounds> <message> \n\nEncrypt a message. The '<message>' has to be in double quotes for it to work.")
         await ctx.send(embed = em)
 
     @help.command(name="decrypt")
     async def _decrypt(self, ctx):
-        em = discord.Embed(title = "Caesarcrypt: Decrypt", description = prefix + "decrypt <rounds> <message> \n\nDecrypt a message. The '<message>' has to be in double quotes for it to work.")
+        em = discord.Embed(title = "Caesarcrypt: Decrypt", description = config.prefix + "decrypt <rounds> <message> \n\nDecrypt a message. The '<message>' has to be in double quotes for it to work.")
         await ctx.send(embed = em)
 
     # Update command
     @help.command(name="updatebot")
     async def _updatebot(self, ctx):
-        em = discord.Embed(title = "Update: UpdateBot", description = prefix + "updatebot \n\nUpdates the bot, replacing all of the bot files, except for the warns folder and the config.py file, with the newest files directly from the GitHub repository. Owner only.")
+        em = discord.Embed(title = "Update: UpdateBot", description = config.prefix + "updatebot \n\nUpdates the bot, replacing all of the bot files, except for the warns folder and the config.py file, with the newest files directly from the GitHub repository. Owner only.")
         await ctx.send(embed = em)
 
-    # VirusTotal commands'
+    # VirusTotal commands
     @help.command(name="scan_url")
     async def _scan_url(self, ctx):
-        em = discord.Embed(title = "VirusTotal: Scan_URL", description = prefix + "scan_url <link> with https or http at the begining \n\nScans a URL link using a VirusTotal API key.")
-        await ctx.send(embed = em)  
+        em = discord.Embed(title = "VirusTotal: Scan_URL", description = config.prefix + "scan_url <link> with https or http at the begining \n\nScans a URL link using a VirusTotal API key.")
+        await ctx.send(embed = em)
 
     @help.command(name="vt_hash")
     async def _vt_hash(self, ctx):
-        em = discord.Embed(title = "VirusTotal: VT_Hash", description = prefix + "vt_hash <file hash> SHA-256 SHA-1 or MD5 \n\nScans a file hash using a VirusTotal API key.")
-        await ctx.send(embed = em)   
+        em = discord.Embed(title = "VirusTotal: VT_Hash", description = config.prefix + "vt_hash <file hash> SHA-256 SHA-1 or MD5 \n\nScans a file hash using a VirusTotal API key.")
+        await ctx.send(embed = em)
+
+    # Admin commands
+    @help.command(name="lockdownbot")
+    async def _lockdownbot(self, ctx):
+        em = discord.Embed(title = "Admin: LockdownBot", description = config.prefix + "lockdownbot \n\nLocks down the bot in all servers and disables most commands. Owner only.")
+        await ctx.send(embed = em)
 
 def setup(bot):
     bot.add_cog(Help(bot))

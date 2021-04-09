@@ -148,10 +148,10 @@ tokenWrite()
 prefixWrite()
 ownerIDWrite()
 vtapiWrite()
+config = open('config.py', 'a')
+config.write("bot_lockdown_status = 'no_lockdown'")
+config.close()
 print("Your config file should be written now!")
 print("To start your bot, run python3 bot.py")
 print("Have a nice day! :)")
 exit()
-
-
-["badword", "badtest"]
