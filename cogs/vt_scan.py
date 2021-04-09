@@ -51,4 +51,4 @@ class VT(commands.Cog):
             await ctx.send(embed = em)
 
 def setup(bot):
-    bot.add_cog(vt_scan(bot))
+    bot.add_cog(VT(bot))
