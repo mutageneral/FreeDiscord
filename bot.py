@@ -41,6 +41,17 @@ bot.load_extension("cogs.update")
 bot.load_extension("cogs.admin")
 bot.load_extension("cogs.vt_scan")
 
+@bot.event 
+async def on_message(msg):
+    for word in bad_words:
+        if word in msg.content.lower():
+            await msg.delete()
+            await msg.channel.send("123")
+        else:
+            await bot.process_commands(msg)
+            
+    await bot.process_commands(msg)
+
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):
