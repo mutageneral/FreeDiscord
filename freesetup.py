@@ -100,6 +100,35 @@ def vtapiWrite() :
         print("Invalid response, please rerun the script.")
         exit()
 
+def badwordWrite() :
+    print("Please put in bad words that you want to be filtered by the bot.\n If you don't want this feature just hit enter on this prompt and type 's' when it asks if what you inputted is correct.\n The format is ")
+    print('["badword1", "badword2", "badword3"]')
+    badwords = input("Enter the bad words (make sure to use the format): ")
+    verificationFour = input("Is this correct? (y/n/s): '" + badwords + "'")
+    if verificationFour == "y":
+        print("Writing...")
+        config = open('config.py', 'a')
+        writePrefixTemplate = "bad_words = " + badwords + "\n"
+        config.write(writePrefixTemplate)
+        config.close()
+        print("Written!")
+        print()
+    elif verificationFour == "n":
+        print("Please rerun the file and input the bad words you want to be filtered.")
+        exit()
+    elif verificationFour == "s":
+        print("Writing...")
+        config = open('config.py', 'a')
+        writePrefixTemplate = "bad_words = [] "
+        config.write(writePrefixTemplate)
+        config.close()
+        print("Written!")
+        print()
+        print("You have chosen not to input bad words. You may add them by editing the config.py file later.")
+    elif verificationFour != "n" or "y" or "s":
+        print("Invalid response, please rerun the script.")
+        exit()
+
 if os.path.exists("config.py"):
     prompt = input("Existing config.py found. Should I delete it? (y/n)")
     if prompt == "y":
