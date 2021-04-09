@@ -18,7 +18,7 @@ def vt_json_parsing(detections):
     detections = "".join(filter(str.isdigit, m))
     return str(detections)
 
-class Caesarcrypt(commands.Cog):
+class vt_scan(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
