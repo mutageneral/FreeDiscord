@@ -82,14 +82,16 @@ class Moderation(commands.Cog):
         """Mute a member."""
         if config.bot_lockdown_status == 'no_lockdown':
             if timeconvertion(mutetime) != 0:
-                role = discord.utils.get(user.guild.roles, name="muted")
-                await user.add_roles(role)
-
-                em = discord.Embed(title = "User has been muted for " + "`{}`".format(str(mutetime)) + ".")
-                await ctx.send(embed = em)
-
-                await asyncio.sleep(timeconvertion(mutetime))
-                await user.remove_roles(role)
+                if check_immune(user.roles) == False:
+                    role = discord.utils.get(user.guild.roles, name="muted")
+                    await user.add_roles(role)
+                    em = discord.Embed(title = "User has been muted for " + "`{}`".format(str(mutetime)) + ".")
+                    await ctx.send(embed = em)
+                    await asyncio.sleep(timeconvertion(mutetime))
+                    await user.remove_roles(role)
+                else:
+                    em = discord.Embed(title = "User is immune to that command")
+                    await ctx.send(embed = em)
             elif timeconvertion(mutetime) == 0:
                 em = discord.Embed(title = "The time format doesn't seem right.")
                 await ctx.send(embed = em)
