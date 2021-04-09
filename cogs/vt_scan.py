@@ -18,7 +18,7 @@ def vt_json_parsing(detections):
     detections = "".join(filter(str.isdigit, m))
     return int(detections)
 
-class vt_scan(commands.Cog):
+class VT(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
