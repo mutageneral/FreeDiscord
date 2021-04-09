@@ -3,24 +3,24 @@ from discord.ext import commands
 import config
 import json, base64, requests
 
+apikey = config.virustotal_api
+
+def vt_json_parsing(self, detections):
+    detections = json.dumps(detections)
+    detections = json.dumps(json.loads(detections), indent=2)
+    detections = str(detections).split("last_analysis_stats")
+    detections = detections[1]
+    detections = detections.split("        ")
+    for m in detections:
+        if 'malicious' in str(m) and any(d.isdigit() for d in m):
+            detections = m
+            break
+    detections = "".join(filter(str.isdigit, m))
+    return str(detections)
+
 class Caesarcrypt(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
-    apikey = config.virustotal_api
-
-    def vt_json_parsing(self, detections):
-        detections = json.dumps(detections)
-        detections = json.dumps(json.loads(detections), indent=2)
-        detections = str(detections).split("last_analysis_stats")
-        detections = detections[1]
-        detections = detections.split("        ")
-        for m in detections:
-            if 'malicious' in str(m) and any(d.isdigit() for d in m):
-                detections = m
-                break
-        detections = "".join(filter(str.isdigit, m))
-        return str(detections)
 
     @commands.command(description='Testing, "@bot hash"')
     async def vt_hash(self, ctx, hash: str):
