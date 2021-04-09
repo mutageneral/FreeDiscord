@@ -6,6 +6,8 @@ from discord.utils import get
 import asyncio
 import config
 
+##immune_roles variable
+immune_roles = {"Moderators", "Admins"}
 
 def timeconvertion(time):# Time convertion
     convertion = {"s": 1, "m": 60, "h": 3600, "d": 86400}
