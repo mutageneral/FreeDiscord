@@ -1,7 +1,7 @@
 import discord, time
 from discord.ext import commands
 import config
-import json, base64
+import json, base64, requests
 
 class Caesarcrypt(commands.Cog):
     def __init__(self, bot):
@@ -9,7 +9,7 @@ class Caesarcrypt(commands.Cog):
 
     apikey = config.virustotal_api
 
-    def vt_json_parsing(detections):
+    def vt_json_parsing(self, detections):
         detections = json.dumps(detections)
         detections = json.dumps(json.loads(detections), indent=2)
         detections = str(detections).split("last_analysis_stats")
@@ -22,8 +22,8 @@ class Caesarcrypt(commands.Cog):
         detections = "".join(filter(str.isdigit, m))
         return str(detections)
 
-    @bot.command(description='Testing, "@bot hash"')
-    async def vt_hash(ctx, hash: str):
+    @commands.command(description='Testing, "@bot hash"')
+    async def vt_hash(self, ctx, hash: str):
         """VirusTotal Integration"""
         if config.bot_lockdown_status == 'no_lockdown':
             header = {'x-apikey': '{}'.format(apikey)}
@@ -35,8 +35,8 @@ class Caesarcrypt(commands.Cog):
             em = discord.Embed(title = "This bot is locked down", description = "<@!" + config.ownerID + "> has locked down this bot globally.")
             await ctx.send(embed = em)
 
-    @bot.command(description='Testing, "@bot hash"')
-    async def scan_url(ctx, url: str):
+    @commands.command(description='Testing, "@bot hash"')
+    async def scan_url(self, ctx, url: str):
         #Need to import base64 module to work
         if config.bot_lockdown_status == 'no_lockdown':
             header = {'x-apikey': '{}'.format(apikey)}
