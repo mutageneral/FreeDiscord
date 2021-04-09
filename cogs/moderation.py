@@ -13,6 +13,8 @@ def check_immune(roles):
     for r in roles:
         if r in immune_roles:
             return True
+        else:
+            return False
 
 def timeconvertion(time):# Time convertion
     convertion = {"s": 1, "m": 60, "h": 3600, "d": 86400}
