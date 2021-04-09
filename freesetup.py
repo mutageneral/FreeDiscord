@@ -108,12 +108,15 @@ def badwordWrite() :
     if verificationFour == "y":
         print("Writing...")
         config = open('config.py', 'a')
-        writePrefixTemplate = "bad_words = ' + badwords + '\n"
+        writePrefixTemplate = "bad_words = " + badwords + "\n"
         config.write(writePrefixTemplate)
         config.close()
         print("Written!")
         print()
     elif verificationFour == "n":
+        print("Please rerun the file and input the bad words you want to be filtered.")
+        exit()
+    elif verificationFour == "s":
         print("Writing...")
         config = open('config.py', 'a')
         writePrefixTemplate = "bad_words = [] "
@@ -121,9 +124,6 @@ def badwordWrite() :
         config.close()
         print("Written!")
         print()
-        print("Please rerun the file and input the bad words you want to be filtered.")
-        exit()
-    elif verificationFour == "s":
         print("You have chosen not to input bad words. You may add them by editing the config.py file later.")
     elif verificationFour != "n" or "y" or "s":
         print("Invalid response, please rerun the script.")
