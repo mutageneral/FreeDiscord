@@ -11,7 +11,7 @@ class Utils(commands.Cog):
         Get the latency of the bot.
         '''
         if config.bot_lockdown_status == 'no_lockdown':
-            em = discord.Embed(title = "Pong! `"f"{self.bot.latency*1000} ms`.")
+            em = discord.Embed(title = "Pong! `"f"{round(self.bot.latency*1000)} ms`.")
             await ctx.send(embed = em)
         elif config.bot_lockdown_status == "lockdown_activated":
             em = discord.Embed(title = "This bot is locked down", description = "<@!" + config.ownerID + "> has locked down this bot globally.")
