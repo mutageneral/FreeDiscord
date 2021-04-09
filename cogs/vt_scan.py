@@ -22,7 +22,7 @@ class vt_scan(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(description='Testing, "@bot hash"')
+    @commands.command()
     async def vt_hash(self, ctx, hash: str):
         """VirusTotal Integration"""
         if config.bot_lockdown_status == 'no_lockdown':
@@ -35,7 +35,7 @@ class vt_scan(commands.Cog):
             em = discord.Embed(title = "This bot is locked down", description = "<@!" + config.ownerID + "> has locked down this bot globally.")
             await ctx.send(embed = em)
 
-    @commands.command(description='Testing, "@bot hash"')
+    @commands.command()
     async def scan_url(self, ctx, url: str):
         #Need to import base64 module to work
         if config.bot_lockdown_status == 'no_lockdown':
