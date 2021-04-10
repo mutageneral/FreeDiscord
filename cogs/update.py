@@ -118,6 +118,7 @@ class Update(commands.Cog):
             print("Done! Restart the bot to apply the changes!")
             em = discord.Embed(title = "Updated!", description = "Cogs updated! No error reported. Check your console to confirm this.")
             em.add_field(name = "Note", value = "If you want to use the new cogs, either restart the bot using `" + config.prefix + "restartbot` which will load all the cogs on startup (recommended), or reload every cog manually using `" + config.prefix + "reloadcog {every cog name}.`")
+            await ctx.send(embed = em)
         else:
             em = discord.Embed(title = "This command is for the bot owner only.")
             await ctx.send(embed = em)
