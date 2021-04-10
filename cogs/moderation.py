@@ -6,16 +6,6 @@ from discord.utils import get
 import asyncio
 import config
 
-##immune_roles variable
-immune_roles = ["Moderators", "Admins"]
-def check_immune(roles):
-    #roles = list(roles.split(", "))
-    for r in roles:
-        if r in immune_roles:
-            return True
-        else:
-            return False
-
 def timeconvertion(time):# Time convertion
     convertion = {"s": 1, "m": 60, "h": 3600, "d": 86400}
     letters_inside = ''.join(filter(str.isalpha, time))
@@ -84,17 +74,12 @@ class Moderation(commands.Cog):
         """Mute a member."""
         if config.bot_lockdown_status == 'no_lockdown':
             if timeconvertion(mutetime) != 0:
-                #role = discord.utils.get(user.guild.roles, name = [r for r in immune_roles])
-                if check_immune(user.roles) == False:
-                    role = discord.utils.get(user.guild.roles, name="muted")
-                    await user.add_roles(role)
-                    em = discord.Embed(title = "User has been muted for " + "`{}`".format(str(mutetime)) + ".")
-                    await ctx.send(embed = em)
-                    await asyncio.sleep(timeconvertion(mutetime))
-                    await user.remove_roles(role)
-                else:
-                    em = discord.Embed(title = "User is immune to that command.")
-                    await ctx.send(embed = em)
+                role = discord.utils.get(user.guild.roles, name="muted")
+                await user.add_roles(role)
+                em = discord.Embed(title = "User has been muted for " + "`{}`".format(str(mutetime)) + ".")
+                await ctx.send(embed = em)
+                await asyncio.sleep(timeconvertion(mutetime))
+                await user.remove_roles(role)
             elif timeconvertion(mutetime) == 0:
                 em = discord.Embed(title = "The time format doesn't seem right.")
                 await ctx.send(embed = em)
