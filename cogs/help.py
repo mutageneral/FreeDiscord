@@ -4,6 +4,7 @@ import os
 import sys
 sys.path.append(os.path.realpath('.'))
 import config
+import globalconfig
 class Help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -12,29 +13,36 @@ class Help(commands.Cog):
     async def help(self, ctx):
         if ctx.invoked_subcommand is None:
             if config.bot_lockdown_status == 'lockdown_activated':
-                em = discord.Embed(title = "Help", description = "Note: global bot lockdown is enabled, so most commands are disabled. Use " + config.prefix + "help <command> for extended information on a command.")
+                em = discord.Embed(title = "Help", description = "Note: global bot lockdown is enabled, so most commands are disabled. Use `" + config.prefix + "help <command>` for extended information on a command.")
                 em.add_field(name = "General", value = "GLOBAL BOT LOCKDOWN ENABLED, only the `about` command works.")
                 em.add_field(name = "Moderation", value = "GLOBAL BOT LOCKDOWN ENABLED")
                 em.add_field(name = "Settings", value = "GLOBAL BOT LOCKDOWN ENABLED")
                 em.add_field(name = "Utils", value = "GLOBAL BOT LOCKDOWN ENABLED")
                 em.add_field(name = "Caesarcrypt", value = "GLOBAL BOT LOCKDOWN ENABLED")
                 em.add_field(name = "VirusTotal", value = "GLOBAL BOT LOCKDOWN ENABLED")
-                em.add_field(name = "Update", value = "updatebot - Updates the bot (destructive, do " + config.prefix + "help before running so you know what this command does)")
-                em.add_field(name = "Admin", value = "lockdownbot")
+                em.add_field(name = "Update", value = "updatebot - Updates the bot (Do `" + config.prefix + "help updatebot` before running), updatecogs - Updates the bot's cogs (Do `" + config.prefix + "help updatecogs` before running)")
+                em.add_field(name = "Admin", value = "lockdownbot, reloadcog, restartbot, shutdownbot")
                 em.add_field(name = "Help", value = "help - Shows this message")
+                if globalconfig.latest_version > globalconfig.version:
+                    em.add_field(name = "Notice", value = "This bot has an available update that will update it from version `" + globalconfig.version + "` to version `" + globalconfig.latest_version + "`. Please use `" + config.prefix + "updatecheck` for more details.")
+                elif globalconfig.latest_version < globalconfig.version:
+                    em.add_field(name = "Notice", value = "This bot has an available downgrade that will downgrade it from version `" + globalconfig.version + "` to version `" + globalconfig.latest_version + "`. Please use `" + config.prefix + "updatecheck` for more details.")
             elif config.bot_lockdown_status == 'no_lockdown':
-                em = discord.Embed(title = "Help", description = "Use " + config.prefix + "help <command> for extended information on a command.")
+                em = discord.Embed(title = "Help", description = "Use `" + config.prefix + "help <command>` for extended information on a command.")
                 em.add_field(name = "General", value = "about, add, choose, roll")
                 em.add_field(name = "Moderation", value = "ban, delwarn, kick, mute, purge, unban, unmute, warn, warns")
                 em.add_field(name = "Settings", value = "botstatus, botstatusrepeat")
                 em.add_field(name = "Utils", value = "avatar, joined, ping, quickpoll, userinfo")
                 em.add_field(name = "Caesarcrypt", value = "decrypt, encrypt")
                 em.add_field(name = "VirusTotal", value = "scan_url, vt_hash")
-                em.add_field(name = "Update", value = "updatebot - Updates the bot (destructive, do " + config.prefix + "help before running so you know what this command does)")
-                em.add_field(name = "Admin", value = "lockdownbot")
+                em.add_field(name = "Update", value = "updatecheck - checks for updates/downgrades, updatebot - Updates the bot (Do `" + config.prefix + "help updatebot` before running), updatecogs - Updates the bot's cogs (Do `" + config.prefix + "help updatecogs` before running)")
+                em.add_field(name = "Admin", value = "lockdownbot, reloadcog, restartbot, shutdownbot")
                 em.add_field(name = "Help", value = "help - Shows this message")
-
-            await ctx.send(embed = em)
+                if globalconfig.latest_version > globalconfig.version:
+                    em.add_field(name = "Notice", value = "This bot has an available update that will update it from version `" + globalconfig.version + "` to version `" + globalconfig.latest_version + "`. Please use `" + config.prefix + "updatecheck` for more details.")
+                elif globalconfig.latest_version < globalconfig.version:
+                    em.add_field(name = "Notice", value = "This bot has an available downgrade that will downgrade it from version `" + globalconfig.version + "` to version `" + globalconfig.latest_version + "`. Please use `" + config.prefix + "updatecheck` for more details.")
+                await ctx.send(embed = em)
 
     # Moderation commands
     @help.command(name="ban")
@@ -151,10 +159,20 @@ class Help(commands.Cog):
         em = discord.Embed(title = "Caesarcrypt: Decrypt", description = config.prefix + "decrypt <rounds> <message> \n\nDecrypt a message. The '<message>' has to be in double quotes for it to work.")
         await ctx.send(embed = em)
 
-    # Update command
+    # Update commands
     @help.command(name="updatebot")
     async def _updatebot(self, ctx):
-        em = discord.Embed(title = "Update: UpdateBot", description = config.prefix + "updatebot \n\nUpdates the bot, replacing all of the bot files, except for the warns folder and the config.py file, with the newest files directly from the GitHub repository. Owner only.")
+        em = discord.Embed(title = "Update: UpdateBot", description = config.prefix + "updatebot \n\nUpdates/downgrades the bot, replacing all of the bot files, except for the warns folder and the config.py file, with the newest files directly from the GitHub repository. Owner only.")
+        await ctx.send(embed = em)
+
+    @help.command(name="updatecheck")
+    async def _updatecheck(self, ctx):
+        em = discord.Embed(title = "Update: UpdateCheck", description = config.prefix + "updatecheck \n\nChecks for updates/downgrades for the bot. Owner only.")
+        await ctx.send(embed = em)
+
+    @help.command(name="updatecogs")
+    async def _updatecogs(self, ctx):
+        em = discord.Embed(title = "Update: UpdateCogs", description = config.prefix + "updatecogs \n\nUpdates the bot's cogs, replacing all of the cog files with the newest files directly from the GitHub repository. Owner only.")
         await ctx.send(embed = em)
 
     # VirusTotal commands
@@ -173,6 +191,22 @@ class Help(commands.Cog):
     async def _lockdownbot(self, ctx):
         em = discord.Embed(title = "Admin: LockdownBot", description = config.prefix + "lockdownbot \n\nLocks down the bot in all servers and disables most commands. Owner only.")
         await ctx.send(embed = em)
+
+    @help.command(name="reloadcog")
+    async def _reloadcog(self, ctx):
+        em = discord.Embed(title = "Admin: ReloadCog", description = config.prefix + "reload cog <cog> \n\nReloads the user specified cog. Owner only.")
+        await ctx.send(embed = em)
+
+    @help.command(name="restartbot")
+    async def _restartbot(self, ctx):
+        em = discord.Embed(title = "Admin: RestartBot", description = config.prefix + "restartbot \n\nRestarts the bot. Owner only.")
+        await ctx.send(embed = em)
+
+    @help.command(name="shutdownbot")
+    async def _shutdownbot(self, ctx):
+        em = discord.Embed(title = "Admin: ShutdownBot", description = config.prefix + "shutdownbot \n\nShuts down the bot. Owner only.")
+        await ctx.send(embed = em)
+
 
 def setup(bot):
     bot.add_cog(Help(bot))

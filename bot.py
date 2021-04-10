@@ -26,6 +26,7 @@ bot.remove_command('help')
 @bot.event
 async def on_ready():
     # What gets printed in the terminal when the bot is succesfully logged in
+    print('\n')
     print('Logged in as')
     print(bot.user.name)
     print(bot.user.id)
@@ -41,7 +42,7 @@ bot.load_extension("cogs.update")
 bot.load_extension("cogs.admin")
 bot.load_extension("cogs.vt_scan")
 
-@bot.event 
+@bot.event
 async def on_message(msg):
     for word in config.bad_words:
         if word in msg.content.lower():
@@ -49,22 +50,26 @@ async def on_message(msg):
             await msg.channel.send("Please don't use that word", delete_after=5.0)
         else:
             await bot.process_commands(msg)
-            
+
     await bot.process_commands(msg)
 
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):
-        em = discord.Embed(title = "You do not have permission to do that.")
+        em = discord.Embed(title = "Error", description = "You do not have permission to do that.")
+        em.add_field(name = "Detailed Error", value = "`" + str(error) + "`")
         await ctx.send(embed = em)
     elif isinstance(error, commands.MissingRequiredArgument):
-        em = discord.Embed(title = "Your command is missing an argument.")
+        em = discord.Embed(title = "Error", description = "Your command is missing an argument.")
+        em.add_field(name = "Detailed Error", value = "`" + str(error) + "`")
         await ctx.send(embed = em)
     elif isinstance(error, commands.CommandNotFound):
-        em = discord.Embed(title = "Command not found")
+        em = discord.Embed(title = "Error", description = "Command not found")
+        em.add_field(name = "Detailed Error", value = "`" + str(error) + "`")
         await ctx.send(embed = em)
     else:
-        em = discord.Embed(title = "An internal error occurred.", description = "Here are the details of the error: " + str(error))
+        em = discord.Embed(title = "An internal error occurred.")
+        em.add_field(name = "Detailed Error", value = "`" + str(error) + "`")
         await ctx.send(embed = em)
 
 @bot.command(description='Shows information about bot instance.')
