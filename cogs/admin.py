@@ -3,6 +3,8 @@ from discord.ext import commands
 import config
 import globalconfig
 import importlib
+import subprocess
+import os
 
 class Admin(commands.Cog):
     def __init__(self, bot):
@@ -36,8 +38,46 @@ class Admin(commands.Cog):
             em = discord.Embed(title = "This command is for the bot owner only.")
             await ctx.send(embed = em)
 
+    @commands.command()
+    async def reloadcog(self, ctx, *args):
+        """Reloads a cog"""
+        if str(ctx.message.author.id) == config.ownerID:
+            args = "cogs." + " ".join(args[:])
+            self.bot.unload_extension(args)
+            self.bot.load_extension(args)
+            em = discord.Embed(title = "Cog Reloaded", description = "`" + args + "` has been reloaded.")
+            await ctx.send(embed = em)
+        else:
+            em = discord.Embed(title = "This command is for the bot owner only.")
+            await ctx.send(embed = em)
 
+    @commands.command()
+    async def restartbot(self, ctx):
+        """Restarts the bot"""
+        if str(ctx.message.author.id) == config.ownerID:
+            first_embed = discord.Embed(title = "Restarting bot...")
+            msg = await ctx.send(embed=first_embed)
+            dir_path = os.getcwd()
+            subprocess.Popen(['python3', dir_path + '/bot.py'])
+            new_embed = discord.Embed(title = "Restarted bot!")
+            await msg.edit(embed=new_embed)
+            await ctx.bot.close()
+        else:
+            em = discord.Embed(title = "This command is for the bot owner only.")
+            await ctx.send(embed = em)
 
+    @commands.command()
+    async def shutdownbot(self, ctx):
+        """Shuts down the bot"""
+        if str(ctx.message.author.id) == config.ownerID:
+            first_embed = discord.Embed(title = "Shutting down bot...")
+            msg = await ctx.send(embed=first_embed)
+            new_embed = discord.Embed(title = "Shut down bot!", description = "Check your console, as it may still be running a subprocess. If it is, click `ctrl + c` on your keyboard to end the process.")
+            await msg.edit(embed=new_embed)
+            await ctx.bot.close()
+        else:
+            em = discord.Embed(title = "This command is for the bot owner only.")
+            await ctx.send(embed = em)
 
 def setup(bot):
     bot.add_cog(Admin(bot))
