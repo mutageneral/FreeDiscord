@@ -26,6 +26,7 @@ bot.remove_command('help')
 @bot.event
 async def on_ready():
     # What gets printed in the terminal when the bot is succesfully logged in
+    print('\n')
     print('Logged in as')
     print(bot.user.name)
     print(bot.user.id)
@@ -41,7 +42,7 @@ bot.load_extension("cogs.update")
 bot.load_extension("cogs.admin")
 bot.load_extension("cogs.vt_scan")
 
-@bot.event 
+@bot.event
 async def on_message(msg):
     for word in config.bad_words:
         if word in msg.content.lower():
@@ -49,22 +50,26 @@ async def on_message(msg):
             await msg.channel.send("Please don't use that word", delete_after=5.0)
         else:
             await bot.process_commands(msg)
-            
+
     await bot.process_commands(msg)
 
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):
-        em = discord.Embed(title = "You do not have permission to do that.")
+        em = discord.Embed(title = "Error", description = "You do not have permission to do that.")
+        em.add_field(name = "Detailed Error", value = "`" + str(error) + "`")
         await ctx.send(embed = em)
     elif isinstance(error, commands.MissingRequiredArgument):
-        em = discord.Embed(title = "Your command is missing an argument.")
+        em = discord.Embed(title = "Error", description = "Your command is missing an argument.")
+        em.add_field(name = "Detailed Error", value = "`" + str(error) + "`")
         await ctx.send(embed = em)
     elif isinstance(error, commands.CommandNotFound):
-        em = discord.Embed(title = "Command not found")
+        em = discord.Embed(title = "Error", description = "Command not found")
+        em.add_field(name = "Detailed Error", value = "`" + str(error) + "`")
         await ctx.send(embed = em)
     else:
-        em = discord.Embed(title = "An internal error occurred.", description = "Here are the details of the error: " + str(error))
+        em = discord.Embed(title = "An internal error occurred.")
+        em.add_field(name = "Detailed Error", value = "`" + str(error) + "`")
         await ctx.send(embed = em)
 
 @bot.command(description='Shows information about bot instance.')
@@ -126,48 +131,5 @@ async def choose(ctx, *choices: str):
     elif config.bot_lockdown_status == "lockdown_activated":
         em = discord.Embed(title = "This bot is locked down", description = "<@!" + config.ownerID + "> has locked down this bot globally.")
         await ctx.send(embed = em)
-
-"""apikey = config.virustotal_api
-
-def vt_json_parsing(detections):
-    detections = json.dumps(detections)
-    detections = json.dumps(json.loads(detections), indent=2)
-    detections = str(detections).split("last_analysis_stats")
-    detections = detections[1]
-    detections = detections.split("        ")
-    for m in detections:
-        if 'malicious' in str(m) and any(d.isdigit() for d in m):
-            detections = m
-            break
-    detections = "".join(filter(str.isdigit, m))
-    return str(detections)
-
-@bot.command(description='Testing, "@bot hash"')
-async def vt_hash(ctx, hash: str):
-    #VirusTotal Integration
-    if config.bot_lockdown_status == 'no_lockdown':
-        header = {'x-apikey': '{}'.format(apikey)}
-        vturl = "https://www.virustotal.com/api/v3/files/{}".format(hash)
-        response = requests.get(vturl, headers = header).json()
-        em = discord.Embed(title = "Detections: {}".format(vt_json_parsing(response)))
-        await ctx.send(embed = em)
-    elif config.bot_lockdown_status == "lockdown_activated":
-        em = discord.Embed(title = "This bot is locked down", description = "<@!" + config.ownerID + "> has locked down this bot globally.")
-        await ctx.send(embed = em)
-
-@bot.command(description='Testing, "@bot hash"')
-async def scan_url(ctx, url: str):
-    #Need to import base64 module to work
-    if config.bot_lockdown_status == 'no_lockdown':
-        header = {'x-apikey': '{}'.format(apikey)}
-        encode = base64.b64encode(url.encode("utf-8"))
-        url_in_base64 = str(encode, "utf-8").replace("=", "")
-        vturl = "https://www.virustotal.com/api/v3/urls/{}".format(url_in_base64)
-        response = requests.get(vturl, headers = header).json()
-        em = discord.Embed(title = "Detections: {}".format(vt_json_parsing(response)))
-        await ctx.send(embed = em)
-    elif config.bot_lockdown_status == "lockdown_activated":
-        em = discord.Embed(title = "This bot is locked down", description = "<@!" + config.ownerID + "> has locked down this bot globally.")
-        await ctx.send(embed = em)"""
 
 bot.run(config.bot_token)
