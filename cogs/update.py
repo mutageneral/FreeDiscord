@@ -93,6 +93,7 @@ class Update(commands.Cog):
             await ctx.send(embed = em)
             dir_path = os.getcwd()
             subprocess.Popen(['python3', dir_path + '/bot.py'])
+            await ctx.bot.close()
 
         else:
             em = discord.Embed(title = "This command is for the bot owner only.")
