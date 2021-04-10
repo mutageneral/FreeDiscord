@@ -10,11 +10,10 @@ import config
 immune_roles = ["Moderators", "Admins"]
 def check_immune(roles):
     #roles = list(roles.split(", "))
-    for r in roles:
-        if r in immune_roles:
-            return True
-        else:
-            return False
+    if any(role in roles for role in immune_roles) == True:
+        return True
+    else:
+        return False
 
 def timeconvertion(time):# Time convertion
     convertion = {"s": 1, "m": 60, "h": 3600, "d": 86400}
