@@ -171,7 +171,7 @@ class Help(commands.Cog):
         await ctx.send(embed = em)
 
     @help.command(name="updatecogs")
-    async def _updatebot(self, ctx):
+    async def _updatecogs(self, ctx):
         em = discord.Embed(title = "Update: UpdateCogs", description = config.prefix + "updatecogs \n\nUpdates the bot's cogs, replacing all of the cog files with the newest files directly from the GitHub repository. Owner only.")
         await ctx.send(embed = em)
 
