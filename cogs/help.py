@@ -42,8 +42,7 @@ class Help(commands.Cog):
                     em.add_field(name = "Notice", value = "This bot has an available update that will update it from version `" + globalconfig.version + "` to version `" + globalconfig.latest_version + "`. Please use `" + config.prefix + "updatecheck` for more details.")
                 elif globalconfig.latest_version < globalconfig.version:
                     em.add_field(name = "Notice", value = "This bot has an available downgrade that will downgrade it from version `" + globalconfig.version + "` to version `" + globalconfig.latest_version + "`. Please use `" + config.prefix + "updatecheck` for more details.")
-
-            await ctx.send(embed = em)
+                await ctx.send(embed = em)
 
     # Moderation commands
     @help.command(name="ban")
