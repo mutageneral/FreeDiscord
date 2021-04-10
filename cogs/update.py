@@ -116,13 +116,8 @@ class Update(commands.Cog):
             destination = shutil.copytree(src, dest)
             shutil.rmtree('/tmp/cogupdate')
             print("Done! Restart the bot to apply the changes!")
-            if error == '':
-                em = discord.Embed(title = "Updated!", description = "Cogs updated! No error reported. Check your console to confirm this.")
-                em.add_field(name = "Note", value = "If you want to use the new cogs, either restart the bot using `" + config.prefix + "restartbot` which will load all the cogs on startup (recommended), or reload every cog manually using `" + config.prefix + "reloadcog {every cog name}.`")
-            else:
-                em = discord.Embed(title = "Update Failed", description = "There was an error during the cog update attempt.")
-                em.add_field(title = "Details of Error", value = "`" + str(error) + "`")
-
+            em = discord.Embed(title = "Updated!", description = "Cogs updated! No error reported. Check your console to confirm this.")
+            em.add_field(name = "Note", value = "If you want to use the new cogs, either restart the bot using `" + config.prefix + "restartbot` which will load all the cogs on startup (recommended), or reload every cog manually using `" + config.prefix + "reloadcog {every cog name}.`")
         else:
             em = discord.Embed(title = "This command is for the bot owner only.")
             await ctx.send(embed = em)
