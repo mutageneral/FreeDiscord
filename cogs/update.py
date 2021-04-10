@@ -88,16 +88,11 @@ class Update(commands.Cog):
             copyfile('/tmp/freeupdate/globalconfig.py', dir_path + '/globalconfig.py')
             shutil.rmtree('/tmp/freeupdate')
             print("Done! Restart the bot to apply the changes!")
-            if error == '':
-                em = discord.Embed(title = "Updated!", description = "FreeDiscord updated! No error reported. Check your console to confirm this.")
-                em.add_field(name = "Note", value = "The bot will now restart. If it doesn't, start it up manually. If it won't start, open an issue in FreeDiscord's GitHub repository.")
-                await ctx.send(embed = em)
-                dir_path = os.getcwd()
-                subprocess.Popen(['python3', dir_path + '/bot.py'])
-            else:
-                em = discord.Embed(title = "Update Failed", description = "There was an error during the update attempt.")
-                em.add_field(title = "Details of Error", value = "`" + str(error) + "`")
-                await ctx.send(embed = em)
+            em = discord.Embed(title = "Updated!", description = "FreeDiscord updated! No error reported. Check your console to confirm this.")
+            em.add_field(name = "Note", value = "The bot will now restart. If it doesn't, start it up manually. If it won't start, open an issue in FreeDiscord's GitHub repository.")
+            await ctx.send(embed = em)
+            dir_path = os.getcwd()
+            subprocess.Popen(['python3', dir_path + '/bot.py'])
 
         else:
             em = discord.Embed(title = "This command is for the bot owner only.")
