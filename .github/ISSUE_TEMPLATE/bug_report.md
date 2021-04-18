@@ -20,7 +20,7 @@ Steps to reproduce the behavior:
 4. See error
 
 **Error**
-Paste your error here. If you have problems finding an error see this issue: https://github.com/FreeTechnologies/FreeDiscord/issues/6
+Paste the error here.
 
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
