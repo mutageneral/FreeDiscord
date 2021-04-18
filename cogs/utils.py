@@ -118,7 +118,5 @@ class Utils(commands.Cog):
         except discord.HTTPException:
             await ctx.send("Current uptime: " + text)
 
-    
-
 def setup(bot):
     bot.add_cog(Utils(bot))
