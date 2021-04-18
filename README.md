@@ -30,3 +30,13 @@ There are many features of the bot. These features include:
 
 Like earlier said, if you have any feature requests or issues with the bot, open an issue [here](https://github.com/FreeTechnologies/FreeDiscord/issues)!
 Enjoy the bot! We hope you have as much fun with it as we had programming it! :)
+
+### Main Instance
+You can find the main instance of FreeDiscord that is hosted for you here (really good uptime):
+
+[![FreeDiscord Bot](https://top.gg/api/widget/829158610965495848.svg)](https://top.gg/bot/829158610965495848)
+
+### Support Server
+Having some problems? Have some suggestions? Tell us here:
+
+![Support Server Banner](https://discordapp.com/api/guilds/827948403698696193/widget.png?style=banner3)
