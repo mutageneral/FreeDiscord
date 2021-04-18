@@ -45,7 +45,7 @@ class VT(commands.Cog):
             data = {'url': url}
             vturl = "https://www.virustotal.com/api/v3/urls"
             requests.post(vturl, data = data, headers = header)
-            em = discord.Embed(title = "Please wait for 30 seconds")
+            em = discord.Embed(title = "Please wait for 30 seconds.")
             await ctx.send(embed = em)
             await asyncio.sleep(30)
             encode = base64.b64encode(url.encode("utf-8"))
