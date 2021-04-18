@@ -7,6 +7,8 @@ import time
 import config
 #import base64
 import psutil
+import os
+import datetime
 
 description = '''List of all the commands
 -----------------------------------------
@@ -18,10 +20,11 @@ Support Server: https://discord.gg/VyNxSt55gj
 
 intents = discord.Intents.default()
 intents.members = True
+start_time = time.time()
+
 
 bot = commands.Bot(command_prefix=config.prefix, description=description, intents=intents)
 bot.remove_command('help')
-
 
 @bot.event
 async def on_ready():
@@ -84,7 +87,11 @@ async def about(ctx):
     em.add_field(name = "Number of servers this instance is in", value = serverNumber)
     cpuUsage = psutil.cpu_percent()
     em.add_field(name = "CPU usage of host", value = cpuUsage)
-    em.add_field(name = "Ping in milliseconds", value = bot.latency*1000)
+    em.add_field(name = "Ping", value = "`"f"{round(bot.latency*1000)} ms`")
+    current_time = time.time()
+    difference = int(round(current_time - start_time))
+    text = str(datetime.timedelta(seconds=difference))
+    em.add_field(name="Uptime", value=text)
     await ctx.send(embed = em)
 
 @bot.command()
