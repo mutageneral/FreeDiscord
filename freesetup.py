@@ -90,7 +90,7 @@ def vtapiWrite() :
     elif verificationFour == "s":
         print("Writing...")
         config = open('config.py', 'a')
-        writePrefixTemplate = "virustotal_api = '' "
+        writePrefixTemplate = "virustotal_api = ''\n"
         config.write(writePrefixTemplate)
         config.close()
         print("Written!")
