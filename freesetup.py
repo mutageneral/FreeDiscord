@@ -124,7 +124,6 @@ if os.path.exists("config.py"):
         print("Invalid response, please rerun the script.")
         exit()
 
-githubLoginWrite()
 tokenWrite()
 prefixWrite()
 ownerIDWrite()
