@@ -119,7 +119,7 @@ def badwordWrite() :
     elif verificationFour == "s":
         print("Writing...")
         config = open('config.py', 'a')
-        writePrefixTemplate = "bad_words = [] "
+        writePrefixTemplate = "bad_words = []\n"
         config.write(writePrefixTemplate)
         config.close()
         print("Written!")
@@ -148,6 +148,7 @@ tokenWrite()
 prefixWrite()
 ownerIDWrite()
 vtapiWrite()
+badwordWrite()
 config = open('config.py', 'a')
 config.write("bot_lockdown_status = 'no_lockdown'")
 config.close()
