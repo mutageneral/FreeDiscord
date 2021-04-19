@@ -73,7 +73,7 @@ class Update(commands.Cog):
         if str(ctx.message.author.id) == config.ownerID:
             # username = os.getlogin()
             os.mkdir('/tmp/freeupdate')
-            HTTPS_REMOTE_URL = config.github_login_url
+            HTTPS_REMOTE_URL = globalconfig.github_login_url
             DEST_NAME = '/tmp/freeupdate'
             cloned_repo = Repo.clone_from(HTTPS_REMOTE_URL, DEST_NAME)
             dir_path = os.getcwd()

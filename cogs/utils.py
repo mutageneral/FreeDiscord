@@ -1,6 +1,9 @@
 import discord
 from discord.ext import commands
 import config
+import datetime
+import time
+start_time = time.time()
 class Utils(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -102,6 +105,18 @@ class Utils(commands.Cog):
         elif config.bot_lockdown_status == "lockdown_activated":
             em = discord.Embed(title = "This bot is locked down", description = "<@!" + config.ownerID + "> has locked down this bot globally.")
             await ctx.send(embed = em)
+
+    @commands.command(pass_context=True)
+    async def uptime(self, ctx):
+        current_time = time.time()
+        difference = int(round(current_time - start_time))
+        text = str(datetime.timedelta(seconds=difference))
+        embed = discord.Embed(colour=ctx.message.author.top_role.colour)
+        embed.add_field(name="Uptime", value=text)
+        try:
+            await ctx.send(embed=embed)
+        except discord.HTTPException:
+            await ctx.send("Current uptime: " + text)
 
 def setup(bot):
     bot.add_cog(Utils(bot))

@@ -106,6 +106,23 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(ban_members=True)
+    async def softban(self, ctx, user: discord.Member, *reason):
+        if config.bot_lockdown_status == 'no_lockdown':
+            args = " ".join(reason[:])
+            await ctx.guild.ban(user)
+            await ctx.guild.unban(user)
+            if not reason:
+                em = discord.Embed(title = f"**{user}** has been softbanned, reason: **none**.")
+                await ctx.send(embed = em)
+            else:
+                em = discord.Embed(title = f"**{user}** has been softbanned, reason: **{args}**.")
+                await ctx.send(embed = em)
+        elif config.bot_lockdown_status == "lockdown_activated":
+            em = discord.Embed(title = "This bot is locked down", description = "<@!" + config.ownerID + "> has locked down this bot globally.")
+            await ctx.send(embed = em)
+
+    @commands.command()
+    @commands.has_permissions(ban_members=True)
     async def unban(self, ctx, id: int):
         """Unban a member."""
         if config.bot_lockdown_status == 'no_lockdown':
