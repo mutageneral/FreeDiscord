@@ -53,7 +53,7 @@ class VT(commands.Cog):
                     response = i.replace(keyword, "").replace("}", "").replace("'", "").replace(" ", "").split("-")
                     result_id = str(response[1])
                     break
-            em = discord.Embed(title = "Please wait for 15 seconds.")
+            em = discord.Embed(title = "Please wait for a few seconds. Reanalyzing file...")
             await ctx.send(embed = em)
             await asyncio.sleep(15)
             vturl = "https://www.virustotal.com/api/v3/urls/{}".format(result_id)
