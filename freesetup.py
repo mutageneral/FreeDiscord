@@ -82,7 +82,7 @@ def vtapiWrite() :
         exit()
 
 def badwordWrite() :
-    print("Please put in bad words that you want to be filtered by the bot.\n If you don't want this feature just hit enter on this prompt and type 's' when it asks if what you inputted is correct.\n The format is ")
+    print("Please put in bad words that you want to be filtered by the bot.\nIf you don't want this feature just hit enter on this prompt and type 's' when it asks if what you inputted is correct.\nThe format is ")
     print('["badword1", "badword2", "badword3"]')
     badwords = input("Enter the bad words (make sure to use the format): ")
     verificationFour = input("Is this correct? (y/n/s): '" + badwords + "'")
@@ -110,6 +110,35 @@ def badwordWrite() :
         print("Invalid response, please rerun the script.")
         exit()
 
+def immunerolesWrite() :
+    print("Please put in names of the roles that you want to be immune to the mute command.\nIf you don't want this feature just hit enter on this prompt and type 's' when it asks if what you inputted is correct.\nThe format is ")
+    print('["RoleName1", "RoleName2", "RoleName3"]')
+    immuneroles = input("Enter the immune roles (make sure to use the format): ")
+    verificationFour = input("Is this correct? (y/n/s): '" + immuneroles + "'")
+    if verificationFour == "y":
+        print("Writing...")
+        config = open('config.py', 'a')
+        writePrefixTemplate = "immune_roles = " + immuneroles + "\n"
+        config.write(writePrefixTemplate)
+        config.close()
+        print("Written!")
+        print()
+    elif verificationFour == "n":
+        print("Please rerun the file and input the roles that you want to be immune.")
+        exit()
+    elif verificationFour == "s":
+        print("Writing...")
+        config = open('config.py', 'a')
+        writePrefixTemplate = "immune_roles = []\n"
+        config.write(writePrefixTemplate)
+        config.close()
+        print("Written!")
+        print()
+        print("You have chosen not to input immune roles. You may add them by editing the config.py file later.")
+    elif verificationFour != "n" or "y" or "s":
+        print("Invalid response, please rerun the script.")
+        exit()
+
 if os.path.exists("config.py"):
     prompt = input("Existing config.py found. Should I delete it? (y/n)")
     if prompt == "y":
@@ -129,6 +158,7 @@ prefixWrite()
 ownerIDWrite()
 vtapiWrite()
 badwordWrite()
+immunerolesWrite()
 config = open('config.py', 'a')
 config.write("bot_lockdown_status = 'no_lockdown'")
 config.close()
