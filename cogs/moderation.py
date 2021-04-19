@@ -7,12 +7,11 @@ import asyncio
 import config
 
 ##immune_roles variable
-immune_roles = ["Moderators", "Admins"]
 def check_immune(roles):
     roles = ''.join(filter(str.isalpha, str(roles)))
     roles = roles.replace('Roleidname', ' ')
     roles = roles.split()
-    if any(role in roles for role in immune_roles) == True:
+    if any(role in roles for role in config.immune_roles) == True:
         return True
     else:
         return False
