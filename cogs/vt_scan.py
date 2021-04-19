@@ -11,10 +11,11 @@ def vt_json_parsing(detections):
     for m in detections:
         if 'malicious' in str(m) and any(d.isdigit() for d in m):
             detections = m
+            detections = "".join(filter(str.isdigit, m))
             break
         else:
-            return -1
-    detections = "".join(filter(str.isdigit, m))
+            detections == -1
+            break
     return int(detections)
 
 class VT(commands.Cog):
