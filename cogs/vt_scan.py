@@ -28,8 +28,14 @@ class VT(commands.Cog):
             header = {'x-apikey': '{}'.format(apikey)}
             vturl = "https://www.virustotal.com/api/v3/files/{}".format(hash)
             response = requests.get(vturl, headers = header).json()
-            em = discord.Embed(title = "Detections: {}".format(vt_json_parsing(response)))
-            await ctx.send(embed = em)
+            response = str(response).split(",")
+            parsed = vt_json_parsing(response)
+            if parsed == -1:
+                em = discord.Embed(title = "Something went wrong.")
+                await ctx.send(embed = em)
+            else:
+                em = discord.Embed(title = "Detections: {}".format(parsed))
+                await ctx.send(embed = em)
         elif config.bot_lockdown_status == "lockdown_activated":
             em = discord.Embed(title = "This bot is locked down", description = "<@!" + config.ownerID + "> has locked down this bot globally.")
             await ctx.send(embed = em)
