@@ -7,7 +7,7 @@ If you find an issue, or have a feature suggestion, please let us know by openin
 
 ### Starting the bot
 
-1. Clone the repository: `git clone https://github.com/FreeTechnologies/FreeDiscord.git`. Or download the zip, unzip it, shift + right click in the `FreeDiscord-main` folder, click on `Open Powershell window here`, and continue with step 3.
+1. Clone the repository: `git clone https://github.com/FreeTechnologies/FreeDiscord.git` and go to step 2. Or download the zip, unzip it, shift + right click in the `FreeDiscord-main` folder, click on `Open Powershell window here`, and continue with step 3.
 2. `cd` to the repository folder: `cd FreeDiscord`.
 3. Make sure all the dependencies are installed, Windows: `python -m pip install discord.py requests asyncio gitpython psutil` Linux: `pip3 install discord.py requests asyncio gitpython psutil`.
 4. Run `python3 freesetup.py` for an interative configuration creator.
