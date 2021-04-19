@@ -32,7 +32,7 @@ class Help(commands.Cog):
                 em.add_field(name = "General", value = "about, add, choose, roll")
                 em.add_field(name = "Moderation", value = "ban, delwarn, kick, mute, purge, unban, unmute, warn, warns")
                 em.add_field(name = "Settings", value = "botstatus, botstatusrepeat")
-                em.add_field(name = "Utils", value = "avatar, joined, ping, quickpoll, userinfo")
+                em.add_field(name = "Utils", value = "avatar, joined, ping, quickpoll, uptime, userinfo")
                 em.add_field(name = "Caesarcrypt", value = "decrypt, encrypt")
                 em.add_field(name = "VirusTotal", value = "scan_url, vt_hash")
                 em.add_field(name = "Update", value = "updatecheck - checks for updates/downgrades, updatebot - Updates the bot (Do `" + config.prefix + "help updatebot` before running), updatecogs - Updates the bot's cogs (Do `" + config.prefix + "help updatecogs` before running)")
@@ -143,9 +143,14 @@ class Help(commands.Cog):
         em = discord.Embed(title = "Utils: Quickpoll", description = config.prefix + "quickpoll <poll> \n\nMake a poll with yes/no reactions.")
         await ctx.send(embed = em)
 
+    @help.command(name="uptime")
+    async def _uptime(self, ctx):
+        em = discord.Embed(title = "Utils: Uptime", description = config.prefix + "uptime \n\nShows the uptime of the bot.")
+        await ctx.send(embed = em)
+
     @help.command(name="userinfo")
     async def _userinfo(self, ctx):
-        em = discord.Embed(title = "Utils: UserInfo", description = config.prefix + "userinfo <user> \n\nGives you information about a user.")
+        em = discord.Embed(title = "Utils: Userinfo", description = config.prefix + "userinfo <user> \n\nGives you information about a user.")
         await ctx.send(embed = em)
 
     # Caesar commands
