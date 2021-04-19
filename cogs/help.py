@@ -29,10 +29,11 @@ class Help(commands.Cog):
                     em.add_field(name = "Notice", value = "This bot has an available downgrade that will downgrade it from version `" + globalconfig.version + "` to version `" + globalconfig.latest_version + "`. Please use `" + config.prefix + "updatecheck` for more details.")
             elif config.bot_lockdown_status == 'no_lockdown':
                 em = discord.Embed(title = "Help", description = "Use `" + config.prefix + "help <command>` for extended information on a command.")
-                em.add_field(name = "General", value = "about, add, choose, roll")
+                em.add_field(name = "General", value = "about")
                 em.add_field(name = "Moderation", value = "ban, delwarn, kick, mute, purge, unban, unmute, warn, warns")
                 em.add_field(name = "Settings", value = "botstatus, botstatusrepeat")
                 em.add_field(name = "Utils", value = "avatar, joined, ping, quickpoll, uptime, userinfo")
+                em.add_field(name = "Fun", value = "add, choose, roll")
                 em.add_field(name = "Caesarcrypt", value = "decrypt, encrypt")
                 em.add_field(name = "VirusTotal", value = "scan_url, vt_hash")
                 em.add_field(name = "Update", value = "updatecheck - checks for updates/downgrades, updatebot - Updates the bot (Do `" + config.prefix + "help updatebot` before running), updatecogs - Updates the bot's cogs (Do `" + config.prefix + "help updatecogs` before running)")
@@ -96,19 +97,20 @@ class Help(commands.Cog):
         em = discord.Embed(title = "General: About", description = config.prefix + "about \n\nShows information about this bot instance.")
         await ctx.send(embed = em)
 
+    # Fun commands
     @help.command(name="add")
     async def _add(self, ctx):
-        em = discord.Embed(title = "General: Add", description = config.prefix + "add <number1> <number2> \n\nAdds two numbers together.")
+        em = discord.Embed(title = "Fun: Add", description = config.prefix + "add <number1> <number2> \n\nAdds two numbers together.")
         await ctx.send(embed = em)
 
     @help.command(name="choose")
     async def _choose(self, ctx):
-        em = discord.Embed(title = "General: Choose", description = config.prefix + "choose <choice1> <choice2> \n\nChooses between multiple choices.")
+        em = discord.Embed(title = "Fun: Choose", description = config.prefix + "choose <choice1> <choice2> \n\nChooses between multiple choices.")
         await ctx.send(embed = em)
 
     @help.command(name="roll")
     async def _roll(self, ctx):
-        em = discord.Embed(title = "General: Roll", description = config.prefix + "roll <number1>-<number2> \n\nRolls a dice in N-N format.")
+        em = discord.Embed(title = "Fun: Roll", description = config.prefix + "roll <number1>-<number2> \n\nRolls a dice in N-N format.")
         await ctx.send(embed = em)
 
     # Settings commands
