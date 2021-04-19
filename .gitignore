@@ -1,0 +1,3 @@
+# because pycache is annoying and gets in the way
+__pycache__/
+config.py

@@ -7,12 +7,11 @@ import asyncio
 import config
 
 ##immune_roles variable
-immune_roles = ["Moderators", "Admins"]
 def check_immune(roles):
     roles = ''.join(filter(str.isalpha, str(roles)))
     roles = roles.replace('Roleidname', ' ')
     roles = roles.split()
-    if any(role in roles for role in immune_roles) == True:
+    if any(role in roles for role in config.immune_roles) == True:
         return True
     else:
         return False
@@ -85,17 +84,38 @@ class Moderation(commands.Cog):
         """Mute a member."""
         if config.bot_lockdown_status == 'no_lockdown':
             if timeconvertion(mutetime) != 0:
-                role = discord.utils.get(user.guild.roles, name="muted")
-                await user.add_roles(role)
-                em = discord.Embed(title = "User has been muted for " + "`{}`".format(str(mutetime)) + ".")
-                await ctx.send(embed = em)
-                await asyncio.sleep(timeconvertion(mutetime))
-                await user.remove_roles(role)
+                if check_immune(user.roles) == False:
+                    role = discord.utils.get(user.guild.roles, name="muted")
+                    await user.add_roles(role)
+                    em = discord.Embed(title = "User has been muted for " + "`{}`".format(str(mutetime)) + ".")
+                    await ctx.send(embed = em)
+                    await asyncio.sleep(timeconvertion(mutetime))
+                    await user.remove_roles(role)
+                else:
+                    em = discord.Embed(title = "User is immune to that command.")
+                    await ctx.send(embed = em)
             elif timeconvertion(mutetime) == 0:
                 em = discord.Embed(title = "The time format doesn't seem right.")
                 await ctx.send(embed = em)
             else:
                 print("Something went wrong.")
+        elif config.bot_lockdown_status == "lockdown_activated":
+            em = discord.Embed(title = "This bot is locked down", description = "<@!" + config.ownerID + "> has locked down this bot globally.")
+            await ctx.send(embed = em)
+
+    @commands.command()
+    @commands.has_permissions(ban_members=True)
+    async def softban(self, ctx, user: discord.Member, *reason):
+        if config.bot_lockdown_status == 'no_lockdown':
+            args = " ".join(reason[:])
+            await ctx.guild.ban(user)
+            await ctx.guild.unban(user)
+            if not reason:
+                em = discord.Embed(title = f"**{user}** has been softbanned, reason: **none**.")
+                await ctx.send(embed = em)
+            else:
+                em = discord.Embed(title = f"**{user}** has been softbanned, reason: **{args}**.")
+                await ctx.send(embed = em)
         elif config.bot_lockdown_status == "lockdown_activated":
             em = discord.Embed(title = "This bot is locked down", description = "<@!" + config.ownerID + "> has locked down this bot globally.")
             await ctx.send(embed = em)
@@ -113,7 +133,7 @@ class Moderation(commands.Cog):
             em = discord.Embed(title = "This bot is locked down", description = "<@!" + config.ownerID + "> has locked down this bot globally.")
             await ctx.send(embed = em)
 
-    @commands.command()  # Takes 1s 1m 1h 1d
+    @commands.command()
     @commands.has_permissions(manage_messages=True)
     async def unmute(self, ctx, user: discord.Member):
         """Unmute a member."""
