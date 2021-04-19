@@ -13,8 +13,6 @@ def vt_json_parsing(detections):
             detections = m
             detections = "".join(filter(str.isdigit, m))
             break
-        else:
-            detections == -1
     return detections
 
 class VT(commands.Cog):
