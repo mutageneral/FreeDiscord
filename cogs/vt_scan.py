@@ -15,8 +15,7 @@ def vt_json_parsing(detections):
             break
         else:
             detections == -1
-            break
-    return int(detections)
+    return detections
 
 class VT(commands.Cog):
     def __init__(self, bot):
@@ -67,7 +66,7 @@ class VT(commands.Cog):
                 em = discord.Embed(title = "Something went wrong.")
                 await ctx.send(embed = em)
             else:
-                em = discord.Embed(title = "Detections: {}".format(parsed))
+                em = discord.Embed(title = "Detections: {}".format(str(parsed)))
                 await ctx.send(embed = em)
         elif config.bot_lockdown_status == "lockdown_activated":
             em = discord.Embed(title = "This bot is locked down", description = "<@!" + config.ownerID + "> has locked down this bot globally.")
