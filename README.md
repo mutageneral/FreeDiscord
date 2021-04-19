@@ -39,4 +39,4 @@ You can find the main instance of FreeDiscord that is hosted for you here (reall
 ### Support Server
 Having some problems? Have some suggestions? Tell us here:
 
-![Support Server Banner](https://discordapp.com/api/guilds/827948403698696193/widget.png?style=banner3)
+[![Support Server Banner](https://discordapp.com/api/guilds/827948403698696193/widget.png?style=banner3)](https://discord.gg/VyNxSt55gj)
