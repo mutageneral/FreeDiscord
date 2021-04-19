@@ -134,7 +134,7 @@ class Moderation(commands.Cog):
             em = discord.Embed(title = "This bot is locked down", description = "<@!" + config.ownerID + "> has locked down this bot globally.")
             await ctx.send(embed = em)
 
-    @commands.command()  # Takes 1s 1m 1h 1d
+    @commands.command()
     @commands.has_permissions(manage_messages=True)
     async def unmute(self, ctx, user: discord.Member):
         """Unmute a member."""
