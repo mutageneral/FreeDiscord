@@ -1,3 +1,3 @@
-version = "1.4"
-latest_version = "1.4"
+version = "1.5"
+latest_version = "1.5"
 github_login_url = 'https://github.com/FreeTechnologies/FreeDiscord'
