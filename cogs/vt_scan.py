@@ -6,11 +6,8 @@ import json, base64, requests, asyncio
 apikey = config.virustotal_api
 
 def vt_json_parsing(detections):
-    detections = json.dumps(detections)
-    detections = json.dumps(json.loads(detections), indent=2)
     detections = str(detections).split("last_analysis_stats")
-    detections = detections[1]
-    detections = detections.split("        ")
+    detections = str(detections[1]).split('"')
     for m in detections:
         if 'malicious' in str(m) and any(d.isdigit() for d in m):
             detections = m
@@ -44,14 +41,20 @@ class VT(commands.Cog):
             header = {'x-apikey': '{}'.format(apikey)}
             data = {'url': url}
             vturl = "https://www.virustotal.com/api/v3/urls"
-            requests.post(vturl, data = data, headers = header)
-            em = discord.Embed(title = "Please wait for 30 seconds.")
+            response = requests.post(vturl, data = data, headers = header).json()
+            response = str(response).split(",")
+            keyword = "'id': '"
+            for i in response:
+                if keyword in str(i):
+                    response = i.replace(keyword, "").replace("}", "").replace("'", "").replace(" ", "").split("-")
+                    result_id = str(response[1])
+                    break
+            em = discord.Embed(title = "Please wait for 15 seconds.")
             await ctx.send(embed = em)
-            await asyncio.sleep(30)
-            encode = base64.b64encode(url.encode("utf-8"))
-            url_in_base64 = str(encode, "utf-8").replace("=", "")
-            vturl = "https://www.virustotal.com/api/v3/urls/{}".format(url_in_base64)
-            response = requests.get(vturl, headers = header).json()
+            await asyncio.sleep(15)
+            vturl = "https://www.virustotal.com/api/v3/urls/{}".format(result_id)
+            response = requests.get(vturl, headers=header).json()
+            response = str(response).split(",")
             parsed = vt_json_parsing(response)
             if parsed == -1:
                 em = discord.Embed(title = "Something went wrong.")
