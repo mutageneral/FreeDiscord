@@ -111,8 +111,7 @@ class Utils(commands.Cog):
         current_time = time.time()
         difference = int(round(current_time - start_time))
         text = str(datetime.timedelta(seconds=difference))
-        embed = discord.Embed(colour=ctx.message.author.top_role.colour)
-        embed.add_field(name="Uptime", value=text)
+        embed = discord.Embed(name="Uptime", value=text)
         try:
             await ctx.send(embed=embed)
         except discord.HTTPException:
