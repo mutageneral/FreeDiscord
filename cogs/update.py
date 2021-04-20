@@ -10,6 +10,7 @@ from shutil import copyfile
 import config
 import globalconfig
 import importlib
+from sys import platform
 
 class Update(commands.Cog):
     def __init__(self, bot):
@@ -71,36 +72,6 @@ class Update(commands.Cog):
     async def updatebot(self, ctx):
         """Attempts to update the bot directly from the GitHub repository."""
         if str(ctx.message.author.id) == config.ownerID:
-<<<<<<< HEAD
-            # username = os.getlogin()
-            try:
-                os.mkdir('/tmp/freeupdate')
-            except OSError:
-                os.rmdir('/tmp/freeupdate')
-                os.mkdir('/tmp/freeupdate')
-            HTTPS_REMOTE_URL = globalconfig.github_login_url
-            DEST_NAME = '/tmp/freeupdate'
-            cloned_repo = Repo.clone_from(HTTPS_REMOTE_URL, DEST_NAME)
-            dir_path = os.getcwd()
-            shutil.rmtree(dir_path + "/cogs/")
-            path = dir_path
-            src = '/tmp/freeupdate/cogs'
-            dest = dir_path + "/cogs"
-            destination = shutil.copytree(src, dest)
-            copyfile('/tmp/freeupdate/bot.py', dir_path + '/bot.py')
-            copyfile('/tmp/freeupdate/freesetup.py', dir_path + '/freesetup.py')
-            copyfile('/tmp/freeupdate/README.md', dir_path + '/README.md')
-            copyfile('/tmp/freeupdate/globalconfig.py', dir_path + '/globalconfig.py')
-            shutil.rmtree('/tmp/freeupdate')
-            print("Done! Restart the bot to apply the changes!")
-            em = discord.Embed(title = "Updated!", description = "FreeDiscord updated! No error reported. Check your console to confirm this.")
-            em.add_field(name = "Note", value = "The bot will now restart. If it doesn't, start it up manually. If it won't start, open an issue in FreeDiscord's GitHub repository.")
-            await ctx.send(embed = em)
-            dir_path = os.getcwd()
-            subprocess.Popen(['python3', dir_path + '/bot.py'])
-            await ctx.bot.close()
-
-=======
             if platform == "linux" or platform == "linux2":
                 os.mkdir('/tmp/freeupdate')
                 HTTPS_REMOTE_URL = globalconfig.github_login_url
@@ -131,7 +102,6 @@ class Update(commands.Cog):
                 em = discord.Embed(title = "`updatebot` is not yet available for macOS")
                 await ctx.send(embed = em)
             
->>>>>>> 2125852938b656660c92d2fe3352c6ce88f07ffe
         else:
             em = discord.Embed(title = "This command is for the bot owner only.")
             await ctx.send(embed = em)
@@ -141,11 +111,7 @@ class Update(commands.Cog):
         """Updates cogs, but not the bot."""
         if str(ctx.message.author.id) == config.ownerID:
             # username = os.getlogin()
-            try:
-                os.mkdir('/tmp/cogupdate')
-            except OSError:
-                os.rmdir('/tmp/cogupdate')
-                os.mkdir('/tmp/cogupdate')
+            os.mkdir('/tmp/cogupdate')
             HTTPS_REMOTE_URL = config.github_login_url
             DEST_NAME = '/tmp/cogupdate'
             cloned_repo = Repo.clone_from(HTTPS_REMOTE_URL, DEST_NAME)
