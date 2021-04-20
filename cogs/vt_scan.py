@@ -41,6 +41,7 @@ class VT(commands.Cog):
     @commands.command()
     async def scan_url(self, ctx, url: str):
         #Need to import base64 module to work
+        await ctx.message.delete()
         if config.bot_lockdown_status == 'no_lockdown':
             header = {'x-apikey': '{}'.format(apikey)}
             data = {'url': url}
