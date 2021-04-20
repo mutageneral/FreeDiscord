@@ -6,7 +6,7 @@ import importlib
 import subprocess
 import os
 
-class Admin(commands.Cog):
+class Owner(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -80,4 +80,4 @@ class Admin(commands.Cog):
             await ctx.send(embed = em)
 
 def setup(bot):
-    bot.add_cog(Admin(bot))
+    bot.add_cog(Owner(bot))
