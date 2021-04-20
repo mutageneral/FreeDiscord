@@ -16,7 +16,7 @@ class General(commands.Cog):
         em = discord.Embed(title = "About FreeDiscord", description = "This bot is based off of/is the FreeDiscord bot made by SKBotNL, ItsJustLag, recallwhoiam, Quirinus, and antistalker.")
         em.add_field(name = "Project URL", value = "https://github.com/FreeTechnologies/FreeDiscord/")
         em.add_field(name = "Support server", value = "https://discord.gg/VyNxSt55gj")
-        em.add_field(name = "Bot invite link", value = "https://discord.com/oauth2/authorize?client_id=829158610965495848&permissions=8&scope=bot")
+        em.add_field(name = "Main bot invite link", value = "https://discord.com/oauth2/authorize?client_id=829158610965495848&permissions=8&scope=bot")
         servers = list(self.bot.guilds)
         serverNumber = len(servers)
         em.add_field(name = "Number of servers this instance is in", value = serverNumber)
