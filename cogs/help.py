@@ -20,8 +20,8 @@ class Help(commands.Cog):
                 em.add_field(name = "Utils", value = "GLOBAL BOT LOCKDOWN ENABLED")
                 em.add_field(name = "Caesarcrypt", value = "GLOBAL BOT LOCKDOWN ENABLED")
                 em.add_field(name = "VirusTotal", value = "GLOBAL BOT LOCKDOWN ENABLED")
-                em.add_field(name = "Update", value = "updatebot - Updates the bot (Do `" + config.prefix + "help updatebot` before running), updatecogs - Updates the bot's cogs (Do `" + config.prefix + "help updatecogs` before running)")
-                em.add_field(name = "Admin", value = "lockdownbot, reloadcog, restartbot, shutdownbot")
+                em.add_field(name = "Owner", value = "lockdownbot, reloadcog, restartbot, shutdownbot")
+                em.add_field(name = "Update (Owner)", value = "updatebot - Updates the bot (Do `" + config.prefix + "help updatebot` before running), updatecogs - Updates the bot's cogs (Do `" + config.prefix + "help updatecogs` before running)")
                 em.add_field(name = "Help", value = "help - Shows this message")
                 if globalconfig.latest_version > globalconfig.version:
                     em.add_field(name = "Notice", value = "This bot has an available update that will update it from version `" + globalconfig.version + "` to version `" + globalconfig.latest_version + "`. Please use `" + config.prefix + "updatecheck` for more details.")
@@ -193,25 +193,25 @@ class Help(commands.Cog):
         em = discord.Embed(title = "VirusTotal: VT_Hash", description = config.prefix + "vt_hash <file hash> SHA-256 SHA-1 or MD5 \n\nScans a file hash using a VirusTotal API key.")
         await ctx.send(embed = em)
 
-    # Admin commands
+    # Owner commands
     @help.command(name="lockdownbot")
     async def _lockdownbot(self, ctx):
-        em = discord.Embed(title = "Admin: LockdownBot", description = config.prefix + "lockdownbot \n\nLocks down the bot in all servers and disables most commands. Owner only.")
+        em = discord.Embed(title = "Owner: LockdownBot", description = config.prefix + "lockdownbot \n\nLocks down the bot in all servers and disables most commands. Owner only.")
         await ctx.send(embed = em)
 
     @help.command(name="reloadcog")
     async def _reloadcog(self, ctx):
-        em = discord.Embed(title = "Admin: ReloadCog", description = config.prefix + "reload cog <cog> \n\nReloads the user specified cog. Owner only.")
+        em = discord.Embed(title = "Owner: ReloadCog", description = config.prefix + "reload cog <cog> \n\nReloads the user specified cog. Owner only.")
         await ctx.send(embed = em)
 
     @help.command(name="restartbot")
     async def _restartbot(self, ctx):
-        em = discord.Embed(title = "Admin: RestartBot", description = config.prefix + "restartbot \n\nRestarts the bot. Owner only.")
+        em = discord.Embed(title = "Owner: RestartBot", description = config.prefix + "restartbot \n\nRestarts the bot. Owner only.")
         await ctx.send(embed = em)
 
     @help.command(name="shutdownbot")
     async def _shutdownbot(self, ctx):
-        em = discord.Embed(title = "Admin: ShutdownBot", description = config.prefix + "shutdownbot \n\nShuts down the bot. Owner only.")
+        em = discord.Embed(title = "Owner: ShutdownBot", description = config.prefix + "shutdownbot \n\nShuts down the bot. Owner only.")
         await ctx.send(embed = em)
 
 
