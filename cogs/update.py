@@ -73,7 +73,11 @@ class Update(commands.Cog):
         """Attempts to update the bot directly from the GitHub repository."""
         if str(ctx.message.author.id) == config.ownerID:
             if platform == "linux" or platform == "linux2":
-                os.mkdir('/tmp/freeupdate')
+                try:
+                    os.mkdir('/tmp/freeupdate')
+                except OSError:
+                    os.rmdir('/tmp/freeupdate')
+                    os.mkdir('/tmp/freeupdate')
                 HTTPS_REMOTE_URL = globalconfig.github_login_url
                 DEST_NAME = '/tmp/freeupdate'
                 cloned_repo = Repo.clone_from(HTTPS_REMOTE_URL, DEST_NAME)
@@ -111,7 +115,11 @@ class Update(commands.Cog):
         """Updates cogs, but not the bot."""
         if str(ctx.message.author.id) == config.ownerID:
             # username = os.getlogin()
-            os.mkdir('/tmp/cogupdate')
+            try:
+                os.mkdir('/tmp/cogupdate')
+            except OSError:
+                os.rmdir('/tmp/cogupdate')
+                os.mkdir('/tmp/cogupdate')
             HTTPS_REMOTE_URL = config.github_login_url
             DEST_NAME = '/tmp/cogupdate'
             cloned_repo = Repo.clone_from(HTTPS_REMOTE_URL, DEST_NAME)
