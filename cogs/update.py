@@ -99,7 +99,7 @@ class Update(commands.Cog):
                 dir_path = os.getcwd()
                 subprocess.Popen(['python3', dir_path + '/bot.py'])
                 await ctx.bot.close()
-                elif sys.platform == "win32":
+           elif sys.platform == "win32":
                 em = discord.Embed(title = "`updatebot` is not yet available for Windows")
                 await ctx.send(embed = em)
            elif sys.platform == "darwin":
